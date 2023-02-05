@@ -1,33 +1,47 @@
 <template lang="pug">
-TextBlock.line-margin プログラムを選択してください。
-ProgramBlock.line-margin(
-  v-for="program in programList"
-  :key="program.id"
-  :time="program.requireTime"
-  :name="program.name"
-  :hint="program.hint"
-)
-TextBlock.line-margin トレーナーを選択してください。
-TrainerBlock.line-margin(
-  name="指名なし"
-)
-TrainerBlock.line-margin(
-  v-for="trainer in trainerList"
-  :key="trainer.id"
-  :name="trainer.name"
-  :comment="trainer.comment"
-)
+template(v-if="reserve.screen === 'program'")
+  BlockText.line-margin プログラムを選択してください。
+  BlockProgram.line-margin(
+    v-for="program in programList"
+    :key="program.id"
+    :time="program.requireTime"
+    :name="program.name"
+    :hint="program.hint"
+    @click.native="selectProgram(program)"
+  )
+template(v-if="reserve.screen === 'trainer'")
+  BlockProgramSelected.mb-10(
+    :time="reserve.program.requireTime"
+    :name="reserve.program.name"
+    @click.native="moveScreen('program')"
+  )
+  BlockText.line-margin トレーナーを選択してください。
+  BlockTrainer.line-margin(
+    v-for="trainer in trainerList"
+    :key="trainer.id"
+    :name="trainer.name"
+    :comment="trainer.comment"
+    @click.native="selectTrainer(trainer)"
+  )
+template(v-if="reserve.screen === 'schedule'")
+  BlockProgramSelected.line-margin(
+    :time="reserve.program.requireTime"
+    :name="reserve.program.name"
+    @click.native="moveScreen('program')"
+  )
 </template>
 
 <script setup>
-import TextBlock from '~/components/presentational/molescules/TextBlock.vue'
-import ProgramBlock from '~/components/presentational/molescules/ProgramBlock.vue'
-import TrainerBlock from '~/components/presentational/molescules/TrainerBlock.vue'
+import BlockText from '~/components/presentational/molescules/block/Text.vue'
+import BlockProgram from '~/components/presentational/molescules/block/Program.vue'
+import BlockProgramSelected from '~/components/presentational/molescules/block/ProgramSelected.vue'
+import BlockTrainer from '~/components/presentational/molescules/block/Trainer.vue'
 
 import sampleData from '@/data/sample'
 const { programList, trainerList } = sampleData
 
-const reserveInput = reactive({
+const reserve = reactive({
+  screen: 'program',
   program: null,
   trainer: null,
   schedule: null,
@@ -36,6 +50,18 @@ const reserveInput = reactive({
   tel: null,
   message: null,
 })
+
+const moveScreen = (screen) => {
+  reserve.screen = screen
+}
+const selectProgram = (program) => {
+  reserve.program = program
+  moveScreen('trainer')
+}
+const selectTrainer = (trainer) => {
+  reserve.trainer = trainer
+  moveScreen('schedule')
+}
 </script>
 
 <style scoped lang="sass">

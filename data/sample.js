@@ -15,6 +15,11 @@ const programList = [
 
 const trainerList = [
   {
+    id: 0,
+    name: '指名なし',
+    comment: '',
+  },
+  {
     id: 1,
     name: 'Hanako',
     comment: 'よろしくおねがいします😊',

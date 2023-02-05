@@ -15,4 +15,8 @@ body
   background-color: $base
 .line-margin
   margin-bottom: 2px
+.mb-10
+  margin-bottom: 10px
+.mb-20
+  margin-bottom: 20px
 </style>

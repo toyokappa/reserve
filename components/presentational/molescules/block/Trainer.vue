@@ -3,7 +3,7 @@
   .thumbnail
   .profile
     .name {{ name }}
-    .comment {{ comment }}
+    .comment(v-if="comment") {{ comment }}
 </template>
 
 <script setup>
@@ -27,7 +27,7 @@ const props = defineProps({
     margin-right: 20px
   .profile
     .name
-      margin-bottom: 5px
     .comment
       font-size: 12px
+      margin-top: 5px
 </style>

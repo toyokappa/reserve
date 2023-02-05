@@ -5,7 +5,7 @@
     .menu-main
       RequireTime(:time="time")
       .menu-name {{ name }}
-    .menu-hint {{ hint }}
+    .menu-hint(v-if="hint") {{ hint }}
 </template>
 
 <script setup>
@@ -34,10 +34,10 @@ const props = defineProps({
     .menu-main
       display: flex
       align-items: center
-      margin-bottom: 5px
       .menu-name
         margin-left: 10px
     .menu-hint
       font-size: 12px
       color: $hint
+      margin-top: 5px
 </style>

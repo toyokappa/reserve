@@ -10,6 +10,7 @@ const layoutName = computed(() => {
 })
 </script>
 
-<style lang="sass" scoped>
-
+<style lang="sass">
+body
+  background-color: $base
 </style>

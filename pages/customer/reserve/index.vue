@@ -1,19 +1,20 @@
 <template lang="pug">
 TextBlock.line-margin プログラムを選択してください。
 ProgramBlock.line-margin(
-  time="60"
-  name="無料カウンセリング"
-)
-ProgramBlock(
-  time="60"
-  name="パーソナルトレーニング"
-  hint="ご利用にはチケットが必要となります。"
+  v-for="program in programList"
+  :key="program.id"
+  :time="program.requireTime"
+  :name="program.name"
+  :hint="program.hint"
 )
 </template>
 
 <script setup>
 import TextBlock from '~/components/presentational/molescules/TextBlock.vue'
 import ProgramBlock from '~/components/presentational/molescules/ProgramBlock.vue'
+
+import sampleData from '@/data/sample'
+const { programList } = sampleData
 </script>
 
 <style scoped lang="sass">

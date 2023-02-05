@@ -78,7 +78,7 @@ template(v-else-if="reserve.screen === 'confirm'")
   BlockConfirm.mb-line(label="電話番号" :content="reserve.tel")
   BlockConfirm.mb-10(label="ご質問など" :content="reserve.message")
   .button-area
-    PrimaryButton.mb-10(@click="") 予約を確定する
+    PrimaryButton.mb-10(@click="completeReserve()") 予約を確定する
     DefaultButton.mb-10(@click="moveScreen('userInput')") 戻る
 </template>
 
@@ -131,6 +131,11 @@ const inputUserInfo = (userInfo) => {
   reserve.tel = tel
   reserve.message = message
   moveScreen('confirm')
+}
+
+const router = useRouter()
+const completeReserve = () => {
+  router.push('/reserve/complete')
 }
 </script>
 

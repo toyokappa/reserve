@@ -9,6 +9,8 @@ template(v-if="reserve.screen === 'program'")
     :hint="program.hint"
     @click.native="selectProgram(program)"
   )
+  BlockText.mb-line 連絡先をご入力ください。
+  FormNoAccount
 template(v-else-if="reserve.screen === 'trainer'")
   BlockProgramSelected.mb-10(
     :time="reserve.program.requireTime"
@@ -49,10 +51,12 @@ template(v-else-if="reserve.screen === 'userInput'")
     :schedule="reserve.schedule"
     @click.native="moveScreen('schedule')"
   )
+  BlockText.mb-line 連絡先をご入力ください。
 </template>
 
 <script setup>
 import CalendarReserve from '~/components/presentational/organizms/CalendarReserve.vue'
+import FormNoAccount from '~/components/presentational/organizms/FormNoAccount.vue'
 import BlockText from '~/components/presentational/molescules/block/Text.vue'
 import BlockProgram from '~/components/presentational/molescules/block/Program.vue'
 import BlockProgramSelected from '~/components/presentational/molescules/block/ProgramSelected.vue'

@@ -1,49 +1,37 @@
 <template lang="pug">
 .calendar
-  BlockSwitchWeek.mb-line
+  BlockSwitchWeek.mb-line(:startDate="startDateToS" :endDate="endDateToS")
   .calendar-header.mb-line
     .column-title.black 開始時間
-    BlockCalendarDate.ms-line(date="05" day="日")
-    BlockCalendarDate.ms-line(date="06" day="月")
-    BlockCalendarDate.ms-line(date="07" day="火")
-    BlockCalendarDate.ms-line(date="08" day="水")
-    BlockCalendarDate.ms-line(date="09" day="木")
-    BlockCalendarDate.ms-line(date="10" day="金")
-    BlockCalendarDate.ms-line(date="11" day="土")
-  .calendar-body.mb-line
-    .column-title 09:00~
-    BlockCalendarState.ms-line(state="ok")
-    BlockCalendarState.ms-line(state="ng")
-    BlockCalendarState.ms-line(state="ng")
-    BlockCalendarState.ms-line(state="ng")
-    BlockCalendarState.ms-line(state="ng")
-    BlockCalendarState.ms-line(state="ng")
-    BlockCalendarState.ms-line(state="ng")
-  .calendar-body.mb-line
-    .column-title 10:00~
-    BlockCalendarState.ms-line(state="ok")
-    BlockCalendarState.ms-line(state="ng")
-    BlockCalendarState.ms-line(state="ng")
-    BlockCalendarState.ms-line(state="ng")
-    BlockCalendarState.ms-line(state="ok")
-    BlockCalendarState.ms-line(state="ok")
-    BlockCalendarState.ms-line(state="ok")
-  .calendar-body.mb-line
-    .column-title 11:00~
-    BlockCalendarState.ms-line(state="ok")
-    BlockCalendarState.ms-line(state="ok")
-    BlockCalendarState.ms-line(state="ok")
-    BlockCalendarState.ms-line(state="ok")
-    BlockCalendarState.ms-line(state="ok")
-    BlockCalendarState.ms-line(state="ok")
-    BlockCalendarState.ms-line(state="ok")
+    BlockCalendarDate.ms-line(v-for="d in dateList" :key="d.date" :date="d.date" :day="d.day")
+  .calendar-body.mb-line(v-for="time in timeList" :key="time.hour")
+    .column-title {{ time.hour }}~
+    BlockCalendarState.ms-line(v-for="(state, index) in time.stateList" :key="index" :state="state")
 
 </template>
 
 <script setup>
+import { eachDayOfInterval, format } from 'date-fns'
+import { ja } from 'date-fns/locale'
 import BlockSwitchWeek from '~/components/presentational/molescules/block/SwitchWeek.vue'
-import BlockCalendarDate from '~/components/presentational/atoms/block/CalendarDate.vue';
-import BlockCalendarState from '~/components/presentational/atoms/block/CalendarState.vue';
+import BlockCalendarDate from '~/components/presentational/atoms/block/CalendarDate.vue'
+import BlockCalendarState from '~/components/presentational/atoms/block/CalendarState.vue'
+
+import sampleData from '~/data/sample'
+const { calendarReserve } = sampleData
+const { start, end, timeList } = calendarReserve
+
+const startDate = new Date(start)
+const endDate = new Date(end)
+const startDateToS = format(startDate, 'M/d')
+const endDateToS = format(endDate, 'M/d')
+const dateList = eachDayOfInterval({ 
+  start: startDate,
+  end: endDate,
+}).map(day => ({
+  date: format(day, 'dd'),
+  day: format(day, 'EEEEE', { locale: ja }),
+}))
 </script>
 
 <style lang="sass" scoped>

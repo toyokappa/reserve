@@ -3,7 +3,7 @@
   .week-switcher.me-line
     .arrow-left
       img(src="@/assets/images/arrow-left.svg")
-    .display-week {{ firstday }} - {{ lastday }}
+    .display-week {{ startDate }} - {{ endDate }}
     .arrow-right
       img(src="@/assets/images/arrow-right.svg")
   BlockText.today-switcher
@@ -15,10 +15,10 @@
 <script setup>
 import BlockText from '~/components/presentational/molescules/block/Text.vue'
 
-import { format, add } from 'date-fns';
-const today = format(new Date(), 'M/d')
-const firstday = format(new Date(), 'M/d')
-const lastday = format(add(new Date(), { days: 6 }), 'M/d')
+const props = defineProps({
+  startDate: String,
+  endDate: String,
+})
 </script>
 
 <style lang="sass" scoped>

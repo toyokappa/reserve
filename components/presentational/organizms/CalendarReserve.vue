@@ -1,37 +1,54 @@
 <template lang="pug">
 .calendar
-  BlockSwitchWeek.mb-line(:startDate="startDateToS" :endDate="endDateToS")
+  BlockSwitchWeek.mb-line(
+    :isThisWeek="isThisWeek"
+    :startDate="startDate"
+    :endDate="endDate"
+    @movePrevWeek="movePrevWeek"
+    @moveNextWeek="moveNextWeek"
+    @moveToday="moveToday"
+  )
   .calendar-header.mb-line
     .column-title.black 開始時間
     BlockCalendarDate.ms-line(v-for="d in dateList" :key="d.date" :date="d.date" :day="d.day")
-  .calendar-body.mb-line(v-for="time in timeList" :key="time.hour")
+  .calendar-body.mb-line(v-for="time in reservalTimeList" :key="time.hour")
     .column-title {{ time.hour }}~
     BlockCalendarState.ms-line(v-for="(state, index) in time.stateList" :key="index" :state="state")
 
 </template>
 
 <script setup>
-import { eachDayOfInterval, format } from 'date-fns'
+import { add, eachDayOfInterval, format, isToday, subWeeks } from 'date-fns'
 import { ja } from 'date-fns/locale'
 import BlockSwitchWeek from '~/components/presentational/molescules/block/SwitchWeek.vue'
 import BlockCalendarDate from '~/components/presentational/atoms/block/CalendarDate.vue'
 import BlockCalendarState from '~/components/presentational/atoms/block/CalendarState.vue'
 
 import sampleData from '~/data/sample'
-const { calendarReserve } = sampleData
-const { start, end, timeList } = calendarReserve
+const { reservalTimeList } = sampleData
 
-const startDate = new Date(start)
-const endDate = new Date(end)
-const startDateToS = format(startDate, 'M/d')
-const endDateToS = format(endDate, 'M/d')
-const dateList = eachDayOfInterval({ 
-  start: startDate,
-  end: endDate,
+const start = ref(new Date())
+const end = computed(() => add(start.value, { days: 6 }))
+const startDate = computed(() => format(start.value, 'M/d'))
+const endDate = computed(() => format(end.value, 'M/d'))
+const dateList = computed(() => eachDayOfInterval({ 
+  start: start.value,
+  end: end.value
 }).map(day => ({
   date: format(day, 'dd'),
   day: format(day, 'EEEEE', { locale: ja }),
-}))
+})))
+const isThisWeek = computed(() => isToday(start.value))
+
+const movePrevWeek = () => {
+  start.value = subWeeks(start.value, 1)
+}
+const moveNextWeek = () => {
+  start.value = add(start.value, { days: 7 })
+}
+const moveToday = () => {
+  start.value = new Date()
+}
 </script>
 
 <style lang="sass" scoped>

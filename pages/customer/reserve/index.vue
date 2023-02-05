@@ -50,7 +50,15 @@ template(v-else-if="reserve.screen === 'userInput'")
     @click.native="moveScreen('schedule')"
   )
   BlockText.mb-line 連絡先をご入力ください。
-  FormNoAccount(@inputUserInfo="inputUserInfo")
+  FormNoAccount(
+    :name="reserve.name"
+    :email="reserve.email"
+    :tel="reserve.tel"
+    :message="reserve.message"
+    @inputUserInfo="inputUserInfo"
+  )
+  .button-area
+    DefaultButton.mb-10(@click="moveScreen('schedule')") 戻る
 template(v-else-if="reserve.screen === 'confirm'")
   BlockProgramSelected.mb-line(
     :time="reserve.program.requireTime"
@@ -65,6 +73,13 @@ template(v-else-if="reserve.screen === 'confirm'")
     :schedule="reserve.schedule"
     @click.native="moveScreen('schedule')"
   )
+  BlockConfirm.mb-line(label="お名前" :content="reserve.name")
+  BlockConfirm.mb-line(label="メールアドレス" :content="reserve.email")
+  BlockConfirm.mb-line(label="電話番号" :content="reserve.tel")
+  BlockConfirm.mb-10(label="ご質問など" :content="reserve.message")
+  .button-area
+    PrimaryButton.mb-10(@click="") 予約を確定する
+    DefaultButton.mb-10(@click="moveScreen('userInput')") 戻る
 </template>
 
 <script setup>
@@ -76,6 +91,9 @@ import BlockProgramSelected from '~/components/presentational/molescules/block/P
 import BlockTrainer from '~/components/presentational/molescules/block/Trainer.vue'
 import BlockTrainerSelected from '~/components/presentational/molescules/block/TrainerSelected.vue'
 import BlockScheduleSelected from '~/components/presentational/molescules/block/ScheduleSelected.vue'
+import BlockConfirm from '~/components/presentational/molescules/block/Confirm.vue'
+import PrimaryButton from '~/components/presentational/atoms/PrimaryButton.vue';
+import DefaultButton from '~/components/presentational/atoms/DefaultButton.vue';
 
 import sampleData from '@/data/sample'
 const { programList, trainerList } = sampleData
@@ -85,10 +103,10 @@ const reserve = reactive({
   program: null,
   trainer: null,
   schedule: null,
-  name: null,
-  email: null,
-  tel: null,
-  message: null,
+  name: '',
+  email: '',
+  tel: '',
+  message: '',
 })
 
 const moveScreen = (screen) => {

@@ -23,4 +23,6 @@ body
   margin-bottom: 10px
 .mb-20
   margin-bottom: 20px
+.button-area
+  padding: 0 20px
 </style>

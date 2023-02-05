@@ -49,9 +49,6 @@ form
       :disabled="!meta.valid"
       @click="inputUserInfo()"
     ) 予約内容を確認する
-    DefaultButton.mb-10(
-      @click="moveScreen('schedule')"
-    ) 戻る
 </template>
 
 <script setup>
@@ -62,7 +59,16 @@ import DefaultButton from '~/components/presentational/atoms/DefaultButton.vue';
 import { localize } from '@vee-validate/i18n'
 import { configure, useField, useForm } from 'vee-validate'
 
-const { meta } = useForm()
+const props = defineProps({
+  name: String,
+  email: String,
+  tel: String,
+  message: String,
+})
+
+const { meta } = useForm({
+  initialValues: props
+})
 const { value: name, errorMessage: nameError } = useField(
   'name',
   'required',
@@ -118,6 +124,4 @@ const inputUserInfo = () => {
   .invalid-feedback
     font-size: 12px
     color: $red
-.button-area
-  padding: 0 20px
 </style>

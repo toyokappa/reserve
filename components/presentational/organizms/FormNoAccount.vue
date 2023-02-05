@@ -1,7 +1,9 @@
 <template lang="pug">
 form
   .input-block.mb-line
-    label.input-label(for="name") お名前
+    label.input-label(for="name")
+      span.text お名前
+      RequiredBadge
     input.input-field(
       type="text"
       id="name"
@@ -11,7 +13,9 @@ form
     )
     .invalid-feedback(v-if="nameError") {{ nameError }}
   .input-block.mb-line
-    label.input-label(for="email") メールアドレス
+    label.input-label(for="email")
+      span.text メールアドレス
+      RequiredBadge
     input.input-field(
       type="email"
       id="email"
@@ -21,7 +25,9 @@ form
     )
     .invalid-feedback(v-if="emailError") {{ emailError }}
   .input-block.mb-line
-    label.input-label(for="tel") 電話番号
+    label.input-label(for="tel")
+      span.text 電話番号
+      RequiredBadge
     input.input-field(
       type="tel"
       id="tel"
@@ -41,6 +47,8 @@ form
 </template>
 
 <script setup>
+import RequiredBadge from '~~/components/presentational/atoms/RequiredBadge.vue'
+
 import { localize } from '@vee-validate/i18n'
 import { configure, useField, useForm } from 'vee-validate'
 
@@ -81,7 +89,8 @@ configure({
   padding: $block-padding
   .input-label
     font-size: 12px
-    display: block
+    .text
+      margin-right: 3px
   .input-field
     font-size: 16px
     width: 100%

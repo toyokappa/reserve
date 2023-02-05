@@ -13,7 +13,7 @@ const stateSymbol = computed(() => {
   switch(props.state) {
     case 'ok':
     case 'work':
-    case 'disabled':
+    case 'lock':
       symbol = '○'
       break
     case 'ng':
@@ -45,7 +45,7 @@ const stateSymbol = computed(() => {
   &.work
     color: $white
     background-color: $primary
-  &.disabled
+  &.lock
     color: $white
     background-color: $hint
 </style>

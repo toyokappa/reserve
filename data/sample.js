@@ -13,6 +13,20 @@ const programList = [
   }
 ]
 
+const trainerList = [
+  {
+    id: 1,
+    name: 'Hanako',
+    comment: 'よろしくおねがいします😊',
+  },
+  {
+    id: 2,
+    name: 'Umeko',
+    comment: ''
+  }
+]
+
 export default {
   programList,
+  trainerList,
 }

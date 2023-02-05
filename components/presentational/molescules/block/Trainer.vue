@@ -26,7 +26,6 @@ const props = defineProps({
     background-color: $base
     margin-right: 20px
   .profile
-    .name
     .comment
       font-size: 12px
       margin-top: 5px

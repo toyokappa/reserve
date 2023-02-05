@@ -9,7 +9,7 @@ template(v-if="reserve.screen === 'program'")
     :hint="program.hint"
     @click.native="selectProgram(program)"
   )
-  BlockSwitchWeek
+  CalendarReserve
 template(v-if="reserve.screen === 'trainer'")
   BlockProgramSelected.mb-10(
     :time="reserve.program.requireTime"
@@ -38,12 +38,12 @@ template(v-if="reserve.screen === 'schedule'")
 </template>
 
 <script setup>
+import CalendarReserve from '~/components/presentational/organizms/CalendarReserve.vue'
 import BlockText from '~/components/presentational/molescules/block/Text.vue'
 import BlockProgram from '~/components/presentational/molescules/block/Program.vue'
 import BlockProgramSelected from '~/components/presentational/molescules/block/ProgramSelected.vue'
 import BlockTrainer from '~/components/presentational/molescules/block/Trainer.vue'
 import BlockTrainerSelected from '~/components/presentational/molescules/block/TrainerSelected.vue'
-import BlockSwitchWeek from '~/components/presentational/molescules/block/SwitchWeek.vue'
 
 import sampleData from '@/data/sample'
 const { programList, trainerList } = sampleData

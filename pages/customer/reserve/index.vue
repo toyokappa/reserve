@@ -9,8 +9,7 @@ template(v-if="reserve.screen === 'program'")
     :hint="program.hint"
     @click.native="selectProgram(program)"
   )
-  CalendarReserve
-template(v-if="reserve.screen === 'trainer'")
+template(v-else-if="reserve.screen === 'trainer'")
   BlockProgramSelected.mb-10(
     :time="reserve.program.requireTime"
     :name="reserve.program.name"
@@ -24,7 +23,7 @@ template(v-if="reserve.screen === 'trainer'")
     :comment="trainer.comment"
     @click.native="selectTrainer(trainer)"
   )
-template(v-if="reserve.screen === 'schedule'")
+template(v-else-if="reserve.screen === 'schedule'")
   BlockProgramSelected.mb-line(
     :time="reserve.program.requireTime"
     :name="reserve.program.name"
@@ -35,6 +34,21 @@ template(v-if="reserve.screen === 'schedule'")
     @click.native="moveScreen('trainer')"
   )
   BlockText.mb-line ご希望の日程を選択してください。
+  CalendarReserve(@selectSchedule="selectSchedule")
+template(v-else-if="reserve.screen === 'userInput'")
+  BlockProgramSelected.mb-line(
+    :time="reserve.program.requireTime"
+    :name="reserve.program.name"
+    @click.native="moveScreen('program')"
+  )
+  BlockTrainerSelected.mb-line(
+    :name="reserve.trainer.name"
+    @click.native="moveScreen('trainer')"
+  )
+  BlockScheduleSelected.mb-10(
+    :schedule="reserve.schedule"
+    @click.native="moveScreen('schedule')"
+  )
 </template>
 
 <script setup>
@@ -44,6 +58,7 @@ import BlockProgram from '~/components/presentational/molescules/block/Program.v
 import BlockProgramSelected from '~/components/presentational/molescules/block/ProgramSelected.vue'
 import BlockTrainer from '~/components/presentational/molescules/block/Trainer.vue'
 import BlockTrainerSelected from '~/components/presentational/molescules/block/TrainerSelected.vue'
+import BlockScheduleSelected from '~/components/presentational/molescules/block/ScheduleSelected.vue'
 
 import sampleData from '@/data/sample'
 const { programList, trainerList } = sampleData
@@ -69,6 +84,10 @@ const selectProgram = (program) => {
 const selectTrainer = (trainer) => {
   reserve.trainer = trainer
   moveScreen('schedule')
+}
+const selectSchedule = (schedule) => {
+  reserve.schedule = schedule
+  moveScreen('userInput')
 }
 </script>
 

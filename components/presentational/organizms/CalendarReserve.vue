@@ -13,12 +13,17 @@
     BlockCalendarDate.ms-line(v-for="d in dateList" :key="d.date" :date="d.date" :day="d.day")
   .calendar-body.mb-line(v-for="time in reservalTimeList" :key="time.hour")
     .column-title {{ time.hour }}~
-    BlockCalendarState.ms-line(v-for="(state, index) in time.stateList" :key="index" :state="state")
+    BlockCalendarState.ms-line(
+      v-for="(state, index) in time.stateList"
+      :key="index"
+      :state="state"
+      @click="selectSchedule(state, index, time.hour)"
+    )
 
 </template>
 
 <script setup>
-import { add, eachDayOfInterval, format, isToday, subWeeks } from 'date-fns'
+import { add, eachDayOfInterval, format, isToday, setHours, startOfToday, subWeeks } from 'date-fns'
 import { ja } from 'date-fns/locale'
 import BlockSwitchWeek from '~/components/presentational/molescules/block/SwitchWeek.vue'
 import BlockCalendarDate from '~/components/presentational/atoms/block/CalendarDate.vue'
@@ -27,7 +32,7 @@ import BlockCalendarState from '~/components/presentational/atoms/block/Calendar
 import sampleData from '~/data/sample'
 const { reservalTimeList } = sampleData
 
-const start = ref(new Date())
+const start = ref(startOfToday())
 const end = computed(() => add(start.value, { days: 6 }))
 const startDate = computed(() => format(start.value, 'M/d'))
 const endDate = computed(() => format(end.value, 'M/d'))
@@ -48,6 +53,16 @@ const moveNextWeek = () => {
 }
 const moveToday = () => {
   start.value = new Date()
+}
+
+const emits = defineEmits()
+const selectSchedule = (state, index, time) => {
+  if (state === 'ng') return
+
+  const date = add(start.value, { days: index })
+  const hour = parseInt(time)
+  const schedule = setHours(date, hour)
+  emits('selectSchedule', schedule)
 }
 </script>
 

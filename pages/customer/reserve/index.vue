@@ -1,7 +1,7 @@
 <template lang="pug">
 template(v-if="reserve.screen === 'program'")
-  BlockText.line-margin プログラムを選択してください。
-  BlockProgram.line-margin(
+  BlockText.mb-line プログラムを選択してください。
+  BlockProgram.mb-line(
     v-for="program in programList"
     :key="program.id"
     :time="program.requireTime"
@@ -15,8 +15,8 @@ template(v-if="reserve.screen === 'trainer'")
     :name="reserve.program.name"
     @click.native="moveScreen('program')"
   )
-  BlockText.line-margin トレーナーを選択してください。
-  BlockTrainer.line-margin(
+  BlockText.mb-line トレーナーを選択してください。
+  BlockTrainer.mb-line(
     v-for="trainer in trainerList"
     :key="trainer.id"
     :name="trainer.name"
@@ -24,7 +24,7 @@ template(v-if="reserve.screen === 'trainer'")
     @click.native="selectTrainer(trainer)"
   )
 template(v-if="reserve.screen === 'schedule'")
-  BlockProgramSelected.line-margin(
+  BlockProgramSelected.mb-line(
     :time="reserve.program.requireTime"
     :name="reserve.program.name"
     @click.native="moveScreen('program')"
@@ -33,7 +33,7 @@ template(v-if="reserve.screen === 'schedule'")
     :name="reserve.trainer.name"
     @click.native="moveScreen('trainer')"
   )
-  BlockText.line-margin ご希望の日程を選択してください。
+  BlockText.mb-line ご希望の日程を選択してください。
 </template>
 
 <script setup>

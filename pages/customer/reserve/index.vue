@@ -9,8 +9,6 @@ template(v-if="reserve.screen === 'program'")
     :hint="program.hint"
     @click.native="selectProgram(program)"
   )
-  BlockText.mb-line 連絡先をご入力ください。
-  FormNoAccount
 template(v-else-if="reserve.screen === 'trainer'")
   BlockProgramSelected.mb-10(
     :time="reserve.program.requireTime"
@@ -52,6 +50,21 @@ template(v-else-if="reserve.screen === 'userInput'")
     @click.native="moveScreen('schedule')"
   )
   BlockText.mb-line 連絡先をご入力ください。
+  FormNoAccount(@inputUserInfo="inputUserInfo")
+template(v-else-if="reserve.screen === 'confirm'")
+  BlockProgramSelected.mb-line(
+    :time="reserve.program.requireTime"
+    :name="reserve.program.name"
+    @click.native="moveScreen('program')"
+  )
+  BlockTrainerSelected.mb-line(
+    :name="reserve.trainer.name"
+    @click.native="moveScreen('trainer')"
+  )
+  BlockScheduleSelected.mb-line(
+    :schedule="reserve.schedule"
+    @click.native="moveScreen('schedule')"
+  )
 </template>
 
 <script setup>
@@ -92,6 +105,14 @@ const selectTrainer = (trainer) => {
 const selectSchedule = (schedule) => {
   reserve.schedule = schedule
   moveScreen('userInput')
+}
+const inputUserInfo = (userInfo) => {
+  const { name, email, tel, message } = userInfo
+  reserve.name = name
+  reserve.email = email
+  reserve.tel = tel
+  reserve.message = message
+  moveScreen('confirm')
 }
 </script>
 

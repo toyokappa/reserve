@@ -36,7 +36,7 @@ form
       :class="{ invalid: telError }"
     )
     .invalid-feedback(v-if="telError") {{ telError }}
-  .input-block
+  .input-block.mb-10
     label.input-label(for="message") ご質問など
     textarea.input-field(
       rows="3"
@@ -44,10 +44,20 @@ form
       name="message"
       v-model="message"
     )
+  .button-area
+    PrimaryButton.mb-10(
+      :disabled="!meta.valid"
+      @click="inputUserInfo()"
+    ) 予約内容を確認する
+    DefaultButton.mb-10(
+      @click="moveScreen('schedule')"
+    ) 戻る
 </template>
 
 <script setup>
-import RequiredBadge from '~~/components/presentational/atoms/RequiredBadge.vue'
+import RequiredBadge from '~/components/presentational/atoms/RequiredBadge.vue'
+import PrimaryButton from '~/components/presentational/atoms/PrimaryButton.vue';
+import DefaultButton from '~/components/presentational/atoms/DefaultButton.vue';
 
 import { localize } from '@vee-validate/i18n'
 import { configure, useField, useForm } from 'vee-validate'
@@ -81,6 +91,11 @@ configure({
     }
   })
 })
+
+const emits = defineEmits()
+const inputUserInfo = () => {
+  emits('inputUserInfo', { name, email, tel, message })
+}
 </script>
 
 <style lang="sass" scoped>
@@ -103,4 +118,6 @@ configure({
   .invalid-feedback
     font-size: 12px
     color: $red
+.button-area
+  padding: 0 20px
 </style>

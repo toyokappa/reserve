@@ -1,10 +1,11 @@
 <template lang="pug">
 div
-  div customer
+  Header
   slot
 </template>
 
 <script setup>
+import Header from '@/components/presentational/global/CustomerHeader.vue'
 </script>
 
 <style lang="sass" scoped>

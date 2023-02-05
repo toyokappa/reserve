@@ -1,0 +1,43 @@
+<template lang="pug">
+.program-block
+  .thumbnail
+  .menu
+    .menu-main
+      RequireTime(:time="time")
+      .menu-name {{ name }}
+    .menu-hint {{ hint }}
+</template>
+
+<script setup>
+import RequireTime from '~/components/presentational/atoms/RequireTime.vue'
+
+const props = defineProps({
+  time: Number | String,
+  name: String,
+  hint: String,
+})
+</script>
+
+<style lang="sass" scoped>
+.program-block
+  background-color: $white
+  padding: $block-padding
+  display: flex
+  align-items: center
+  .thumbnail
+    width: 80px
+    height: 80px
+    border-radius: 50%
+    background-color: $base
+    margin-right: 20px
+  .menu
+    .menu-main
+      display: flex
+      align-items: center
+      margin-bottom: 5px
+      .menu-name
+        margin-left: 10px
+    .menu-hint
+      font-size: 12px
+      color: $hint
+</style>

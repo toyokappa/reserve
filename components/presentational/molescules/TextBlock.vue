@@ -1,12 +1,13 @@
 <template lang="pug">
-div
-  Header.mb-20
+.text-block
   slot
 </template>
 
 <script setup>
-import Header from '@/components/presentational/global/CustomerHeader.vue'
 </script>
 
 <style lang="sass" scoped>
+.text-block
+  background-color: $white
+  padding: $block-padding
 </style>

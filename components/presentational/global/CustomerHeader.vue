@@ -13,7 +13,8 @@ header
   width: 100%
   color: $black
   background-color: $white
-  padding: 10px 20px
+  padding: $block-padding
+  margin-bottom: 20px
   display: flex
   align-items: center
   justify-content: space-between

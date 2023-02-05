@@ -13,4 +13,6 @@ const layoutName = computed(() => {
 <style lang="sass">
 body
   background-color: $base
+.line-margin
+  margin-bottom: 2px
 </style>

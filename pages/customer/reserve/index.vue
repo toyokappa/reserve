@@ -29,6 +29,11 @@ template(v-if="reserve.screen === 'schedule'")
     :name="reserve.program.name"
     @click.native="moveScreen('program')"
   )
+  BlockTrainerSelected.mb-10(
+    :name="reserve.trainer.name"
+    @click.native="moveScreen('trainer')"
+  )
+  BlockText.line-margin ご希望の日程を選択してください。
 </template>
 
 <script setup>
@@ -36,6 +41,7 @@ import BlockText from '~/components/presentational/molescules/block/Text.vue'
 import BlockProgram from '~/components/presentational/molescules/block/Program.vue'
 import BlockProgramSelected from '~/components/presentational/molescules/block/ProgramSelected.vue'
 import BlockTrainer from '~/components/presentational/molescules/block/Trainer.vue'
+import BlockTrainerSelected from '~/components/presentational/molescules/block/TrainerSelected.vue'
 
 import sampleData from '@/data/sample'
 const { programList, trainerList } = sampleData

@@ -1,5 +1,21 @@
 <template lang="pug">
 form
+  InputFieldHorizontal.mb-line(
+    labelText="お名前"
+    name1="lastName" name2="firstName"
+    placeholder1="姓" placeholder2="名"
+    type1="text" type2="text"
+    validation1="required" validation2="required"
+    required
+  )
+  InputFieldHorizontal.mb-line(
+    labelText="お名前（かな）"
+    name1="lastNameKana" name2="firstNameKana"
+    placeholder1="せい" placeholder2="めい"
+    type1="text" type2="text"
+    validation1="required" validation2="required"
+    required
+  )
   InputField.mb-line(
     name="birthday"
     type="date"
@@ -40,6 +56,7 @@ form
 
 <script setup>
 import InputField from '~~/components/presentational/molescules/form/InputField.vue';
+import InputFieldHorizontal from '~~/components/presentational/molescules/form/InputFieldHorizontal.vue';
 
 import { useForm } from 'vee-validate'
 import { Core as YubinBangoCore } from 'yubinbango-core2'

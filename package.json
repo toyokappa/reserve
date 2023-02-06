@@ -17,6 +17,7 @@
     "@vee-validate/i18n": "^4.7.3",
     "@vee-validate/rules": "^4.7.3",
     "date-fns": "^2.29.3",
-    "vee-validate": "^4.7.3"
+    "vee-validate": "^4.7.3",
+    "yubinbango-core2": "^0.6.3"
   }
 }

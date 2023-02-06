@@ -35,9 +35,7 @@ form
 <script setup>
 import InputField from '~~/components/presentational/molescules/form/InputField.vue';
 import Textarea from '~~/components/presentational/molescules/form/Textarea.vue';
-import RequiredBadge from '~/components/presentational/atoms/RequiredBadge.vue'
 import PrimaryButton from '~/components/presentational/atoms/PrimaryButton.vue';
-import DefaultButton from '~/components/presentational/atoms/DefaultButton.vue';
 
 import { useForm } from 'vee-validate'
 
@@ -52,7 +50,6 @@ const { meta, values } = useForm({
   initialValues: props
 })
 
-console.log(values)
 const emits = defineEmits()
 const inputUserInfo = () => {
   emits('inputUserInfo', values)

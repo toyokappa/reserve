@@ -20,7 +20,7 @@
       :index="index"
       :hour="time.hour"
       @click="toggleShift"
-      @touchstart="toggleShift"
+      @touchstart.prevent="toggleShift"
       @touchmove="toggleShift"
       @touchend="touchDocument = null"
       @touchcancel="touchDocument = null"
@@ -63,7 +63,6 @@ const moveToday = () => {
 
 let touchDocument
 const toggleShift = (e) => {
-  if(e.type === 'touchstart') e.preventDefault()
   if (e.type.startsWith('touch')) {
     const newTouchDocument = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY)
     if (!newTouchDocument.classList.contains('calendar-state')) return

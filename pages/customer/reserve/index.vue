@@ -50,7 +50,7 @@ template(v-else-if="reserve.screen === 'userInput'")
     @click.native="moveScreen('schedule')"
   )
   BlockText.mb-line 連絡先をご入力ください。
-  FormNoAccount(
+  FormReserveNoAccount(
     :name="reserve.name"
     :email="reserve.email"
     :tel="reserve.tel"
@@ -84,7 +84,7 @@ template(v-else-if="reserve.screen === 'confirm'")
 
 <script setup>
 import CalendarReserve from '~/components/presentational/organizms/CalendarReserve.vue'
-import FormNoAccount from '~/components/presentational/organizms/FormNoAccount.vue'
+import FormReserveNoAccount from '~~/components/presentational/organizms/FormReserveNoAccount.vue'
 import BlockText from '~/components/presentational/molescules/block/Text.vue'
 import BlockProgram from '~/components/presentational/molescules/block/Program.vue'
 import BlockProgramSelected from '~/components/presentational/molescules/block/ProgramSelected.vue'

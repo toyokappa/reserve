@@ -92,8 +92,8 @@ import BlockTrainer from '~/components/presentational/molescules/block/Trainer.v
 import BlockTrainerSelected from '~/components/presentational/molescules/block/TrainerSelected.vue'
 import BlockScheduleSelected from '~/components/presentational/molescules/block/ScheduleSelected.vue'
 import BlockConfirm from '~/components/presentational/molescules/block/Confirm.vue'
-import PrimaryButton from '~/components/presentational/atoms/PrimaryButton.vue';
-import DefaultButton from '~/components/presentational/atoms/DefaultButton.vue';
+import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
+import DefaultButton from '~~/components/presentational/atoms/button/Default.vue';
 
 import sampleData from '@/data/sample'
 const { programList, trainerList } = sampleData

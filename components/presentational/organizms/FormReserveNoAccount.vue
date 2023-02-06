@@ -35,7 +35,7 @@ form
 <script setup>
 import InputField from '~~/components/presentational/molescules/form/InputField.vue';
 import Textarea from '~~/components/presentational/molescules/form/Textarea.vue';
-import PrimaryButton from '~/components/presentational/atoms/PrimaryButton.vue';
+import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
 
 import { useForm } from 'vee-validate'
 

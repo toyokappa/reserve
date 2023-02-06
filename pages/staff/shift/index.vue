@@ -8,7 +8,7 @@ CalendarShift.mb-10
   <script setup>
   import CalendarShift from '~/components/presentational/organizms/CalendarShift.vue'
   import BlockText from '~/components/presentational/molescules/block/Text.vue'
-  import PrimaryButton from '~/components/presentational/atoms/PrimaryButton.vue';
+  import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
   
   const router = useRouter()
   const completeShift = () => {

@@ -52,11 +52,17 @@ form
     validation="required"
     required
   )
+  InputImages.mb-line(
+    name="idCard"
+    labelText="本人確認書類"
+    required
+  )
 </template>
 
 <script setup>
 import InputField from '~~/components/presentational/molescules/form/InputField.vue';
 import InputFieldHorizontal from '~~/components/presentational/molescules/form/InputFieldHorizontal.vue';
+import InputImages from '~~/components/presentational/molescules/form/InputImages.vue';
 
 import { useForm } from 'vee-validate'
 import { Core as YubinBangoCore } from 'yubinbango-core2'

@@ -55,7 +55,7 @@ template(v-else-if="reserve.screen === 'userInput'")
     :email="reserve.email"
     :tel="reserve.tel"
     :message="reserve.message"
-    @inputUserInfo="inputUserInfo"
+    @confirmReserve="confirmReserve"
   )
   .button-area
     DefaultButton.mb-10(@click="moveScreen('schedule')") 戻る
@@ -124,7 +124,7 @@ const selectSchedule = (schedule) => {
   reserve.schedule = schedule
   moveScreen('userInput')
 }
-const inputUserInfo = (userInfo) => {
+const confirmReserve = (userInfo) => {
   const { name, email, tel, message } = userInfo
   reserve.name = name
   reserve.email = email

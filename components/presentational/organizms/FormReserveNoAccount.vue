@@ -28,7 +28,7 @@ form
   .button-area
     PrimaryButton.mb-10(
       :disabled="!meta.valid"
-      @click="inputUserInfo()"
+      @click="confirmReserve()"
     ) 予約内容を確認する
 </template>
 
@@ -51,8 +51,8 @@ const { meta, values } = useForm({
 })
 
 const emits = defineEmits()
-const inputUserInfo = () => {
-  emits('inputUserInfo', values)
+const confirmReserve = () => {
+  emits('confirmReserve', values)
 }
 </script>
 

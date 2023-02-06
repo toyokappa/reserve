@@ -52,25 +52,42 @@ form
     validation="required"
     required
   )
-  InputImages.mb-line(
+  InputImages.mb-10(
     name="idCard"
     labelText="本人確認書類"
     required
   )
+  .button-area
+    PrimaryButton.mb-10(
+      :disabled="!meta.valid"
+      @click.prevent="confirmRegister()"
+    ) 登録内容を確認する
 </template>
 
 <script setup>
 import InputField from '~~/components/presentational/molescules/form/InputField.vue';
 import InputFieldHorizontal from '~~/components/presentational/molescules/form/InputFieldHorizontal.vue';
 import InputImages from '~~/components/presentational/molescules/form/InputImages.vue';
+import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
 
 import { useForm } from 'vee-validate'
 import { Core as YubinBangoCore } from 'yubinbango-core2'
 
+const props = defineProps({
+  lastName: String,
+  firstName: String,
+  lastNameKana: String,
+  firstNameKana: String,
+  birthday: String,
+  email: String,
+  tel: String,
+  postcode: String,
+  address: String,
+  idCard: Array,
+})
+
 const { meta, values } = useForm({
-  initialValues: {
-    birthday: '1990-01-01'
-  }
+  initialValues: props
 })
 
 const autocompleteAdress = () => {
@@ -79,5 +96,10 @@ const autocompleteAdress = () => {
     values.address += value.locality
     values.address += value.street
   })
+}
+
+const emits = defineEmits()
+const confirmRegister = () => {
+  emits('confirmRegister', values)
 }
 </script>

@@ -72,7 +72,6 @@ const input = ref()
 let previews = []
 const onImageUploaded = (e) => {
   const images = Array.from(e.target.files)
-  console.log(images)
   value.value = images
   previews = images.map(image => URL.createObjectURL(image))
 }

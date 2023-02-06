@@ -17,10 +17,14 @@
       v-for="(state, index) in time.stateList"
       :key="index"
       :state="state"
-      @touchstart="(e) => { e.preventDefault() & toggleShift(state, index, time.hour)}"
-      @click="toggleShift(state, index, time.hour)"
+      :index="index"
+      :hour="time.hour"
+      @click="toggleShift"
+      @touchstart="toggleShift"
+      @touchmove="toggleShift"
+      @touchend="touchDocument = null"
+      @touchcancel="touchDocument = null"
     )
-
 </template>
 
 <script setup>
@@ -57,9 +61,20 @@ const moveToday = () => {
   start.value = new Date()
 }
 
-const toggleShift = (state, index, hour) => {
-  console.log('hello')
-  if (state === 'lock') return
+let touchDocument
+const toggleShift = (e) => {
+  if(e.type === 'touchstart') e.preventDefault()
+  if (e.type.startsWith('touch')) {
+    const newTouchDocument = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY)
+    if (!newTouchDocument.classList.contains('calendar-state')) return
+    if (newTouchDocument.dataset.state === 'lock') return
+    if (touchDocument && touchDocument === newTouchDocument) return
+
+    touchDocument = newTouchDocument
+  } else {
+    touchDocument = e.target
+  }
+  const { state, hour, index } = touchDocument.dataset
 
   const toggledState = state === 'work' ? 'rest' : 'work'
   const time = reactiveShiftTimeList.value.find(time => time.hour === hour)

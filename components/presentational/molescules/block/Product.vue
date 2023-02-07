@@ -21,7 +21,7 @@ const props = defineProps({
 <style lang="sass" scoped>
 .product-block
   background-color: $white
-  padding: $block-padding
+  padding: 17px 20px
   .purchaseLimit
     display: inline-block
     font-size: 12px

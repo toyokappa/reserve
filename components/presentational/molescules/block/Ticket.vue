@@ -3,7 +3,7 @@
   .name.mb-5 {{ name }}
   .expiration チケット有効期限: {{ expiration  }} （{{ daysOfExpiration }}日間有効）
   .number-of-ticket
-    span.unit チケット枚数
+    span.unit.me-line チケット枚数
     span.value {{ numberOfTicket }}
     span.unit 枚
 </template>
@@ -25,7 +25,7 @@ const expiration = computed(() => {
 <style lang="sass" scoped>
 .ticket-block
   background-color: $white
-  padding: $block-padding
+  padding: 17px 20px
   .expiration
     font-size: 14px
     color: $hint

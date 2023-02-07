@@ -3,6 +3,10 @@ BlockProfile.mb-30(
   name="田中 太郎"
   email="tanaka@example.com"
 )
+NoticeAlert.mb-10(
+  title="登録の確認メールをご確認ください"
+  description="現在お客様は「仮登録」の状態となります。<br>ご登録いただいたメールアドレスに届いている確認メールに<br>記載のURLをクリックして会員登録を完了させてください。"
+)
 BlockMenu.mb-line(
   v-for="menuSection in mypageMenu"
   :key="menuSection.title"
@@ -14,6 +18,7 @@ BlockMenu.mb-line(
 <script setup>
 import BlockProfile from '~/components/presentational/molescules/block/Profile.vue'
 import BlockMenu from '~/components/presentational/molescules/block/Menu.vue'
+import NoticeAlert from '~/components/presentational/molescules/NoticeAlert.vue'
 
 import reserveIcon from '~/assets/images/menu-reserve.svg'
 import purchaseIcon from '~/assets/images/menu-purchase.svg'

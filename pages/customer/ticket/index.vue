@@ -8,6 +8,7 @@ BlockProduct.mb-line(
   :price="product.price"
   :hasPurchaseLimit="product.hasPurchaseLimit"
   :purchaseLimit="product.purchaseLimit"
+  @click="router.push(`/ticket/${product.id}`)"
 )
 </template>
 
@@ -17,6 +18,7 @@ import BlockProduct from '~/components/presentational/molescules/block/Product.v
 
 import sampleData from '@/data/sample'
 const { productList } = sampleData
+const router = useRouter()
 </script>
 
 <style lang="sass" scoped>

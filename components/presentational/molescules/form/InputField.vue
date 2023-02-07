@@ -7,6 +7,9 @@
     :type="type"
     :id="name"
     :name="name"
+    :placeholder="placeholder"
+    :autocomplete="autocomplete"
+    :inputmode="inputmode"
     v-model="value"
     :class="{ invalid: errorMessage }"
   )
@@ -23,7 +26,10 @@ const props = defineProps({
   name: String,
   type: String,
   labelText: String,
-  validation: String,
+  placeholder: String,
+  autocomplete: String,
+  inputmode: String,
+  validation: [String, Object],
   required: Boolean,
 })
 

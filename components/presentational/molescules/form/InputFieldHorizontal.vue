@@ -9,6 +9,8 @@
       :id="name1"
       :name="name1"
       :placeholder="placeholder1"
+      :autocomplete="autocomplete1"
+      :inputmode="inputmode1"
       v-model="value1"
       :class="{ invalid: errorMessage1 }"
     )
@@ -17,6 +19,8 @@
       :id="name2"
       :name="name2"
       :placeholder="placeholder2"
+      :autocomplete="autocomplete2"
+      :inputmode="inputmode2"
       v-model="value2"
       :class="{ invalid: errorMessage2 }"
     )
@@ -38,18 +42,19 @@ const props = defineProps({
   type2: String,
   placeholder1: String,
   placeholder2: String,
-  validation1: String,
-  validation2: String,
+  autocomplete1: String,
+  autocomplete2: String,
+  inputmode1: String,
+  inputmode2: String,
+  validation1: [String, Object],
+  validation2: [String, Object],
   required: Boolean,
 })
 
 const {
-  labelText,
   name1, name2,
-  type1, type2,
   placeholder1, placeholder2,
   validation1, validation2,
-  required
 } = props
 
 const { value: value1, errorMessage: errorMessage1 } = useField(

@@ -1,13 +1,15 @@
 <template lang="pug">
-.notice
+.notice(:class="type")
   .title
-    img.icon(src="@/assets/images/question-red.svg")
+    img.icon(v-if="type === 'alert'" src="@/assets/images/question-red.svg")
+    img.icon(v-if="type === 'info'"  src="@/assets/images/question-primary.svg")
     .text {{ title }}
   .description(v-html="description")
 </template>
 
 <script setup>
 const props = defineProps({
+  type: String,
   title: String,
   description: String,
 })
@@ -15,12 +17,16 @@ const props = defineProps({
 
 <style lang="sass" scoped>
 .notice
-  color: $red
   background-color: $white
   padding: $block-padding
-  border-color: $red
   border-top: 1px solid
   border-bottom: 1px solid
+  &.alert
+    color: $red
+    border-color: $red
+  &.info
+    color: $primary
+    border-color: $primary
   .icon
     margin-right: 3px
   .title

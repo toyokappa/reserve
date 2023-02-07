@@ -3,9 +3,12 @@ BlockProfile.mb-30(
   name="田中 太郎"
   email="tanaka@example.com"
 )
-NoticeAlert.mb-10(
-  title="登録の確認メールをご確認ください"
-  description="現在お客様は「仮登録」の状態となります。<br>ご登録いただいたメールアドレスに届いている確認メールに<br>記載のURLをクリックして会員登録を完了させてください。"
+Notice.mb-10(
+  v-for="(notice, index) in noticeList"
+  :key="index"
+  :type="notice.type"
+  :title="notice.title"
+  :description="notice.description"
 )
 BlockMenu.mb-line(
   v-for="menuSection in mypageMenu"
@@ -18,7 +21,7 @@ BlockMenu.mb-line(
 <script setup>
 import BlockProfile from '~/components/presentational/molescules/block/Profile.vue'
 import BlockMenu from '~/components/presentational/molescules/block/Menu.vue'
-import NoticeAlert from '~/components/presentational/molescules/NoticeAlert.vue'
+import Notice from '~/components/presentational/molescules/Notice.vue'
 
 import reserveIcon from '~/assets/images/menu-reserve.svg'
 import purchaseIcon from '~/assets/images/menu-purchase.svg'
@@ -28,6 +31,19 @@ import purchaseHistoryIcon from '~/assets/images/menu-purchase-history.svg'
 import profileIcon from '~/assets/images/menu-profile.svg'
 import passwordIcon from '~/assets/images/menu-password.svg'
 import cardIcon from '~/assets/images/menu-card.svg'
+
+const noticeList = [
+  {
+    type: 'alert',
+    title: '登録の確認メールをご確認ください',
+    description: '現在お客様は「仮登録」の状態となります。<br>ご登録いただいたメールアドレスに届いている確認メールに<br>記載のURLをクリックして会員登録を完了させてください。',
+  },
+  {
+    type: 'info',
+    title: '本人確認書類を確認中です',
+    description: 'ご登録いただいた本人確認書類を確認しております。<br>確認完了後にこちらのお知らせは非表示となります。<br>今しばらくお待ちくださいませ。',
+  },
+]
 
 const mypageMenu = [
   {

@@ -32,7 +32,6 @@ const props = defineProps({
   .description
     font-size: 14px
     color: $hint
-    margin-top: 5px
   .price
     text-align: right
     .value

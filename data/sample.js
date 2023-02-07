@@ -65,7 +65,7 @@ const shiftTimeList = [
 
 const productList = [
   {
-    id: 1,
+    id: 'p1',
     name: '2ヶ月コース',
     description: 'コース料金とは別に40,000円の入会金もお支払いいただきます。',
     price: 192000,
@@ -75,7 +75,7 @@ const productList = [
     purchaseLimit: 1,
     defaultOptions: [
       {
-        id: 1,
+        id: 'o1',
         name: '入会金',
         price: 40000,
         isAdmissionFee: true,
@@ -83,7 +83,7 @@ const productList = [
     ]
   },
   {
-    id: 2,
+    id: 'p2',
     name: 'ビジターチケット',
     description: '',
     price: 14980,

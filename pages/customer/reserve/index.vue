@@ -73,10 +73,10 @@ template(v-else-if="reserve.screen === 'confirm'")
     :schedule="reserve.schedule"
     @click.native="moveScreen('schedule')"
   )
-  BlockConfirm.mb-line(label="お名前" :content="reserve.name")
-  BlockConfirm.mb-line(label="メールアドレス" :content="reserve.email")
-  BlockConfirm.mb-line(label="電話番号" :content="reserve.tel")
-  BlockConfirm.mb-10(label="ご質問など" :content="reserve.message")
+  BlockConfirm.mb-line(label="お名前" :contents="[reserve.name]")
+  BlockConfirm.mb-line(label="メールアドレス" :contents="[reserve.email]")
+  BlockConfirm.mb-line(label="電話番号" :contents="[reserve.tel]")
+  BlockConfirm.mb-10(label="ご質問など" :contents="[reserve.message]")
   .button-area
     PrimaryButton.mb-10(@click="completeReserve()") 予約を確定する
     DefaultButton.mb-10(@click="moveScreen('userInput')") 戻る

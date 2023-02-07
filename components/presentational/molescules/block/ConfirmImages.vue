@@ -1,14 +1,15 @@
 <template lang="pug">
 .confirm-block
   .label {{ label }}
-  .contents
-    div(v-for="content in contents" :key="content") {{ content || '-' }}
+  PreviewImages(:images="props.images")
 </template>
 
 <script setup>
+import PreviewImages from '~/components/presentational/atoms/PreviewImages.vue'
+
 const props = defineProps({
   label: String,
-  contents: Array,
+  images: Array,
 })
 </script>
 

@@ -15,8 +15,7 @@
     multiple
     @change="onImageUploaded"
   )
-  .preview
-    img(v-for="(preview, index) in previews" :src="preview" :key="index")
+  PreviewImages(:images="value")
   ImageUploadButton(@click.prevent="input.click()")
   .invalid-feedback(v-if="errorMessage") {{ errorMessage }}
 </template>
@@ -27,6 +26,7 @@ import { localize } from '@vee-validate/i18n'
 
 import RequiredBadge from '~/components/presentational/atoms/RequiredBadge.vue'
 import ImageUploadButton from '~/components/presentational/atoms/button/ImageUpload.vue'
+import PreviewImages from '~/components/presentational/atoms/PreviewImages.vue'
 
 const props = defineProps({
   name: String,
@@ -68,11 +68,9 @@ configure({
 })
 
 const input = ref()
-let previews = []
 const onImageUploaded = (e) => {
   const images = Array.from(e.target.files)
   value.value = images
-  previews = images.map(image => URL.createObjectURL(image))
 }
 </script>
 
@@ -88,13 +86,4 @@ const onImageUploaded = (e) => {
   .text
     font-size: 12px
     color: $hint
-.preview
-  display: flex
-  flex-wrap: wrap
-  img
-    width: calc(50% - 2px)
-    height: auto
-    margin-bottom: 5px
-    &:nth-child(odd)
-      margin-right: 4px
 </style>

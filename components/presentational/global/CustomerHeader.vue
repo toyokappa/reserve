@@ -1,6 +1,6 @@
 <template lang="pug">
 header
-  .logo LOGO
+  nuxt-link.logo(to="/") LOGO
   .menu-toggler
     img(src="@/assets/images/menu-toggler.svg")
 </template>
@@ -17,4 +17,6 @@ header
   display: flex
   align-items: center
   justify-content: space-between
+  .logo
+    color: $black
 </style>

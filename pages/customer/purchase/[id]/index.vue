@@ -45,9 +45,9 @@ form
 .button-area
   PrimaryButton.mb-10(
     :disabled="!meta.valid"
-    @click.prevent="router.push('/ticket/complete')"
+    @click.prevent="router.push('/purchase/complete')"
   ) チケットを購入する
-  DefaultButton.mb-10(@click.prevent="router.push('/ticket')") 戻る
+  DefaultButton.mb-10(@click.prevent="router.push('/purchase')") 戻る
 </template>
 
 <script setup>

@@ -8,7 +8,7 @@ BlockProduct.mb-line(
   :price="product.price"
   :hasPurchaseLimit="product.hasPurchaseLimit"
   :purchaseLimit="product.purchaseLimit"
-  @click="router.push(`/ticket/${product.id}`)"
+  @click="router.push(`/purchase/${product.id}`)"
 )
 </template>
 

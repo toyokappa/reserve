@@ -13,6 +13,12 @@ const layoutName = computed(() => {
 <style lang="sass">
 body
   background-color: $base
+a
+  color: $primary
+  text-decoration: none
+.emphasis-red
+  font-weight: bold
+  color: $red
 .ms-line
   margin-left: 2px
 .me-line
@@ -23,6 +29,12 @@ body
   margin-bottom: 10px
 .mb-20
   margin-bottom: 20px
+.mb-30
+  margin-bottom: 30px
 .button-area
   padding: 0 20px
+.complete-page
+  text-align: center
+  letter-spacing: 0.05em
+  padding: 50px 0 80px
 </style>

@@ -38,14 +38,14 @@ import BlockConfirmImages from '~/components/presentational/molescules/block/Con
 
 const register = reactive({
   screen: 'register',
-  lastName: '田中',
-  firstName: '太郎',
-  lastNameKana: 'たなか',
-  firstNameKana: 'たろう',
+  lastName: '',
+  firstName: '',
+  lastNameKana: '',
+  firstNameKana: '',
   birthday: '1990-01-01',
-  email: 'tanaka@example.com',
-  tel: '080-1234-1234',
-  postcode: '371-0221',
+  email: '',
+  tel: '',
+  postcode: '',
   address: '',
   idCard: [],
 })

@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { add, eachDayOfInterval, format, isToday, setHours, startOfToday, subWeeks } from 'date-fns'
+import { add, eachDayOfInterval, format, isToday, startOfToday, subWeeks } from 'date-fns'
 import { ja } from 'date-fns/locale'
 import BlockSwitchWeek from '~/components/presentational/molescules/block/SwitchWeek.vue'
 import BlockCalendarDate from '~/components/presentational/atoms/block/CalendarDate.vue'

@@ -4,8 +4,7 @@
     span.text {{ labelText }}
     RequiredBadge(v-if="required")
   .hint
-    .icon
-      img(src="@/assets/images/question-hint.svg")
+    img.icon(src="@/assets/images/question-hint.svg")
     .text 本人確認書類ガイド
   input.hidden-field(
     type="file"
@@ -83,10 +82,9 @@ const onImageUploaded = (e) => {
   align-items: center
   margin-bottom: 3px
   .icon
+    width: 14px
+    height: auto
     margin-right: 3px
-    img
-      width: 14px
-      height: auto
   .text
     font-size: 12px
     color: $hint

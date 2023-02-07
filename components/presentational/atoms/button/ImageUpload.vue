@@ -1,7 +1,6 @@
 <template lang="pug">
 button.image-upload-button
-  .icon
-    img(src="@/assets/images/image.svg")
+  img.icon(src="@/assets/images/image.svg")
   .text 画像を選択する
 </template>
 
@@ -16,10 +15,9 @@ button.image-upload-button
   align-items: center
   justify-content: center
   .icon
-    margin-right: 3px
-    img
     width: 16px
     height: auto
+    margin-right: 3px
   .text
     font-size: 14px
 </style>

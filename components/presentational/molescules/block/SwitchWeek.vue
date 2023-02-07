@@ -8,8 +8,7 @@
     .arrow-right(@click="emits('moveNextWeek')")
       img(src="@/assets/images/arrow-right.svg")
   BlockText.today-switcher(@click="emits('moveToday')")
-    .icon
-      img(src="@/assets/images/return-today.svg")
+    img.icon(src="@/assets/images/return-today.svg")
     .text 今日に戻る
 </template>
 
@@ -44,6 +43,7 @@ const emits = defineEmits()
     .icon
       margin-right: 3px
       width: 16px
+      height: auto
     .text
       white-space: nowrap
 </style>

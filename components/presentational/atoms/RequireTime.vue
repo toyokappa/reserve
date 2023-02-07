@@ -1,7 +1,6 @@
 <template lang="pug">
 .require-time(:style="styles")
-  .icon
-    img(src="@/assets/images/require-time.svg")
+  img.icon(src="@/assets/images/require-time.svg")
   .text {{ time }}分
 </template>
 

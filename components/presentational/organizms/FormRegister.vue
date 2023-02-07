@@ -5,6 +5,7 @@ form
     name1="lastName" name2="firstName"
     placeholder1="姓" placeholder2="名"
     type1="text" type2="text"
+    autocomplete1="family-name" autocomplete2="given-name"
     validation1="required" validation2="required"
     required
   )
@@ -27,6 +28,7 @@ form
     name="email"
     type="email"
     labelText="メールアドレス"
+    autocomplete="email"
     validation="required|email"
     required
   )
@@ -34,13 +36,16 @@ form
     name="tel"
     type="tel"
     labelText="電話番号"
+    autocomplete="tel"
     validation="required"
     required
   )
   InputField.mb-line(
     name="postcode"
-    type="tel"
+    type="text"
+    inputmode="numeric"
     labelText="郵便番号"
+    autocomplete="postal-code"
     validation="required"
     required
     @focusout="autocompleteAdress()"

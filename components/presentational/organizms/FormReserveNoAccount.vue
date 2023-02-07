@@ -4,6 +4,7 @@ form
     name="name"
     type="text"
     labelText="お名前"
+    autocomplete="name"
     validation="required"
     required
   )
@@ -11,6 +12,7 @@ form
     name="email"
     type="email"
     labelText="メールアドレス"
+    autocomplete="email"
     validation="required|email"
     required
   )
@@ -18,6 +20,7 @@ form
     name="tel"
     type="tel"
     labelText="電話番号"
+    autocomplete="tel"
     validation="required"
     required
   )

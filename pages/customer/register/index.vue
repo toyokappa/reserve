@@ -24,6 +24,9 @@ template(v-if="register.screen === 'confirm'")
   BlockConfirm.mb-line(label="住所" :contents="['〒' + register.postcode, register.address]")
   BlockConfirmImages.mb-10(label="本人確認書類" :images="register.idCard")
   .button-area
+    PrimaryButton.mb-10(
+      @click.prevent="router.push('/register/sendMail')"
+    ) 予約内容を確認する
     DefaultButton.mb-10(@click.prevent="moveScreen('register')") 戻る
 </template>
 
@@ -32,9 +35,12 @@ import { format } from 'date-fns'
 
 import BlockText from '~/components/presentational/molescules/block/Text.vue'
 import FormRegister from '~/components/presentational/organizms/FormRegister.vue'
+import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
 import DefaultButton from '~~/components/presentational/atoms/button/Default.vue';
 import BlockConfirm from '~/components/presentational/molescules/block/Confirm.vue'
 import BlockConfirmImages from '~/components/presentational/molescules/block/ConfirmImages.vue'
+
+const router = useRouter()
 
 const register = reactive({
   screen: 'register',

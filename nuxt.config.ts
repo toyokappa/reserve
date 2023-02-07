@@ -11,5 +11,16 @@ export default defineNuxtConfig({
         }
       }
     }
+  },
+  app: {
+    head: {
+      title: '予約システム',
+      htmlAttrs: {
+        lang: 'ja'
+      },
+      link: [
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:400,700' },
+      ]
+    }
   }
 })

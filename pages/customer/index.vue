@@ -1,4 +1,8 @@
 <template lang="pug">
+BlockProfile.mb-30(
+  name="田中 太郎"
+  email="tanaka@example.com"
+)
 BlockMenu.mb-line(
   v-for="menuSection in mypageMenu"
   :key="menuSection.title"
@@ -8,6 +12,7 @@ BlockMenu.mb-line(
 </template>
 
 <script setup>
+import BlockProfile from '~/components/presentational/molescules/block/Profile.vue'
 import BlockMenu from '~/components/presentational/molescules/block/Menu.vue'
 
 import reserveIcon from '~/assets/images/menu-reserve.svg'

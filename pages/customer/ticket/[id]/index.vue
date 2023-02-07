@@ -12,37 +12,41 @@ TotalAmount.mb-10(
   :options="product.defaultOptions"
 )
 BlockText.mb-line カード情報を入力してください。
-InputField.mb-line(
-  name="cardNumber"
-  type="text"
-  inputmode="numeric"
-  labelText="カード番号"
-  autocomplete="cc-number"
-  :validation="{ required: true, regex: cardNumberFmt }"
-  required
-)
-InputField.mb-line(
-  name="cardOwner"
-  type="text"
-  labelText="カード名義"
-  autocomplete="cc-name"
-  placeholder="TARO TANAKA"
-  :validation="{ required: true, regex: cardOwnerFmt }"
-  required
-)
-InputFieldHorizontal.mb-10(
-  labelText="有効期限/CVC"
-  name1="expiration" name2="cvc"
-  placeholder1="月/年" placeholder2="CVC"
-  type1="text" type2="text"
-  inputmode1="decimal" inputmode2="numeric"
-  autocomplete1="cc-exp" autocomplete2="cc-csc"
-  :validation1="{ required: true, regex: cardExpFmt }"
-  :validation2="{ required: true, regex: cardCvcFmt }"
-  required
-)
+form
+  InputField.mb-line(
+    name="cardNumber"
+    type="text"
+    inputmode="numeric"
+    labelText="カード番号"
+    autocomplete="cc-number"
+    :validation="{ required: true, regex: cardNumberFmt }"
+    required
+  )
+  InputField.mb-line(
+    name="cardOwner"
+    type="text"
+    labelText="カード名義"
+    autocomplete="cc-name"
+    placeholder="TARO TANAKA"
+    :validation="{ required: true, regex: cardOwnerFmt }"
+    required
+  )
+  InputFieldHorizontal.mb-10(
+    labelText="有効期限/CVC"
+    name1="expiration" name2="cvc"
+    placeholder1="月/年" placeholder2="CVC"
+    type1="text" type2="text"
+    inputmode1="decimal" inputmode2="numeric"
+    autocomplete1="cc-exp" autocomplete2="cc-csc"
+    :validation1="{ required: true, regex: cardExpFmt }"
+    :validation2="{ required: true, regex: cardCvcFmt }"
+    required
+  )
 .button-area
-  PrimaryButton.mb-10(@click.prevent="router.push('/ticket/complete')") チケットを購入する
+  PrimaryButton.mb-10(
+    :disabled="!meta.valid"
+    @click.prevent="router.push('/ticket/complete')"
+  ) チケットを購入する
   DefaultButton.mb-10(@click.prevent="router.push('/ticket')") 戻る
 </template>
 
@@ -56,9 +60,12 @@ import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue
 import DefaultButton from '~~/components/presentational/atoms/button/Default.vue';
 
 import sampleData from '@/data/sample'
+import { useForm } from 'vee-validate'
+
 const { productList } = sampleData
 const router = useRouter()
 const route = useRoute()
+const { meta } = useForm()
 const { id } = route.params
 const product = productList.find(product => product.id === id )
 const cardNumberFmt = /^[0-9]{13,16}$/

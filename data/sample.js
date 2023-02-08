@@ -161,6 +161,30 @@ const ticketSetList = [
   },
 ]
 
+const purchaseHistoryList = [
+  {
+    id: 'ph3',
+    productName: '2ヶ月コース',
+    purchaseDate: '2023/2/4',
+    paymentMethod: 'クレジットカード支払い',
+    price: 232000,
+  },
+  {
+    id: 'ph2',
+    productName: 'ビジターチケット',
+    purchaseDate: '2023/2/4',
+    paymentMethod: 'クレジットカード支払い',
+    price: 14980,
+  },
+  {
+    id: 'ph1',
+    productName: 'ビジターチケット',
+    purchaseDate: '2023/2/1',
+    paymentMethod: 'クレジットカード支払い',
+    price: 14980,
+  },
+]
+
 export default {
   programList,
   trainerList,
@@ -169,4 +193,5 @@ export default {
   productList,
   reservationList,
   ticketSetList,
+  purchaseHistoryList,
 }

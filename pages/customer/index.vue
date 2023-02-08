@@ -58,7 +58,7 @@ const mypageMenu = [
     menuList: [
       { name: '予約スケジュール', link: '/schedule', icon: scheduleIcon },
       { name: '所持チケット', link: '/ticket', icon: ticketIcon },
-      { name: '購入履歴', link: '/', icon: purchaseHistoryIcon },
+      { name: '購入履歴', link: '/purchaseHistory', icon: purchaseHistoryIcon },
     ]
   },
   {

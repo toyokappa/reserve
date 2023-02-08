@@ -28,6 +28,8 @@ a
   margin-bottom: 2px
 .mb-5
   margin-bottom: 5px
+.mt-10
+  margin-top: 10px
 .mb-10
   margin-bottom: 10px
 .mb-20

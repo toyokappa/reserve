@@ -101,21 +101,42 @@ const reservationList = [
     schedule: '2023/2/5(日) 10:00~11:00',
     requireTime: 60,
     programName: 'パーソナルトレーニング',
-    trainer: 'Hanako'
+    trainer: 'Hanako',
+    ticketList: [
+      {
+        id: 't1',
+        name: 'ビジターチケット',
+        expiration: '2023/3/1',
+      },
+    ]
   },
   {
     id: 'r2',
     schedule: '2023/2/9(木) 13:00~14:00',
     requireTime: 60,
     programName: 'パーソナルトレーニング',
-    trainer: 'Umeko'
+    trainer: 'Umeko',
+    ticketList: [
+      {
+        id: 't2',
+        name: '2ヶ月コース',
+        expiration: '2023/4/12',
+      },
+    ]
   },
   {
     id: 'r3',
     schedule: '2023/2/12(日) 13:00~14:00',
     requireTime: 60,
     programName: 'パーソナルトレーニング',
-    trainer: 'Hanako'
+    trainer: 'Hanako',
+    ticketList: [
+      {
+        id: 't3',
+        name: '2ヶ月コース',
+        expiration: '2023/4/12',
+      },
+    ]
   },
 ]
 

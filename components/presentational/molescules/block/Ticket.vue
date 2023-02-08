@@ -1,25 +1,38 @@
 <template lang="pug">
 .ticket-block
   .name.mb-5 {{ name }}
-  .expiration チケット有効期限: {{ expiration  }} （{{ daysOfExpiration }}日間有効）
-  .number-of-ticket
+  .expiration
+    span チケット有効期限: {{ expiration }}
+    span(v-if="daysOfExpiration > 0") （{{ daysOfExpiration }}日間有効）
+    span(v-else) （有効期限切れ）
+  .number-of-ticket(v-if="numberOfTicket")
     span.unit.me-line チケット枚数
     span.value {{ numberOfTicket }}
     span.unit 枚
 </template>
 
 <script setup>
-import { add, format } from 'date-fns'
+import { add, differenceInDays, format } from 'date-fns'
 
 const props = defineProps({
   name: String,
+  expiration: String,
   numberOfTicket: Number,
   daysOfExpiration: Number,
 })
 
 const expiration = computed(() => {
+  if(props.expiration) return props.expiration
+
   return format(add(new Date(), { days: props.daysOfExpiration }), 'Y/M/d')
 })
+
+const daysOfExpiration = computed(() => {
+  if(props.daysOfExpiration) return props.daysOfExpiration
+
+  return differenceInDays(new Date(props.expiration), new Date())
+})
+
 </script>
 
 <style lang="sass" scoped>

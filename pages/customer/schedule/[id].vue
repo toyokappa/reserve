@@ -14,6 +14,9 @@ BlockTicket.mb-line(
   :expiration="ticket.expiration"
 )
 .button-area.mt-10
+  DefaultButton.mb-10(
+    @click.prevent="router.push('/schedule')"
+  ) 戻る
   DangerButton.mb-5(
     @click.prevent="router.push('/schedule')"
   ) 予約をキャンセルする
@@ -28,6 +31,7 @@ import BlockText from '~/components/presentational/molescules/block/Text.vue'
 import BlockReservation from '~/components/presentational/molescules/block/Reservation.vue'
 import BlockTicket from '~/components/presentational/molescules/block/Ticket.vue'
 import DangerButton from '~/components/presentational/atoms/button/Danger.vue'
+import DefaultButton from '~/components/presentational/atoms/button/Default.vue'
 import HintText from '~/components/presentational/atoms/HintText.vue'
 
 import sampleData from '@/data/sample'

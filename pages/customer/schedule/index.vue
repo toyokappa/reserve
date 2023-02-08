@@ -7,6 +7,7 @@ BlockReservation.mb-line(
   :time="reservation.requireTime"
   :name="reservation.programName"
   :trainer="reservation.trainer"
+  @click="router.push(`/schedule/${reservation.id}`)"
 )
 </template>
 
@@ -16,6 +17,7 @@ import BlockReservation from '~/components/presentational/molescules/block/Reser
 
 import sampleData from '@/data/sample'
 const { reservationList } = sampleData
+const router = useRouter()
 </script>
 
 <style lang="sass" scoped>

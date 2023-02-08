@@ -6,7 +6,8 @@ BlockPurchaseHistory.mb-line(
   :productName="purchaseHistory.productName"
   :purchaseDate="purchaseHistory.purchaseDate"
   :paymentMethod="purchaseHistory.paymentMethod"
-  :price="purchaseHistory.price"
+  :totalAmount="purchaseHistory.totalAmount"
+  @click="router.push(`/purchaseHistory/${purchaseHistory.id}`)"
 )
 </template>
 
@@ -16,6 +17,8 @@ import BlockPurchaseHistory from '~/components/presentational/molescules/block/P
 
 import sampleData from '@/data/sample'
 const { purchaseHistoryList } = sampleData
+
+const router = useRouter()
 </script>
 
 <style lang="sass" scoped>

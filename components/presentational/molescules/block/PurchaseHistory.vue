@@ -5,7 +5,7 @@
     .purchase-date {{ purchaseDate }}
   .payment-method.mb-5 {{ paymentMethod }}
   .price
-    span.value {{ price.toLocaleString() }}円
+    span.value {{ totalAmount.toLocaleString() }}円
     span.unit (税込)
 </template>
 
@@ -14,7 +14,7 @@ const props = defineProps({
   productName: String,
   purchaseDate: String,
   paymentMethod: String,
-  price: Number
+  totalAmount: Number,
 })
 </script>
 

@@ -26,6 +26,8 @@ a
   margin-right: 2px
 .mb-line
   margin-bottom: 2px
+.mt-5
+  margin-top: 5px
 .mb-5
   margin-bottom: 5px
 .mt-10

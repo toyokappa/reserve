@@ -140,6 +140,27 @@ const reservationList = [
   },
 ]
 
+const ticketSetList = [
+  {
+    id: 'ts1',
+    name: 'ビジターチケット',
+    expiration: '2023/2/28',
+    numberOfTicket: 1,
+  },
+  {
+    id: 'ts2',
+    name: 'ビジターチケット',
+    expiration: '2023/3/14',
+    numberOfTicket: 1,
+  },
+  {
+    id: 'ts3',
+    name: '2ヶ月コース',
+    expiration: '2023/4/18',
+    numberOfTicket: 16,
+  },
+]
+
 export default {
   programList,
   trainerList,
@@ -147,4 +168,5 @@ export default {
   shiftTimeList,
   productList,
   reservationList,
+  ticketSetList,
 }

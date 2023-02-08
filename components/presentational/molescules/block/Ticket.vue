@@ -5,7 +5,7 @@
     span チケット有効期限: {{ expiration }}
     span(v-if="daysOfExpiration > 0") （{{ daysOfExpiration }}日間有効）
     span(v-else) （有効期限切れ）
-  .number-of-ticket(v-if="numberOfTicket")
+  .number-of-ticket.mt-5(v-if="numberOfTicket")
     span.unit.me-line チケット枚数
     span.value {{ numberOfTicket }}
     span.unit 枚

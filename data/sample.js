@@ -95,10 +95,35 @@ const productList = [
   }
 ]
 
+const reservationList = [
+  {
+    id: 'r1',
+    schedule: '2023/2/5(日) 10:00~11:00',
+    requireTime: 60,
+    programName: 'パーソナルトレーニング',
+    trainer: 'Hanako'
+  },
+  {
+    id: 'r2',
+    schedule: '2023/2/9(木) 13:00~14:00',
+    requireTime: 60,
+    programName: 'パーソナルトレーニング',
+    trainer: 'Umeko'
+  },
+  {
+    id: 'r3',
+    schedule: '2023/2/12(日) 13:00~14:00',
+    requireTime: 60,
+    programName: 'パーソナルトレーニング',
+    trainer: 'Hanako'
+  },
+]
+
 export default {
   programList,
   trainerList,
   reservalTimeList,
   shiftTimeList,
   productList,
+  reservationList,
 }

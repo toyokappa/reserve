@@ -98,7 +98,8 @@ const productList = [
 const reservationList = [
   {
     id: 'r1',
-    schedule: '2023/2/5(日) 10:00~11:00',
+    scheduleDate: '2/5(日)',
+    scheduleTime: '10:00~11:00',
     requireTime: 60,
     programName: 'パーソナルトレーニング',
     trainer: 'Hanako',
@@ -112,7 +113,8 @@ const reservationList = [
   },
   {
     id: 'r2',
-    schedule: '2023/2/9(木) 13:00~14:00',
+    scheduleDate: '2/9(木)',
+    scheduleTime: '13:00~14:00',
     requireTime: 60,
     programName: 'パーソナルトレーニング',
     trainer: 'Umeko',
@@ -126,7 +128,8 @@ const reservationList = [
   },
   {
     id: 'r3',
-    schedule: '2023/2/12(日) 13:00~14:00',
+    scheduleDate: '2/12(日)',
+    scheduleTime: '13:00~14:00',
     requireTime: 60,
     programName: 'パーソナルトレーニング',
     trainer: 'Hanako',
@@ -257,6 +260,33 @@ const currentStaff = {
   comment: 'よろしくおねがいします😊',
 }
 
+const reservationListForTrainer = [
+  {
+    id: 'r1',
+    scheduleDate: '2/5(日)',
+    scheduleTime: '10:00~11:00',
+    requireTime: 60,
+    programName: 'パーソナルトレーニング',
+    trainee: '田中 太郎'
+  },
+  {
+    id: 'r2',
+    scheduleDate: '2/5(日)',
+    scheduleTime: '12:00~13:00',
+    requireTime: 60,
+    programName: 'パーソナルトレーニング',
+    trainee: '井上吾郎',
+  },
+  {
+    id: 'r3',
+    scheduleDate: '2/7(火)',
+    scheduleTime: '17:00~18:00',
+    requireTime: 60,
+    programName: 'パーソナルトレーニング',
+    trainee: '山上 博士',
+  },
+]
+
 export default {
   programList,
   trainerList,
@@ -269,4 +299,5 @@ export default {
   currentCustomer,
   creditCardList,
   currentStaff,
+  reservationListForTrainer,
 }

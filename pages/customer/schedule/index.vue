@@ -3,7 +3,7 @@ BlockText.mb-line 予約スケジュール
 BlockReservation.mb-line(
   v-for="reservation in reservationList"
   :key="reservation.id"
-  :schedule="reservation.schedule"
+  :schedule="`${reservation.scheduleDate} ${reservation.scheduleTime}`"
   :time="reservation.requireTime"
   :name="reservation.programName"
   :trainer="reservation.trainer"

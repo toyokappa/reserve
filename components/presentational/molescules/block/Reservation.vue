@@ -4,7 +4,8 @@
   .program.mb-5
     RequireTime(:time="time" size="16")
     .name {{ name }}
-  .trainer トレーナー: {{ trainer }}
+  .trainer(v-if="trainer") トレーナー: {{ trainer }}
+  .trainee(v-if="trainee") {{ trainee }}
 </template>
 
 <script setup>
@@ -15,6 +16,7 @@ const props = defineProps({
   time: [Number, String],
   name: String,
   trainer: String,
+  trainee: String,
 })
 </script>
 
@@ -31,4 +33,6 @@ const props = defineProps({
   .trainer
     color: $hint
     font-size: 14px
+  .trainee
+    font-weight: bold
 </style>

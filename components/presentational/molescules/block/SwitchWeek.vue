@@ -1,25 +1,33 @@
 <template lang="pug">
 .switch-week
   .week-switcher.me-line
-    .arrow-left(@click="emits('movePrevWeek')" v-if="!isThisWeek")
+    .arrow-left(@click="emits('switchWeek', prevWeek)" v-if="!isThisWeek")
       img(src="@/assets/images/arrow-left.svg")
     .arrow-left-blank(v-else)
     .display-week {{ startDate }} - {{ endDate }}
-    .arrow-right(@click="emits('moveNextWeek')")
+    .arrow-right(@click="emits('switchWeek', nextWeek)")
       img(src="@/assets/images/arrow-right.svg")
-  BlockText.today-switcher(@click="emits('moveToday')")
+  BlockText.today-switcher(@click="emits('switchWeek', today)")
     img.icon(src="@/assets/images/return-today.svg")
     .text 今日に戻る
 </template>
 
 <script setup>
+import { add, format, isToday, startOfToday, subWeeks } from 'date-fns'
 import BlockText from '~/components/presentational/molescules/block/Text.vue'
 
 const props = defineProps({
-  isThisWeek: Boolean,
-  startDate: String,
-  endDate: String,
+  start: Date,
+  end: Date,
 })
+
+const { start, end } = toRefs(props)
+const startDate = computed(() => format(start.value, 'M/d'))
+const endDate = computed(() => format(end.value, 'M/d'))
+const isThisWeek = computed(() => isToday(start.value))
+const prevWeek = computed(() => subWeeks(start.value, 1))
+const nextWeek = computed(() => add(start.value, { days: 7 }))
+const today = computed(() => startOfToday())
 
 const emits = defineEmits()
 </script>
@@ -40,6 +48,7 @@ const emits = defineEmits()
   .today-switcher
     display: flex
     align-items: center
+    justify-content: center
     .icon
       margin-right: 3px
       width: 16px

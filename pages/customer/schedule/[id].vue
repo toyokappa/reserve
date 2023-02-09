@@ -1,7 +1,7 @@
 <template lang="pug">
 BlockText.mb-line 予約スケジュール
 BlockReservation.mb-10(
-  :schedule="reservation.schedule"
+  :schedule="`${reservation.scheduleDate} ${reservation.scheduleTime}`"
   :time="reservation.requireTime"
   :name="reservation.programName"
   :trainer="reservation.trainer"

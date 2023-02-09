@@ -65,7 +65,7 @@ const mypageMenu = [
     title: 'アカウント',
     menuList: [
       { name: 'プロフィール変更', link: '/', icon: profileIcon },
-      { name: 'パスワード変更', link: '/', icon: passwordIcon },
+      { name: 'パスワード変更', link: '/password/edit', icon: passwordIcon },
       { name: 'クレジットカード設定', link: '/', icon: cardIcon },
     ]
   },

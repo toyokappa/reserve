@@ -2,7 +2,7 @@
 BlockText.mb-line 新しいパスワードを入力してください。
 FormPassword(
   buttonText="パスワードを再設定する"
-  @submitForm="router.push('/login')"
+  @submitForm="router.push('/staff/login')"
 )
 </template>
 

@@ -232,6 +232,25 @@ const currentCustomer = {
   address: '群馬県前橋市樋越町123-4'
 }
 
+const creditCardList = {
+  inUse: {
+    id: 'c1',
+    number: '1234',
+    brand: 'visa',
+    expiration: '10/2024',
+    owner: 'TARO TANAKA'
+  },
+  registered: [
+    {
+      id: 'c2',
+      number: '0123',
+      brand: 'visa',
+      expiration: '10/2025',
+      owner: 'TARO TANAKA'
+    },
+  ]
+}
+
 export default {
   programList,
   trainerList,
@@ -242,4 +261,5 @@ export default {
   ticketSetList,
   purchaseHistoryList,
   currentCustomer,
+  creditCardList,
 }

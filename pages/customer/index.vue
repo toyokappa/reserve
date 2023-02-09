@@ -72,7 +72,7 @@ const mypageMenu = [
     menuList: [
       { name: 'プロフィール変更', link: '/profile/edit', icon: profileIcon },
       { name: 'パスワード変更', link: '/password/edit', icon: passwordIcon },
-      { name: 'クレジットカード設定', link: '/', icon: cardIcon },
+      { name: 'クレジットカード設定', link: '/creditCard', icon: cardIcon },
     ]
   },
 ]

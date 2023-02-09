@@ -24,9 +24,6 @@ FormCreditCard(
 import BlockText from '~/components/presentational/molescules/block/Text.vue'
 import BlockTicket from '~/components/presentational/molescules/block/Ticket.vue'
 import TotalAmount from '~~/components/presentational/organizms/TotalAmount.vue'
-import InputField from '~~/components/presentational/molescules/form/InputField.vue';
-import InputFieldHorizontal from '~~/components/presentational/molescules/form/InputFieldHorizontal.vue';
-import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
 import DefaultButton from '~~/components/presentational/atoms/button/Default.vue';
 import FormCreditCard from '~~/components/presentational/organizms/FormCreditCard.vue';
 
@@ -37,10 +34,6 @@ const router = useRouter()
 const route = useRoute()
 const { id } = route.params
 const product = productList.find(product => product.id === id )
-const cardNumberFmt = /^[0-9]{13,16}$/
-const cardOwnerFmt = /^[A-Z]+\s[A-Z]+$/
-const cardExpFmt = /^[0-9]{2}\/[0-9]{2,4}$/
-const cardCvcFmt = /^[0-9]{3,4}$/
 </script>
 
 <style lang="sass" scoped>

@@ -220,6 +220,18 @@ const purchaseHistoryList = [
   },
 ]
 
+const currentCustomer = {
+  lastName: '田中',
+  firstName: '太郎',
+  lastNameKana: 'たなか',
+  firstNameKana: 'たろう',
+  birthday: '1990-01-01',
+  email: 'tanaka@example.com',
+  tel: '080-1234-1234',
+  postcode: '377-0221',
+  address: '群馬県前橋市樋越町123-4'
+}
+
 export default {
   programList,
   trainerList,
@@ -229,4 +241,5 @@ export default {
   reservationList,
   ticketSetList,
   purchaseHistoryList,
+  currentCustomer,
 }

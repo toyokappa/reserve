@@ -1,7 +1,7 @@
 <template lang="pug">
 BlockProfile.mb-30(
-  name="田中 太郎"
-  email="tanaka@example.com"
+  :name="name"
+  :email="currentCustomer.email"
 )
 Notice.mb-10(
   v-for="(notice, index) in noticeList"
@@ -31,6 +31,12 @@ import purchaseHistoryIcon from '~/assets/images/menu-purchase-history.svg'
 import profileIcon from '~/assets/images/menu-profile.svg'
 import passwordIcon from '~/assets/images/menu-password.svg'
 import cardIcon from '~/assets/images/menu-card.svg'
+
+import sampleData from '~/data/sample'
+const { currentCustomer } = sampleData
+const name = computed(() => {
+  return `${currentCustomer.lastName} ${currentCustomer.firstName}`
+})
 
 const noticeList = [
   {
@@ -64,7 +70,7 @@ const mypageMenu = [
   {
     title: 'アカウント',
     menuList: [
-      { name: 'プロフィール変更', link: '/', icon: profileIcon },
+      { name: 'プロフィール変更', link: '/profile/edit', icon: profileIcon },
       { name: 'パスワード変更', link: '/password/edit', icon: passwordIcon },
       { name: 'クレジットカード設定', link: '/', icon: cardIcon },
     ]

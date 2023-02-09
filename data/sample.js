@@ -251,6 +251,12 @@ const creditCardList = {
   ]
 }
 
+const currentStaff = {
+  name: 'Hanako',
+  email: 'hanako@example.com',
+  comment: 'よろしくおねがいします😊',
+}
+
 export default {
   programList,
   trainerList,
@@ -262,4 +268,5 @@ export default {
   purchaseHistoryList,
   currentCustomer,
   creditCardList,
+  currentStaff,
 }

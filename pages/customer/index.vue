@@ -32,15 +32,14 @@ import profileIcon from '~/assets/images/menu-profile.svg'
 import passwordIcon from '~/assets/images/menu-password.svg'
 import cardIcon from '~/assets/images/menu-card.svg'
 
-import sampleData from '~/data/sample'
-const { currentCustomer } = sampleData
-const name = computed(() => {
-  return `${currentCustomer.lastName} ${currentCustomer.firstName}`
-})
-
 definePageMeta({
   middleware: 'customer-auth'
 })
+const currentCustomer = useState('currentCustomer')
+const name = computed(() => {
+  return `${currentCustomer.value.last_name} ${currentCustomer.value.first_name}`
+})
+
 const noticeList = [
   {
     type: 'alert',

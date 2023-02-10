@@ -26,8 +26,10 @@ const getToken = (cookie) => () => {
 export const useStaffAuth = () => {
   const cookie = useCookie('staff_access_token')
   const staffLoggedIn = useState('staffLoggedIn', () => false)
+  const currentStaff = useState('currentStaff')
   return {
     staffLoggedIn,
+    currentStaff,
     getToken: getToken(cookie),
     staffLogin: login(staffLoggedIn, cookie),
     staffLogout: logout(staffLoggedIn, cookie),

@@ -254,12 +254,6 @@ const creditCardList = {
   ]
 }
 
-const currentStaff = {
-  name: 'Hanako',
-  email: 'hanako@example.com',
-  comment: 'よろしくおねがいします😊',
-}
-
 const reservationListForTrainer = [
   {
     id: 'r1',
@@ -298,6 +292,5 @@ export default {
   purchaseHistoryList,
   currentCustomer,
   creditCardList,
-  currentStaff,
   reservationListForTrainer,
 }

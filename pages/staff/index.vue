@@ -1,6 +1,6 @@
 <template lang="pug">
 BlockProfile.mb-30(
-  :name="currentStaff.name"
+  :name="currentStaff.display_name"
   :email="currentStaff.email"
 )
 BlockMenu.mb-line(
@@ -20,8 +20,7 @@ import shiftIcon from '~/assets/images/menu-shift.svg'
 import profileIcon from '~/assets/images/menu-profile.svg'
 import passwordIcon from '~/assets/images/menu-password.svg'
 
-import sampleData from '~/data/sample'
-const { currentStaff } = sampleData
+const currentStaff = useState('currentStaff')
 
 definePageMeta({
   middleware: 'staff-auth'

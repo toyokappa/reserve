@@ -28,8 +28,11 @@ import DefaultButton from '~~/components/presentational/atoms/button/Default.vue
 import FormCreditCard from '~~/components/presentational/organizms/FormCreditCard.vue';
 
 import sampleData from '@/data/sample'
-
 const { productList } = sampleData
+
+definePageMeta({
+  middleware: 'customer-auth'
+})
 const router = useRouter()
 const route = useRoute()
 const { id } = route.params

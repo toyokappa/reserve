@@ -38,6 +38,9 @@ const name = computed(() => {
   return `${currentCustomer.lastName} ${currentCustomer.firstName}`
 })
 
+definePageMeta({
+  middleware: 'customer-auth'
+})
 const noticeList = [
   {
     type: 'alert',

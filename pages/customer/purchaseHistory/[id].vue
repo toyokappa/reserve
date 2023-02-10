@@ -35,6 +35,9 @@ import TotalAmount from '~~/components/presentational/organizms/TotalAmount.vue'
 import sampleData from '@/data/sample'
 const { purchaseHistoryList } = sampleData
 
+definePageMeta({
+  middleware: 'customer-auth'
+})
 const router = useRouter()
 const route = useRoute()
 const { id } = route.params

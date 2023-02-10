@@ -21,6 +21,9 @@ import FormProfileEdit from '~/components/presentational/organizms/FormProfileEd
 import sampleData from '~/data/sample'
 const { currentCustomer } = sampleData
 
+definePageMeta({
+  middleware: 'customer-auth'
+})
 const router = useRouter()
 
 const profile = reactive({

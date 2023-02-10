@@ -15,6 +15,9 @@ import BlockTicket from '~/components/presentational/molescules/block/Ticket.vue
 
 import sampleData from '@/data/sample'
 const { ticketSetList } = sampleData
+definePageMeta({
+  middleware: 'customer-auth'
+})
 </script>
 
 <style lang="sass" scoped>

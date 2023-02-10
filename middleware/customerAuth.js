@@ -1,14 +1,14 @@
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  const { loggedIn, currentStaff, getAuth } = useStaffAuth()
+  const { loggedIn, currentCustomer, getAuth } = useCustomerAuth()
   try {
-    const data = await $fetch('/staff/auth/validate_token', {
+    const data = await $fetch('/customer/auth/validate_token', {
       baseURL: useRuntimeConfig().apiBaseURL,
       headers: {
         Authorization: getAuth()
       }
     })
     loggedIn.value = data.success
-    currentStaff.value = data.data
+    currentCustomer.value = data.data
   } catch (e) {
     if (e.status === 401) {
       loggedIn.value = false
@@ -17,8 +17,8 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     }
   }
 
-  if (!loggedIn.value && to.path !== '/staff/login') {
-    const path = '/staff/login'
+  if (!loggedIn.value && to.path !== '/login') {
+    const path = '/login'
     return { path }
   }
 })

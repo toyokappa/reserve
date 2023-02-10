@@ -1,6 +1,6 @@
 const login = (loggedIn, cookie) => async (loginInfo) => {
   try {
-    const data = await $fetch('/staff/auth/sign_in', {
+    const data = await $fetch('/customer/auth/sign_in', {
       baseURL: useRuntimeConfig().apiBaseURL,
       method: 'POST',
       body: loginInfo,
@@ -8,7 +8,7 @@ const login = (loggedIn, cookie) => async (loginInfo) => {
     cookie.value = data.access_token
     loggedIn.value = true
 
-    const to = useRoute().redirectedFrom?.path || '/staff'
+    const to = useRoute().redirectedFrom?.path || '/'
     useRouter().push(to)
   } catch (e) {
     throw e
@@ -28,13 +28,13 @@ const getAuth = (cookie) => () => {
   }
 }
 
-export const useStaffAuth = () => {
-  const cookie = useCookie('staff_access_token')
-  const loggedIn = useState('staffLoggedIn', () => false)
-  const currentStaff = useState('currentStaff')
+export const useCustomerAuth = () => {
+  const cookie = useCookie('customer_access_token')
+  const loggedIn = useState('customerLoggedIn', () => false)
+  const currentCustomer = useState('currentCustomer')
   return {
     loggedIn,
-    currentStaff,
+    currentCustomer,
     getAuth: getAuth(cookie),
     login: login(loggedIn, cookie),
     logout: logout(loggedIn, cookie),

@@ -37,6 +37,9 @@ import HintText from '~/components/presentational/atoms/HintText.vue'
 import sampleData from '@/data/sample'
 const { reservationList } = sampleData
 
+definePageMeta({
+  middleware: 'customer-auth'
+})
 const router = useRouter()
 const route = useRoute()
 const { id } = route.params

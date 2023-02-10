@@ -18,6 +18,10 @@ import BlockProduct from '~/components/presentational/molescules/block/Product.v
 
 import sampleData from '@/data/sample'
 const { productList } = sampleData
+
+definePageMeta({
+  middleware: 'customer-auth'
+})
 const router = useRouter()
 </script>
 

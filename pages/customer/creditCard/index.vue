@@ -32,6 +32,10 @@ import sampleData from '@/data/sample'
 const { creditCardList } = sampleData
 const { inUse, registered } = creditCardList
 
+definePageMeta({
+  middleware: 'customer-auth'
+})
+
 const router = useRouter()
 </script>
 

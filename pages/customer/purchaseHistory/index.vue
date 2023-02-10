@@ -18,6 +18,9 @@ import BlockPurchaseHistory from '~/components/presentational/molescules/block/P
 import sampleData from '@/data/sample'
 const { purchaseHistoryList } = sampleData
 
+definePageMeta({
+  middleware: 'customer-auth'
+})
 const router = useRouter()
 </script>
 

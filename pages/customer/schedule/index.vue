@@ -17,6 +17,10 @@ import BlockReservation from '~/components/presentational/molescules/block/Reser
 
 import sampleData from '@/data/sample'
 const { reservationList } = sampleData
+
+definePageMeta({
+  middleware: 'customer-auth'
+})
 const router = useRouter()
 </script>
 

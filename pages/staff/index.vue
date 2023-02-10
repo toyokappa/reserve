@@ -23,6 +23,10 @@ import passwordIcon from '~/assets/images/menu-password.svg'
 import sampleData from '~/data/sample'
 const { currentStaff } = sampleData
 
+definePageMeta({
+  middleware: 'staff-auth'
+})
+
 const mypageMenu = [
   {
     title: '管理',

@@ -17,6 +17,9 @@ import FormStaffProfileEdit from '~/components/presentational/organizms/FormStaf
 import sampleData from '~/data/sample'
 const { currentStaff } = sampleData
 
+definePageMeta({
+  middleware: 'staff-auth'
+})
 const router = useRouter()
 
 const profile = reactive({

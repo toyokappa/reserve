@@ -36,6 +36,10 @@ import sampleData from '@/data/sample'
 const { reservationListForTrainer } = sampleData
 const nextSchedule = reservationListForTrainer[0]
 const reservationGroupByDate = R.groupBy(({ scheduleDate }) => scheduleDate, reservationListForTrainer)
+
+definePageMeta({
+  middleware: 'staff-auth'
+})
 const router = useRouter()
 
 const start = ref(startOfToday())

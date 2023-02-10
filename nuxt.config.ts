@@ -10,7 +10,7 @@ export default defineNuxtConfig({
           additionalData: '@import "@/assets/styles/main.sass"'
         }
       }
-    }
+    },
   },
   app: {
     head: {
@@ -21,6 +21,11 @@ export default defineNuxtConfig({
       link: [
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:400,700' },
       ]
+    }
+  },
+  runtimeConfig: {
+    public: {
+      apiBaseURL: process.env.API_BASE_URL
     }
   }
 })

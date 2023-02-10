@@ -2,7 +2,7 @@
 BlockText.mb-line 新しいパスワードを入力してください。
 FormPassword(
   buttonText="パスワードを変更する"
-  @submitForm="router.push('/staff')"
+  @submitForm="updatePassword"
 )
 </template>
 
@@ -13,7 +13,18 @@ import FormPassword from '~~/components/presentational/organizms/FormPassword.vu
 definePageMeta({
   middleware: 'staff-auth'
 })
-const router = useRouter()
+
+const updatePassword = async (values) => {
+  await $fetch('/staff/auth/password', {
+    baseURL: useRuntimeConfig().public.apiBaseURL,
+    method: 'PATCH',
+    headers: {
+      Authorization: useStaffAuth().getAuth()
+    },
+    body: values,
+  })
+  useRouter().push('/staff')
+}
 </script>
 
 <style lang="sass" scoped>

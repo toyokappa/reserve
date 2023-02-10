@@ -1,6 +1,7 @@
 const login = (staffLoggedIn, cookie) => async (loginInfo) => {
   try {
-    const data = await $fetch(`${useRuntimeConfig().apiBaseURL}/staff/auth/sign_in`, {
+    const data = await $fetch('/staff/auth/sign_in', {
+      baseURL: useRuntimeConfig().apiBaseURL,
       method: 'POST',
       body: loginInfo,
     })
@@ -19,8 +20,12 @@ const logout = (staffLoggedIn, cookie) => async () => {
   cookie.value = null
 }
 
-const getToken = (cookie) => () => {
-  return cookie.value
+const getAuth = (cookie) => () => {
+  if (cookie.value) {
+    return 'Bearer ' + cookie.value
+  } else {
+    return ''
+  }
 }
 
 export const useStaffAuth = () => {
@@ -30,7 +35,7 @@ export const useStaffAuth = () => {
   return {
     staffLoggedIn,
     currentStaff,
-    getToken: getToken(cookie),
+    getAuth: getAuth(cookie),
     staffLogin: login(staffLoggedIn, cookie),
     staffLogout: logout(staffLoggedIn, cookie),
   }

@@ -8,7 +8,7 @@ form
     required
   )
   InputField.mb-10(
-    name="password_confirmed"
+    name="password_confirmation"
     type="password"
     labelText="パスワード（確認用）"
     validation="required|confirmed:@password"

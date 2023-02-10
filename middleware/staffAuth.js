@@ -1,11 +1,12 @@
 import { useStaffAuth } from "~~/composables/useStaffAuth";
 
 export default defineNuxtRouteMiddleware(async (to, from) => {
-  const { staffLoggedIn, currentStaff, getToken } = useStaffAuth()
+  const { staffLoggedIn, currentStaff, getAuth } = useStaffAuth()
   try {
-    const data = await $fetch(`${useRuntimeConfig().apiBaseURL}/staff/auth/validate_token`, {
+    const data = await $fetch('/staff/auth/validate_token', {
+      baseURL: useRuntimeConfig().apiBaseURL,
       headers: {
-        Authorization: `Bearer ${getToken()}`
+        Authorization: getAuth()
       }
     })
     staffLoggedIn.value = data.success

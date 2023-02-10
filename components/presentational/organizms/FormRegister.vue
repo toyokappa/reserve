@@ -60,6 +60,7 @@ form
   InputImages.mb-10(
     name="idCard"
     labelText="本人確認書類"
+    multiple
     required
   )
   .button-area

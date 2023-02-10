@@ -10,7 +10,7 @@
     :name="name"
     ref="input"
     accept="image/*"
-    multiple
+    :multiple="multiple"
     @change="onImageUploaded"
   )
   PreviewImages(:images="value")
@@ -31,13 +31,14 @@ const props = defineProps({
   name: String,
   type: String,
   labelText: String,
+  multiple: Boolean,
   required: Boolean,
 })
 
 const { name, type, labelText, required } = props
 
 const validation = (value) => {
-  if(value.length === 0) {
+  if(value.length === 0 && required) {
     return `${labelText}は必須項目です`
   }
   const regex = /\.(jpg|svg|jpeg|png|bmp|gif|webp)$/i;

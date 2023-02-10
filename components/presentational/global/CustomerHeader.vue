@@ -1,8 +1,8 @@
 <template lang="pug">
 header
   nuxt-link.logo(to="/") LOGO
-  .menu-toggler
-    img(src="@/assets/images/menu-toggler.svg")
+  //- .menu-toggler
+  //-   img(src="@/assets/images/menu-toggler.svg")
 </template>
 
 <script setup>

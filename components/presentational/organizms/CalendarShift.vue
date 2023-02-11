@@ -23,6 +23,8 @@
       @touchend="touchDocument = null"
       @touchcancel="touchDocument = null"
     )
+  .button-area.mt-10
+    PrimaryButton.mb-10(@click.prevent="submitShift()") シフト変更を確定する
 </template>
 
 <script setup>
@@ -31,6 +33,7 @@ import { ja } from 'date-fns/locale'
 import BlockSwitchWeek from '~/components/presentational/molescules/block/SwitchWeek.vue'
 import BlockCalendarDate from '~/components/presentational/atoms/block/CalendarDate.vue'
 import BlockCalendarState from '~/components/presentational/atoms/block/CalendarState.vue'
+import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
 
 const currentStaff = useState('currentStaff')
 const start = ref(startOfToday())
@@ -98,6 +101,21 @@ const toggleShift = (e) => {
   const toggledState = state === 'work' ? 'rest' : 'work'
   const dateSet = reactiveSchedule.value.find(d => d.date === date)
   dateSet.state_list[index] = toggledState
+}
+
+const submitShift = async () => {
+  return await $fetch('/staff/shift', {
+    baseURL: useRuntimeConfig().public.apiBaseURL,
+    method: 'PUT',
+    headers: {
+      Authorization: useStaffAuth().getAuth()
+    },
+    body: {
+      staff_id: currentStaff.value.id,
+      schedule: reactiveSchedule.value,
+    },
+  })
+  useRouter().push('/staff')
 }
 </script>
 

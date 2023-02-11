@@ -11,12 +11,12 @@
   .calendar-body.mb-line(v-for="(_d, stateIndex) in schedule[0].state_list" :key="stateIndex")
     .column-title {{ calcHour(stateIndex) }}
     BlockCalendarState.ms-line(
-      v-for="(date, dateIndex) in selectedSchedule"
-      :key="date + dateIndex"
-      :state="date.state_list[stateIndex]"
-      :data-state="date.state_list[stateIndex]"
+      v-for="(day, dateIndex) in selectedSchedule"
+      :key="day.date + dateIndex"
+      :state="day.state_list[stateIndex]"
+      :data-state="day.state_list[stateIndex]"
       :data-index="stateIndex"
-      :data-date="date.date"
+      :data-date="day.date"
       @click="toggleShift"
       @touchstart.prevent="toggleShift"
       @touchmove="toggleShift"
@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import { add, eachDayOfInterval, format, isToday, startOfToday, subWeeks } from 'date-fns'
+import { add, eachDayOfInterval, format, startOfToday } from 'date-fns'
 import { ja } from 'date-fns/locale'
 import BlockSwitchWeek from '~/components/presentational/molescules/block/SwitchWeek.vue'
 import BlockCalendarDate from '~/components/presentational/atoms/block/CalendarDate.vue'

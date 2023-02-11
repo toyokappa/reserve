@@ -31,35 +31,6 @@ const trainerList = [
   }
 ]
 
-const reservalTimeList = [
-  { hour: '09:00', stateList: ['ng', 'ng', 'ng', 'ng', 'ng', 'ng', 'ng'], },
-  { hour: '10:00', stateList: ['ng', 'ng', 'ng', 'ng', 'ok', 'ok', 'ok'], },
-  { hour: '11:00', stateList: ['ng', 'ng', 'ng', 'ng', 'ok', 'ok', 'ok'], },
-  { hour: '12:00', stateList: ['ng', 'ng', 'ng', 'ok', 'ok', 'ok', 'ok'], },
-  { hour: '13:00', stateList: ['ng', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok'], },
-  { hour: '14:00', stateList: ['ng', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok'], },
-  { hour: '15:00', stateList: ['ng', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok'], },
-  { hour: '16:00', stateList: ['ng', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok'], },
-  { hour: '17:00', stateList: ['ng', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok'], },
-  { hour: '18:00', stateList: ['ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok'], },
-  { hour: '19:00', stateList: ['ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok'], },
-  { hour: '20:00', stateList: ['ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok'], },
-  { hour: '21:00', stateList: ['ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok'], },
-]
-
-const shift = {
-  reservalHoursFirst: 9,
-  schedule: [
-    { date: '2023-02-11', stateList: ['rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest'], },
-    { date: '2023-02-12', stateList: ['rest', 'rest', 'rest', 'rest', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work'], },
-    { date: '2023-02-13', stateList: ['rest', 'rest', 'rest', 'rest', 'lock', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work'], },
-    { date: '2023-02-14', stateList: ['rest', 'rest', 'rest', 'work', 'lock', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work'], },
-    { date: '2023-02-15', stateList: ['rest', 'work', 'lock', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work'], },
-    { date: '2023-02-16', stateList: ['rest', 'work', 'lock', 'lock', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work'], },
-    { date: '2023-02-17', stateList: ['rest', 'work', 'work', 'lock', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work'], },
-  ]
-}
-
 const productList = [
   {
     id: 'p1',
@@ -269,13 +240,10 @@ const reservationListForTrainer = [
 export default {
   programList,
   trainerList,
-  reservalTimeList,
-  shiftTimeList,
   productList,
   reservationList,
   ticketSetList,
   purchaseHistoryList,
   creditCardList,
   reservationListForTrainer,
-  shift,
 }

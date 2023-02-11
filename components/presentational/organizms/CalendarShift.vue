@@ -7,14 +7,14 @@
   )
   .calendar-header.mb-line
     .column-title.black 開始時間
-    BlockCalendarDate.ms-line(v-for="d in dateList" :key="d.date" :date="d.date" :day="d.day")
-  .calendar-body.mb-line(v-for="(_d, stateIndex) in schedule[0].stateList" :key="stateIndex")
+    BlockCalendarDate.ms-line(v-for="column in dateColumns" :key="column.date" :date="column.date" :day="column.day")
+  .calendar-body.mb-line(v-for="(_d, stateIndex) in schedule[0].state_list" :key="stateIndex")
     .column-title {{ calcHour(stateIndex) }}
     BlockCalendarState.ms-line(
-      v-for="(date, dateIndex) in reactiveSchedule"
+      v-for="(date, dateIndex) in selectedSchedule"
       :key="date + dateIndex"
-      :state="date.stateList[stateIndex]"
-      :data-state="date.stateList[stateIndex]"
+      :state="date.state_list[stateIndex]"
+      :data-state="date.state_list[stateIndex]"
       :data-index="stateIndex"
       :data-date="date.date"
       @click="toggleShift"
@@ -32,26 +32,52 @@ import BlockSwitchWeek from '~/components/presentational/molescules/block/Switch
 import BlockCalendarDate from '~/components/presentational/atoms/block/CalendarDate.vue'
 import BlockCalendarState from '~/components/presentational/atoms/block/CalendarState.vue'
 
-import sampleData from '~/data/sample'
-const { shift } = sampleData
-const { schedule, reservalHoursFirst } = shift
-const reactiveSchedule = ref(schedule)
-
+const currentStaff = useState('currentStaff')
 const start = ref(startOfToday())
 const end = computed(() => add(start.value, { days: 6 }))
-const dateList = computed(() => eachDayOfInterval({ 
-  start: start.value,
-  end: end.value
-}).map(day => ({
-  date: format(day, 'dd'),
-  day: format(day, 'EEEEE', { locale: ja }),
-})))
+const dayInterval = computed(() => eachDayOfInterval({ start: start.value, end: end.value }))
+const dateColumns = computed(() => dayInterval.value.map(day => ({ date: format(day, 'dd'), day: format(day, 'EEEEE', { locale: ja }) })))
+const currentDateRange = computed(() => dayInterval.value.map(day => format(day, 'Y-MM-dd')))
+const readDateRange = computed(() => {
+  const interval = eachDayOfInterval({ start: start.value, end: add(start.value, { days: 13 }) })
+  return interval.map(day => format(day, 'Y-MM-dd'))
+})
 
-const switchWeek = (startDate) => {
-  start.value = startDate
+const getShift = async () => {
+  return await $fetch('/staff/shift', {
+    baseURL: useRuntimeConfig().public.apiBaseURL,
+    headers: {
+      Authorization: useStaffAuth().getAuth()
+    },
+    params: {
+      staff_id: currentStaff.value.id,
+      start_date: format(start.value, 'Y-MM-dd'),
+    },
+  })
 }
+
+const shift = await getShift()
+const { schedule, reserval_hours_first } = shift
+const reactiveSchedule = ref(schedule)
+const storedDateRange = computed(() => reactiveSchedule.value.map(({ date }) => date))
+const selectedSchedule = computed(() => {
+  return reactiveSchedule.value.filter(({ date }) => currentDateRange.value.includes(date))
+})
+const hasNewSchedule = computed(() => {
+  return !readDateRange.value.every(date => storedDateRange.value.includes(date))
+})
+
+const switchWeek = async (startDate) => {
+  start.value = startDate
+  if (hasNewSchedule.value) {
+    const newShift = await getShift()
+    const newSchedule = newShift.schedule.filter(({ date }) => !storedDateRange.value.includes(date))
+    reactiveSchedule.value.push(...newSchedule)
+  }
+}
+
 const calcHour = (hour) => {
-  const time = reservalHoursFirst + hour
+  const time = reserval_hours_first + hour
   return ('0' + time).slice(-2) + ':00~'
 }
 
@@ -71,7 +97,7 @@ const toggleShift = (e) => {
 
   const toggledState = state === 'work' ? 'rest' : 'work'
   const dateSet = reactiveSchedule.value.find(d => d.date === date)
-  dateSet.stateList[index] = toggledState
+  dateSet.state_list[index] = toggledState
 }
 </script>
 

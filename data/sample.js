@@ -47,22 +47,6 @@ const reservalTimeList = [
   { hour: '21:00', stateList: ['ok', 'ok', 'ok', 'ok', 'ok', 'ok', 'ok'], },
 ]
 
-const shiftTimeList = [
-  { hour: '09:00', stateList: ['rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest'], },
-  { hour: '10:00', stateList: ['rest', 'rest', 'rest', 'rest', 'work', 'work', 'work'], },
-  { hour: '11:00', stateList: ['rest', 'rest', 'rest', 'rest', 'lock', 'work', 'work'], },
-  { hour: '12:00', stateList: ['rest', 'rest', 'rest', 'work', 'lock', 'work', 'work'], },
-  { hour: '13:00', stateList: ['rest', 'work', 'lock', 'work', 'work', 'work', 'work'], },
-  { hour: '14:00', stateList: ['rest', 'work', 'lock', 'lock', 'work', 'work', 'work'], },
-  { hour: '15:00', stateList: ['rest', 'work', 'work', 'lock', 'work', 'work', 'work'], },
-  { hour: '16:00', stateList: ['rest', 'work', 'work', 'work', 'work', 'work', 'work'], },
-  { hour: '17:00', stateList: ['rest', 'work', 'work', 'work', 'work', 'work', 'work'], },
-  { hour: '18:00', stateList: ['work', 'work', 'work', 'work', 'work', 'work', 'work'], },
-  { hour: '19:00', stateList: ['work', 'work', 'work', 'work', 'work', 'work', 'work'], },
-  { hour: '20:00', stateList: ['work', 'work', 'work', 'work', 'work', 'work', 'work'], },
-  { hour: '21:00', stateList: ['work', 'work', 'work', 'work', 'work', 'work', 'work'], },
-]
-
 const shift = {
   reservalHoursFirst: 9,
   schedule: [

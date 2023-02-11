@@ -8,14 +8,15 @@
   .calendar-header.mb-line
     .column-title.black 開始時間
     BlockCalendarDate.ms-line(v-for="d in dateList" :key="d.date" :date="d.date" :day="d.day")
-  .calendar-body.mb-line(v-for="time in reactiveShiftTimeList" :key="time.hour")
-    .column-title {{ time.hour }}~
+  .calendar-body.mb-line(v-for="(_d, stateIndex) in schedule[0].stateList" :key="stateIndex")
+    .column-title {{ calcHour(stateIndex) }}
     BlockCalendarState.ms-line(
-      v-for="(state, index) in time.stateList"
-      :key="index"
-      :state="state"
-      :index="index"
-      :hour="time.hour"
+      v-for="(date, dateIndex) in reactiveSchedule"
+      :key="date + dateIndex"
+      :state="date.stateList[stateIndex]"
+      :data-state="date.stateList[stateIndex]"
+      :data-index="stateIndex"
+      :data-date="date.date"
       @click="toggleShift"
       @touchstart.prevent="toggleShift"
       @touchmove="toggleShift"
@@ -32,8 +33,9 @@ import BlockCalendarDate from '~/components/presentational/atoms/block/CalendarD
 import BlockCalendarState from '~/components/presentational/atoms/block/CalendarState.vue'
 
 import sampleData from '~/data/sample'
-const { shiftTimeList } = sampleData
-const reactiveShiftTimeList = ref(shiftTimeList)
+const { shift } = sampleData
+const { schedule, reservalHoursFirst } = shift
+const reactiveSchedule = ref(schedule)
 
 const start = ref(startOfToday())
 const end = computed(() => add(start.value, { days: 6 }))
@@ -48,6 +50,10 @@ const dateList = computed(() => eachDayOfInterval({
 const switchWeek = (startDate) => {
   start.value = startDate
 }
+const calcHour = (hour) => {
+  const time = reservalHoursFirst + hour
+  return ('0' + time).slice(-2) + ':00~'
+}
 
 let touchDocument
 const toggleShift = (e) => {
@@ -61,11 +67,11 @@ const toggleShift = (e) => {
   } else {
     touchDocument = e.target
   }
-  const { state, hour, index } = touchDocument.dataset
+  const { state, date, index } = touchDocument.dataset
 
   const toggledState = state === 'work' ? 'rest' : 'work'
-  const time = reactiveShiftTimeList.value.find(time => time.hour === hour)
-  time.stateList[index] = toggledState
+  const dateSet = reactiveSchedule.value.find(d => d.date === date)
+  dateSet.stateList[index] = toggledState
 }
 </script>
 

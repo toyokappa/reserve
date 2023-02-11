@@ -1,17 +1,12 @@
 <template lang="pug">
 .calendar-state(
   :class="state"
-  :data-state="state"
-  :data-index="index"
-  :data-hour="hour"
 ) {{ stateSymbol }}
 </template>
 
 <script setup>
 const props = defineProps({
   state: String,
-  index: Number,
-  hour: String,
 })
 
 const stateSymbol = computed(() => {

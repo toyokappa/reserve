@@ -63,6 +63,19 @@ const shiftTimeList = [
   { hour: '21:00', stateList: ['work', 'work', 'work', 'work', 'work', 'work', 'work'], },
 ]
 
+const shift = {
+  reservalHoursFirst: 9,
+  schedule: [
+    { date: '2023-02-11', stateList: ['rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest', 'rest'], },
+    { date: '2023-02-12', stateList: ['rest', 'rest', 'rest', 'rest', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work'], },
+    { date: '2023-02-13', stateList: ['rest', 'rest', 'rest', 'rest', 'lock', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work'], },
+    { date: '2023-02-14', stateList: ['rest', 'rest', 'rest', 'work', 'lock', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work'], },
+    { date: '2023-02-15', stateList: ['rest', 'work', 'lock', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work'], },
+    { date: '2023-02-16', stateList: ['rest', 'work', 'lock', 'lock', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work'], },
+    { date: '2023-02-17', stateList: ['rest', 'work', 'work', 'lock', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work', 'work'], },
+  ]
+}
+
 const productList = [
   {
     id: 'p1',
@@ -280,4 +293,5 @@ export default {
   purchaseHistoryList,
   creditCardList,
   reservationListForTrainer,
+  shift,
 }

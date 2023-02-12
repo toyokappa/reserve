@@ -1,21 +1,3 @@
-const trainerList = [
-  {
-    id: 0,
-    name: '指名なし',
-    comment: '',
-  },
-  {
-    id: 1,
-    name: 'Hanako',
-    comment: 'よろしくおねがいします😊',
-  },
-  {
-    id: 2,
-    name: 'Umeko',
-    comment: ''
-  }
-]
-
 const productList = [
   {
     id: 'p1',
@@ -195,39 +177,10 @@ const creditCardList = {
   ]
 }
 
-const reservationListForTrainer = [
-  {
-    id: 'r1',
-    scheduleDate: '2/5(日)',
-    scheduleTime: '10:00~11:00',
-    requireTime: 60,
-    programName: 'パーソナルトレーニング',
-    trainee: '田中 太郎'
-  },
-  {
-    id: 'r2',
-    scheduleDate: '2/5(日)',
-    scheduleTime: '12:00~13:00',
-    requireTime: 60,
-    programName: 'パーソナルトレーニング',
-    trainee: '井上吾郎',
-  },
-  {
-    id: 'r3',
-    scheduleDate: '2/7(火)',
-    scheduleTime: '17:00~18:00',
-    requireTime: 60,
-    programName: 'パーソナルトレーニング',
-    trainee: '山上 博士',
-  },
-]
-
 export default {
-  trainerList,
   productList,
   reservationList,
   ticketSetList,
   purchaseHistoryList,
   creditCardList,
-  reservationListForTrainer,
 }

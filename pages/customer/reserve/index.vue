@@ -40,6 +40,7 @@ template(v-else-if="reserve.screen === 'schedule'")
   )
   BlockText.mb-line ご希望の日程を選択してください。
   CalendarReserve(
+    :programId="reserve.program.id"
     :staffId="reserve.trainer.id"
     @selectSchedule="selectSchedule"
   )
@@ -159,9 +160,31 @@ const confirmReserve = (userInfo) => {
   moveScreen('confirm')
 }
 
-const router = useRouter()
-const completeReserve = () => {
-  router.push('/reserve/complete')
+// TODO: 会員が予約する場合のフローを実装
+const completeReserve = async () => {
+  const { schedule, program, trainer } = reserve
+  await $fetch('/customer/reserve', {
+    baseURL: useRuntimeConfig().public.apiBaseURL,
+    method: 'POST',
+    headers: {
+      Authorization: useStaffAuth().getAuth()
+    },
+    body: {
+      reservation: {
+        program_id: program.id,
+        staff_id: trainer.id,
+        scheduled_date: schedule,
+        required_time: program.required_time,
+      },
+      guest: {
+        name: reserve.name,
+        email: reserve.email,
+        tel: reserve.tel,
+        message: reserve.message,
+      }
+    }
+  })
+  useRouter().push('/reserve/complete')
 }
 </script>
 

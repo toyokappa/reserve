@@ -27,6 +27,7 @@ import BlockCalendarDate from '~/components/presentational/atoms/block/CalendarD
 import BlockCalendarState from '~/components/presentational/atoms/block/CalendarState.vue'
 
 const props = defineProps({
+  programId: Number,
   staffId: Number,
 })
 
@@ -47,6 +48,7 @@ const getShift = async () => {
       Authorization: useStaffAuth().getAuth()
     },
     params: {
+      program_id: props.programId,
       staff_id: props.staffId,
       start_date: format(start.value, 'Y-MM-dd'),
     },

@@ -11,7 +11,6 @@ interface Props {
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  time: 60,
   size: 16,
 })
 

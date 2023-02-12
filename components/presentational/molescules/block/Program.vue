@@ -3,13 +3,13 @@
   .thumbnail
   .menu
     .menu-main
-      RequireTime(:time="time")
+      RequiredTime(:time="time")
       .menu-name {{ name }}
     .menu-hint(v-if="hint") {{ hint }}
 </template>
 
 <script setup>
-import RequireTime from '~/components/presentational/atoms/RequireTime.vue'
+import RequiredTime from '~/components/presentational/atoms/RequiredTime.vue'
 
 const props = defineProps({
   time: Number | String,

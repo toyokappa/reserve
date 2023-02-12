@@ -2,16 +2,16 @@
 template(v-if="reserve.screen === 'program'")
   BlockText.mb-line プログラムを選択してください。
   BlockProgram.mb-line(
-    v-for="program in programList"
+    v-for="program in program_list"
     :key="program.id"
-    :time="program.requireTime"
+    :time="program.required_time"
     :name="program.name"
-    :hint="program.hint"
+    :hint="program.description"
     @click.native="selectProgram(program)"
   )
 template(v-else-if="reserve.screen === 'trainer'")
   BlockProgramSelected.mb-10(
-    :time="reserve.program.requireTime"
+    :time="reserve.program.required_time"
     :name="reserve.program.name"
     @click.native="moveScreen('program')"
   )
@@ -25,7 +25,7 @@ template(v-else-if="reserve.screen === 'trainer'")
   )
 template(v-else-if="reserve.screen === 'schedule'")
   BlockProgramSelected.mb-line(
-    :time="reserve.program.requireTime"
+    :time="reserve.program.required_time"
     :name="reserve.program.name"
     @click.native="moveScreen('program')"
   )
@@ -37,7 +37,7 @@ template(v-else-if="reserve.screen === 'schedule'")
   CalendarReserve(@selectSchedule="selectSchedule")
 template(v-else-if="reserve.screen === 'userInput'")
   BlockProgramSelected.mb-line(
-    :time="reserve.program.requireTime"
+    :time="reserve.program.required_time"
     :name="reserve.program.name"
     @click.native="moveScreen('program')"
   )
@@ -61,7 +61,7 @@ template(v-else-if="reserve.screen === 'userInput'")
     DefaultButton.mb-10(@click="moveScreen('schedule')") 戻る
 template(v-else-if="reserve.screen === 'confirm'")
   BlockProgramSelected.mb-line(
-    :time="reserve.program.requireTime"
+    :time="reserve.program.required_time"
     :name="reserve.program.name"
     @click.native="moveScreen('program')"
   )
@@ -96,7 +96,14 @@ import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue
 import DefaultButton from '~~/components/presentational/atoms/button/Default.vue';
 
 import sampleData from '@/data/sample'
-const { programList, trainerList } = sampleData
+const { trainerList } = sampleData
+
+const { program_list } = await $fetch('/customer/reserve', {
+  baseURL: useRuntimeConfig().public.apiBaseURL,
+  headers: {
+    Authorization: useStaffAuth().getAuth()
+  },
+})
 
 const reserve = reactive({
   screen: 'program',

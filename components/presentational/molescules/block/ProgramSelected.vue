@@ -3,12 +3,12 @@
   img.arrow(src="@/assets/images/arrow-right.svg")
   .thumbnail
   .menu
-    RequireTime(:time="time" size="14")
+    RequiredTime(:time="time" size="14")
     .menu-name {{ name }}
 </template>
 
 <script setup>
-import RequireTime from '~/components/presentational/atoms/RequireTime.vue'
+import RequiredTime from '~/components/presentational/atoms/RequiredTime.vue'
 
 const props = defineProps({
   time: Number | String,

@@ -2,14 +2,14 @@
 .reservation-block
   .schedule.mb-5 {{ schedule }}
   .program.mb-5
-    RequireTime(:time="time" size="16")
+    RequiredTime(:time="time" size="16")
     .name {{ name }}
   .trainer(v-if="trainer") トレーナー: {{ trainer }}
   .trainee(v-if="trainee") {{ trainee }}
 </template>
 
 <script setup>
-import RequireTime from '~/components/presentational/atoms/RequireTime.vue';
+import RequiredTime from '~/components/presentational/atoms/RequiredTime.vue';
 
 const props = defineProps({
   schedule: String,

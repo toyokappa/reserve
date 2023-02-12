@@ -17,7 +17,8 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     }
   }
 
-  if (!loggedIn.value && to.path !== '/login') {
+  const skipRedirectPath = ['/login', '/reserve', '/reserve/complete']
+  if (!loggedIn.value && !skipRedirectPath.includes(to.path)) {
     const path = '/login'
     return { path }
   }

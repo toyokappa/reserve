@@ -98,11 +98,20 @@ import DefaultButton from '~~/components/presentational/atoms/button/Default.vue
 import sampleData from '@/data/sample'
 const { trainerList } = sampleData
 
+definePageMeta({
+  middleware: 'customer-auth'
+})
+const loggedIn = useState('customerLoggedIn')
+const currentCustomer = useState('currentCustomer')
+
 const { program_list } = await $fetch('/customer/reserve', {
   baseURL: useRuntimeConfig().public.apiBaseURL,
   headers: {
     Authorization: useStaffAuth().getAuth()
   },
+  params: {
+    logged_in: loggedIn.value
+  }
 })
 
 const reserve = reactive({

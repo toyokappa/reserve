@@ -20,12 +20,11 @@ import shiftIcon from '~/assets/images/menu-shift.svg'
 import profileIcon from '~/assets/images/menu-profile.svg'
 import passwordIcon from '~/assets/images/menu-password.svg'
 
-const currentStaff = useState('currentStaff')
-
 definePageMeta({
   middleware: 'staff-auth'
 })
 
+const currentStaff = useState('currentStaff')
 const mypageMenu = [
   {
     title: '管理',

@@ -112,7 +112,7 @@ const currentCustomer = useState('currentCustomer')
 
 const trainerNoSelected = {
   id: null,
-  name: 'すべて',
+  name: '指名なし',
   comment: ''
 }
 const { program_list } = await $fetch('/customer/reserve', {

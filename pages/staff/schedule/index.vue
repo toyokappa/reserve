@@ -33,7 +33,7 @@ BlockText.mb-10(v-else)
 </template>
 
 <script setup>
-import { add, startOfToday, subWeeks } from 'date-fns'
+import { add, startOfToday, format, subWeeks } from 'date-fns'
 import BlockText from '~/components/presentational/molescules/block/Text.vue'
 import BlockReservation from '~/components/presentational/molescules/block/Reservation.vue'
 import BlockSwitchWeek from '~/components/presentational/molescules/block/SwitchWeek.vue'
@@ -44,22 +44,35 @@ definePageMeta({
   middleware: 'staff-auth'
 })
 
-const { reservation_list } = await $fetch('/staff/schedules', {
-  baseURL: useRuntimeConfig().public.apiBaseURL,
-  headers: {
-    Authorization: useStaffAuth().getAuth()
-  },
-})
-const nextSchedule = reservation_list[0]
-const reservationGroupByDate = R.groupBy(({ scheduled_date }) => scheduled_date, reservation_list)
-
-const router = useRouter()
-
 const start = ref(startOfToday())
 const end = computed(() => add(start.value, { days: 6 }))
 
-const switchWeek = (startDate) => {
+const getReservationList = async () => {
+  return await $fetch('/staff/schedules', {
+    baseURL: useRuntimeConfig().public.apiBaseURL,
+    headers: {
+      Authorization: useStaffAuth().getAuth()
+    },
+    params: {
+      start_date: format(start.value, 'Y-MM-dd'),
+    },
+  })
+}
+
+const { reservation_list } = await getReservationList()
+const reactiveReservationList = ref(reservation_list)
+const nextSchedule = reservation_list[0]
+const reservationGroupByDate = computed(() => {
+  return R.groupBy(({ scheduled_date }) => scheduled_date, reactiveReservationList.value)
+})
+
+const router = useRouter()
+
+const switchWeek = async (startDate) => {
   start.value = startDate
+  // TODO: APIリクエスト数を減らすためにキャッシュを使うロジックに変更
+  const { reservation_list: newReservationList } = await getReservationList()
+  reactiveReservationList.value = newReservationList
 }
 </script>
 

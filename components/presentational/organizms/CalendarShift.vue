@@ -53,14 +53,12 @@ const getShift = async () => {
       Authorization: useStaffAuth().getAuth()
     },
     params: {
-      staff_id: currentStaff.value.id,
       start_date: format(start.value, 'Y-MM-dd'),
     },
   })
 }
 
-const shift = await getShift()
-const { schedule, reserval_hours_first } = shift
+const { schedule, reserval_hours_first } = await getShift()
 const reactiveSchedule = ref(schedule)
 const storedDateRange = computed(() => reactiveSchedule.value.map(({ date }) => date))
 const selectedSchedule = computed(() => {
@@ -111,8 +109,9 @@ const submitShift = async () => {
       Authorization: useStaffAuth().getAuth()
     },
     body: {
-      staff_id: currentStaff.value.id,
-      schedule: reactiveSchedule.value,
+      shift: {
+        schedule: reactiveSchedule.value,
+      }
     },
   })
   useRouter().push('/staff')

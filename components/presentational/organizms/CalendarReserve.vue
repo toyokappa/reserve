@@ -55,8 +55,7 @@ const getShift = async () => {
   })
 }
 
-const shift = await getShift()
-const { schedule, reserval_hours_first } = shift
+const { schedule, reserval_hours_first } = await getShift()
 const reactiveSchedule = ref(schedule)
 const storedDateRange = computed(() => reactiveSchedule.value.map(({ date }) => date))
 const selectedSchedule = computed(() => {

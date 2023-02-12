@@ -17,7 +17,12 @@ template(v-else-if="reserve.screen === 'trainer'")
   )
   BlockText.mb-line トレーナーを選択してください。
   BlockTrainer.mb-line(
-    v-for="trainer in trainerList"
+    :name="trainerNoSelected.name"
+    :comment="trainerNoSelected.comment"
+    @click.native="selectTrainer(trainerNoSelected)"
+  )
+  BlockTrainer.mb-line(
+    v-for="trainer in reserve.program.trainer_list"
     :key="trainer.id"
     :name="trainer.name"
     :comment="trainer.comment"
@@ -34,7 +39,10 @@ template(v-else-if="reserve.screen === 'schedule'")
     @click.native="moveScreen('trainer')"
   )
   BlockText.mb-line ご希望の日程を選択してください。
-  CalendarReserve(@selectSchedule="selectSchedule")
+  CalendarReserve(
+    :staffId="reserve.trainer.id"
+    @selectSchedule="selectSchedule"
+  )
 template(v-else-if="reserve.screen === 'userInput'")
   BlockProgramSelected.mb-line(
     :time="reserve.program.required_time"
@@ -95,15 +103,17 @@ import BlockConfirm from '~/components/presentational/molescules/block/Confirm.v
 import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
 import DefaultButton from '~~/components/presentational/atoms/button/Default.vue';
 
-import sampleData from '@/data/sample'
-const { trainerList } = sampleData
-
 definePageMeta({
   middleware: 'customer-auth'
 })
 const loggedIn = useState('customerLoggedIn')
 const currentCustomer = useState('currentCustomer')
 
+const trainerNoSelected = {
+  id: null,
+  name: 'すべて',
+  comment: ''
+}
 const { program_list } = await $fetch('/customer/reserve', {
   baseURL: useRuntimeConfig().public.apiBaseURL,
   headers: {

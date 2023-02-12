@@ -26,6 +26,10 @@ import BlockSwitchWeek from '~/components/presentational/molescules/block/Switch
 import BlockCalendarDate from '~/components/presentational/atoms/block/CalendarDate.vue'
 import BlockCalendarState from '~/components/presentational/atoms/block/CalendarState.vue'
 
+const props = defineProps({
+  staffId: Number,
+})
+
 const start = ref(startOfToday())
 const end = computed(() => add(start.value, { days: 6 }))
 const dayInterval = computed(() => eachDayOfInterval({ start: start.value, end: end.value }))
@@ -43,6 +47,7 @@ const getShift = async () => {
       Authorization: useStaffAuth().getAuth()
     },
     params: {
+      staff_id: props.staffId,
       start_date: format(start.value, 'Y-MM-dd'),
     },
   })

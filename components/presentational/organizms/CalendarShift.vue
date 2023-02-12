@@ -104,7 +104,7 @@ const toggleShift = (e) => {
 }
 
 const submitShift = async () => {
-  return await $fetch('/staff/shift', {
+  await $fetch('/staff/shift', {
     baseURL: useRuntimeConfig().public.apiBaseURL,
     method: 'PUT',
     headers: {

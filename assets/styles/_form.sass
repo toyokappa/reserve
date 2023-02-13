@@ -14,9 +14,15 @@
     display: block
     &.invalid
       border-color: $red
+  .input-card-field
+    width: 100%
+    padding: 6px 8px
+    border: 1px solid $hint
+    border-radius: 3px
+    display: block
   .holizontal-field
     display: flex
-    .input-field:first-child
+    .input-field:first-child, .input-card-field:first-child
       margin-right: 10px
   .hidden-field
     display: none

@@ -25,7 +25,8 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      apiBaseURL: process.env.API_BASE_URL
+      apiBaseURL: process.env.API_BASE_URL,
+      payjpApiToken: process.env.PAYJP_API_TOKEN
     }
   }
 })

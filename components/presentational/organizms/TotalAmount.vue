@@ -25,10 +25,10 @@
 <script setup>
 const props = defineProps({
   productItemList: Array,
+  totalAmount: Number
 })
 
-const totalAmount = props.productItemList.reduce((sum, item) => sum + item.price, 0)
-const tax = Math.floor(totalAmount / 1.1 * 0.1)
+const tax = Math.floor(props.totalAmount / 1.1 * 0.1)
 </script>
 
 <style lang="sass" scoped>

@@ -20,6 +20,9 @@ export default defineNuxtConfig({
       },
       link: [
         { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:400,700' },
+      ],
+      script: [
+        { src: 'https://js.pay.jp/v2/pay.js', defer: true }, // TODO: 呼び出し方は要検討
       ]
     }
   },

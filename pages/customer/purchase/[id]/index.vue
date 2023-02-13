@@ -8,11 +8,12 @@ BlockTicket.mb-10(
 BlockText.mb-line 購入金額を確認してください。
 TotalAmount.mb-10(
   :productItemList="product.product_item_list"
+  :totalAmount="totalAmount"
 )
 BlockText.mb-line カード情報を入力してください。
 FormCreditCard(
   buttonText="チケットを購入する"
-  @submitForm="router.push('/purchase/complete')"
+  @purchaseTicket="purchaseTicket"
 )
 .button-area
   DefaultButton.mb-10(@click.prevent="router.push('/purchase')") 戻る
@@ -28,6 +29,7 @@ import FormCreditCard from '~~/components/presentational/organizms/FormCreditCar
 definePageMeta({
   middleware: 'customer-auth'
 })
+
 const { id } = useRoute().params
 const { product } = await $fetch(`/customer/products/${id}`, {
   baseURL: useRuntimeConfig().public.apiBaseURL,
@@ -35,6 +37,27 @@ const { product } = await $fetch(`/customer/products/${id}`, {
     Authorization: useCustomerAuth().getAuth()
   },
 })
+
+const totalAmount = product.product_item_list.reduce((sum, item) => sum + item.price, 0)
+const purchaseTicket = async (token) => {
+  await $fetch(`/customer/products`, {
+    baseURL: useRuntimeConfig().public.apiBaseURL,
+    method: 'POST',
+    headers: {
+      Authorization: useCustomerAuth().getAuth()
+    },
+    body: {
+      card: {
+        token
+      },
+      payment: {
+        amount: totalAmount,
+        description: product.name
+      }
+    }
+  })
+  router.push('/purchase/complete')
+}
 const router = useRouter()
 </script>
 

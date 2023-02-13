@@ -1,14 +1,14 @@
 <template lang="pug">
 BlockText.mb-line 購入するチケットを選択してください。
 BlockProduct.mb-line(
-  v-for="product in productList"
+  v-for="product in product_list"
   :key="product.id"
   :name="product.name"
   :description="product.description"
   :price="product.price"
-  :hasPurchaseLimit="product.hasPurchaseLimit"
-  :purchaseLimit="product.purchaseLimit"
-  @click="router.push(`/purchase/${product.id}`)"
+  :hasPurchaseLimit="product.has_purchase_limit"
+  :purchaseLimit="product.purchase_limit"
+  @click="useRouter().push(`/purchase/${product.id}`)"
 )
 </template>
 
@@ -16,13 +16,16 @@ BlockProduct.mb-line(
 import BlockText from '~/components/presentational/molescules/block/Text.vue'
 import BlockProduct from '~/components/presentational/molescules/block/Product.vue'
 
-import sampleData from '@/data/sample'
-const { productList } = sampleData
-
 definePageMeta({
   middleware: 'customer-auth'
 })
-const router = useRouter()
+
+const { product_list } = await $fetch('/customer/products', {
+  baseURL: useRuntimeConfig().public.apiBaseURL,
+  headers: {
+    Authorization: useCustomerAuth().getAuth()
+  },
+})
 </script>
 
 <style lang="sass" scoped>

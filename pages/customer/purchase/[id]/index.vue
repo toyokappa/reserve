@@ -2,14 +2,12 @@
 BlockText.mb-line 購入内容を確認してください。
 BlockTicket.mb-10(
   :name="product.name"
-  :numberOfTicket="product.numberOfTicket"
-  :daysOfExpiration="product.daysOfExpiration"
+  :numberOfTicket="product.number_of_item"
+  :daysOfExpiration="product.days_of_expiration"
 )
 BlockText.mb-line 購入金額を確認してください。
 TotalAmount.mb-10(
-  :name="product.name"
-  :price="product.price"
-  :options="product.defaultOptions"
+  :productItemList="product.product_item_list"
 )
 BlockText.mb-line カード情報を入力してください。
 FormCreditCard(
@@ -27,16 +25,17 @@ import TotalAmount from '~~/components/presentational/organizms/TotalAmount.vue'
 import DefaultButton from '~~/components/presentational/atoms/button/Default.vue';
 import FormCreditCard from '~~/components/presentational/organizms/FormCreditCard.vue';
 
-import sampleData from '@/data/sample'
-const { productList } = sampleData
-
 definePageMeta({
   middleware: 'customer-auth'
 })
+const { id } = useRoute().params
+const { product } = await $fetch(`/customer/products/${id}`, {
+  baseURL: useRuntimeConfig().public.apiBaseURL,
+  headers: {
+    Authorization: useCustomerAuth().getAuth()
+  },
+})
 const router = useRouter()
-const route = useRoute()
-const { id } = route.params
-const product = productList.find(product => product.id === id )
 </script>
 
 <style lang="sass" scoped>

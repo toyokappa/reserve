@@ -4,14 +4,10 @@
     .amount-row.header
       div 項目
       div 金額(税込)
-  .block-amount.mb-line
+  .block-amount.mb-line(v-for="item in productItemList" :key="item.id")
     .amount-row
-      div {{ name }}
-      div {{ price.toLocaleString() }}円
-  .block-amount.mb-line(v-for="option in options" :key="option.id")
-    .amount-row
-      div {{ option.name }}
-      div {{ option.price.toLocaleString() }}円
+      div {{ item.name }}
+      div {{ item.price.toLocaleString() }}円
   .block-amount.mb-line
     .total-row
       .label 合計
@@ -28,12 +24,10 @@
 
 <script setup>
 const props = defineProps({
-  name: String,
-  price: Number,
-  options: Array,
+  productItemList: Array,
 })
 
-const totalAmount = props.options.reduce((sum, option) => sum + option.price, props.price)
+const totalAmount = props.productItemList.reduce((sum, item) => sum + item.price, 0)
 const tax = Math.floor(totalAmount / 1.1 * 0.1)
 </script>
 

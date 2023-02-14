@@ -20,7 +20,7 @@ definePageMeta({
   middleware: 'customer-auth'
 })
 
-const { product_list } = await $fetch('/customer/products', {
+const { product_list } = await $fetch('/customer/purchases', {
   baseURL: useRuntimeConfig().public.apiBaseURL,
   headers: {
     Authorization: useCustomerAuth().getAuth()

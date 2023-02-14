@@ -1,35 +1,3 @@
-const productList = [
-  {
-    id: 'p1',
-    name: '2ヶ月コース',
-    description: 'コース料金とは別に40,000円の入会金もお支払いいただきます。',
-    price: 192000,
-    numberOfTicket: 16,
-    daysOfExpiration: 75,
-    hasPurchaseLimit: true,
-    purchaseLimit: 1,
-    defaultOptions: [
-      {
-        id: 'o1',
-        name: '入会金',
-        price: 40000,
-        isAdmissionFee: true,
-      },
-    ]
-  },
-  {
-    id: 'p2',
-    name: 'ビジターチケット',
-    description: '',
-    price: 14980,
-    numberOfTicket: 1,
-    daysOfExpiration: 30,
-    hasPurchaseLimit: false,
-    purchaseLimit: null,
-    defaultOptions: []
-  }
-]
-
 const reservationList = [
   {
     id: 'r1',

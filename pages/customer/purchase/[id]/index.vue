@@ -31,7 +31,7 @@ definePageMeta({
 })
 
 const { id } = useRoute().params
-const { product } = await $fetch(`/customer/products/${id}`, {
+const { product } = await $fetch(`/customer/purchases/${id}`, {
   baseURL: useRuntimeConfig().public.apiBaseURL,
   headers: {
     Authorization: useCustomerAuth().getAuth()
@@ -40,7 +40,7 @@ const { product } = await $fetch(`/customer/products/${id}`, {
 
 const totalAmount = product.product_item_list.reduce((sum, item) => sum + item.price, 0)
 const purchaseTicket = async (token) => {
-  await $fetch(`/customer/products`, {
+  await $fetch(`/customer/purchases`, {
     baseURL: useRuntimeConfig().public.apiBaseURL,
     method: 'POST',
     headers: {
@@ -52,7 +52,13 @@ const purchaseTicket = async (token) => {
       },
       payment: {
         amount: totalAmount,
-        description: product.name
+        description: product.name,
+      },
+      ticket: {
+        product_id: product.id,
+        name: product.name,
+        number_of_item: product.number_of_item,
+        days_of_expiration: product.days_of_expiration,
       }
     }
   })

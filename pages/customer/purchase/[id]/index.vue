@@ -47,19 +47,10 @@ const purchaseTicket = async (token) => {
       Authorization: useCustomerAuth().getAuth()
     },
     body: {
-      card: {
-        token
+      purchase: {
+        product_set_id: product.id,
+        card_token: token,
       },
-      payment: {
-        amount: totalAmount,
-        description: product.name,
-      },
-      ticket: {
-        product_id: product.id,
-        name: product.name,
-        number_of_item: product.number_of_item,
-        days_of_expiration: product.days_of_expiration,
-      }
     }
   })
   router.push('/purchase/complete')

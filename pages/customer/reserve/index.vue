@@ -58,16 +58,20 @@ template(v-else-if="reserve.screen === 'userInput'")
     :schedule="reserve.schedule"
     @click.native="moveScreen('schedule')"
   )
-  BlockText.mb-line 連絡先をご入力ください。
-  FormReserveNoAccount(
-    :name="reserve.name"
-    :email="reserve.email"
-    :tel="reserve.tel"
-    :message="reserve.message"
-    @confirmReserve="confirmReserve"
-  )
+  template(v-if="loggedIn")
+    .button-area
+      PrimaryButton.mb-10(@click.prevent="completeReserve()") チケットを消費して予約を確定する
+  template(v-else)
+    BlockText.mb-line 連絡先をご入力ください。
+    FormReserveNoAccount(
+      :name="reserve.name"
+      :email="reserve.email"
+      :tel="reserve.tel"
+      :message="reserve.message"
+      @confirmReserve="confirmReserve"
+    )
   .button-area
-    DefaultButton.mb-10(@click="moveScreen('schedule')") 戻る
+    DefaultButton.mb-10(@click.prevent="moveScreen('schedule')") 戻る
 template(v-else-if="reserve.screen === 'confirm'")
   BlockProgramSelected.mb-line(
     :time="reserve.program.required_time"
@@ -87,8 +91,8 @@ template(v-else-if="reserve.screen === 'confirm'")
   BlockConfirm.mb-line(label="電話番号" :contents="[reserve.tel]")
   BlockConfirm.mb-10(label="ご質問など" :contents="[reserve.message]")
   .button-area
-    PrimaryButton.mb-10(@click="completeReserve()") 予約を確定する
-    DefaultButton.mb-10(@click="moveScreen('userInput')") 戻る
+    PrimaryButton.mb-10(@click.prevent="completeReserve()") 予約を確定する
+    DefaultButton.mb-10(@click.prevent="moveScreen('userInput')") 戻る
 </template>
 
 <script setup>
@@ -160,9 +164,27 @@ const confirmReserve = (userInfo) => {
   moveScreen('confirm')
 }
 
-// TODO: 会員が予約する場合のフローを実装
 const completeReserve = async () => {
   const { schedule, program, trainer } = reserve
+  let params
+  if (loggedIn) {
+    params = {
+      customer: {
+        id: currentCustomer.value.id,
+        required_ticket: program.required_ticket,
+      }
+    }
+  } else {
+    params = {
+      guest: {
+        name: reserve.name,
+        email: reserve.email,
+        tel: reserve.tel,
+        message: reserve.message,
+      },
+    }
+  }
+
   await $fetch('/customer/reserve', {
     baseURL: useRuntimeConfig().public.apiBaseURL,
     method: 'POST',
@@ -176,12 +198,7 @@ const completeReserve = async () => {
         scheduled_date: schedule,
         required_time: program.required_time,
       },
-      guest: {
-        name: reserve.name,
-        email: reserve.email,
-        tel: reserve.tel,
-        message: reserve.message,
-      }
+      ...params
     }
   })
   useRouter().push('/reserve/complete')

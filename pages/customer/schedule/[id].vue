@@ -1,14 +1,14 @@
 <template lang="pug">
 BlockText.mb-line 予約スケジュール
 BlockReservation.mb-10(
-  :schedule="`${reservation.scheduleDate} ${reservation.scheduleTime}`"
-  :time="reservation.requireTime"
-  :name="reservation.programName"
+  :schedule="`${reservation.scheduled_date} ${reservation.scheduled_time}`"
+  :time="reservation.required_time"
+  :name="reservation.program_name"
   :trainer="reservation.trainer"
 )
 BlockText.mb-line 利用チケット
 BlockTicket.mb-line(
-  v-for="ticket in reservation.ticketList"
+  v-for="ticket in reservation.ticket_list"
   :key="ticket.id"
   :name="ticket.name"
   :expiration="ticket.expiration"
@@ -34,16 +34,17 @@ import DangerButton from '~/components/presentational/atoms/button/Danger.vue'
 import DefaultButton from '~/components/presentational/atoms/button/Default.vue'
 import HintText from '~/components/presentational/atoms/HintText.vue'
 
-import sampleData from '@/data/sample'
-const { reservationList } = sampleData
-
 definePageMeta({
   middleware: 'customer-auth'
 })
 const router = useRouter()
-const route = useRoute()
-const { id } = route.params
-const reservation = reservationList.find(reserved => reserved.id === id)
+const { id } = useRoute().params
+const { reservation } = await $fetch(`/customer/schedules/${id}`, {
+  baseURL: useRuntimeConfig().public.apiBaseURL,
+  headers: {
+    Authorization: useCustomerAuth().getAuth()
+  },
+})
 </script>
 
 <style lang="sass" scoped>

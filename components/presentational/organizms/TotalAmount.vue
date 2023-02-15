@@ -6,8 +6,8 @@
       div 金額(税込)
   .block-amount.mb-line(v-for="item in productItemList" :key="item.id")
     .amount-row
-      div {{ item.name }}
-      div {{ item.price.toLocaleString() }}円
+      div {{ item.product_name }}
+      div {{ item.amount.toLocaleString() }}円
   .block-amount.mb-line
     .total-row
       .label 合計

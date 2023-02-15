@@ -46,65 +46,6 @@ const reservationList = [
   },
 ]
 
-const purchaseHistoryList = [
-  {
-    id: 'ph3',
-    productName: '2ヶ月コース',
-    purchaseDate: '2023/2/4',
-    paymentMethod: 'クレジットカード支払い',
-    totalAmount: 232000,
-    detail: {
-      productName: '2ヶ月コース',
-      price: 192000,
-      options: [
-        { name: '入会金', price: 40000 }
-      ],
-      cardInfo: {
-        number: '1234',
-        brand: 'visa',
-        expiration: '10/2024',
-        owner: 'TARO TANAKA',
-      },
-    },
-  },
-  {
-    id: 'ph2',
-    productName: 'ビジターチケット',
-    purchaseDate: '2023/2/4',
-    paymentMethod: 'クレジットカード支払い',
-    totalAmount: 14980,
-    detail: {
-      productName: 'ビジターチケット',
-      price: 14980,
-      options: [],
-      cardInfo: {
-        number: '1234',
-        brand: 'visa',
-        expiration: '10/2024',
-        owner: 'TARO TANAKA',
-      },
-    },
-  },
-  {
-    id: 'ph1',
-    productName: 'ビジターチケット',
-    purchaseDate: '2023/2/1',
-    paymentMethod: 'クレジットカード支払い',
-    totalAmount: 14980,
-    detail: {
-      productName: 'ビジターチケット',
-      price: 14980,
-      options: [],
-      cardInfo: {
-        number: '1234',
-        brand: 'visa',
-        expiration: '10/2024',
-        owner: 'TARO TANAKA',
-      },
-    },
-  },
-]
-
 const creditCardList = {
   inUse: {
     id: 'c1',
@@ -126,6 +67,5 @@ const creditCardList = {
 
 export default {
   reservationList,
-  purchaseHistoryList,
   creditCardList,
 }

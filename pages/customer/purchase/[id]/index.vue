@@ -38,7 +38,7 @@ const { product } = await $fetch(`/customer/purchases/${id}`, {
   },
 })
 
-const totalAmount = product.product_item_list.reduce((sum, item) => sum + item.price, 0)
+const totalAmount = product.product_item_list.reduce((sum, item) => sum + item.amount, 0)
 const purchaseTicket = async (token) => {
   await $fetch(`/customer/purchases`, {
     baseURL: useRuntimeConfig().public.apiBaseURL,

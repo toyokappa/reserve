@@ -1,13 +1,13 @@
 <template lang="pug">
 BlockText.mb-line 購入履歴
 BlockPurchaseHistory.mb-line(
-  v-for="purchaseHistory in purchaseHistoryList"
-  :key="purchaseHistory.id"
-  :productName="purchaseHistory.productName"
-  :purchaseDate="purchaseHistory.purchaseDate"
-  :paymentMethod="purchaseHistory.paymentMethod"
-  :totalAmount="purchaseHistory.totalAmount"
-  @click="router.push(`/purchaseHistory/${purchaseHistory.id}`)"
+  v-for="history in purchase_history_list"
+  :key="history.id"
+  :productName="history.product_set_name"
+  :purchasedAt="history.purchased_at"
+  :paymentMethod="history.payment_method"
+  :totalAmount="history.total_amount"
+  @click="useRouter().push(`/purchaseHistory/${history.id}`)"
 )
 </template>
 
@@ -15,13 +15,16 @@ BlockPurchaseHistory.mb-line(
 import BlockText from '~/components/presentational/molescules/block/Text.vue'
 import BlockPurchaseHistory from '~/components/presentational/molescules/block/PurchaseHistory.vue'
 
-import sampleData from '@/data/sample'
-const { purchaseHistoryList } = sampleData
-
 definePageMeta({
   middleware: 'customer-auth'
 })
-const router = useRouter()
+
+const { purchase_history_list } = await $fetch('/customer/purchase_histories', {
+  baseURL: useRuntimeConfig().public.apiBaseURL,
+  headers: {
+    Authorization: useCustomerAuth().getAuth()
+  },
+})
 </script>
 
 <style lang="sass" scoped>

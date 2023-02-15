@@ -10,11 +10,17 @@
 </template>
 
 <script setup>
+import { format } from 'date-fns';
+
 const props = defineProps({
   productName: String,
-  purchaseDate: String,
+  purchasedAt: String,
   paymentMethod: String,
   totalAmount: Number,
+})
+
+const purchaseDate = computed(() => {
+  return format(new Date(props.purchasedAt), 'Y/M/d')
 })
 </script>
 

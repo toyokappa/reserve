@@ -96,6 +96,7 @@ template(v-else-if="reserve.screen === 'confirm'")
 </template>
 
 <script setup>
+// TODO: チケットが一枚もない場合の処理も追加
 import CalendarReserve from '~/components/presentational/organizms/CalendarReserve.vue'
 import FormReserveNoAccount from '~~/components/presentational/organizms/FormReserveNoAccount.vue'
 import BlockText from '~/components/presentational/molescules/block/Text.vue'

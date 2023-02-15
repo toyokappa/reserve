@@ -18,7 +18,8 @@ BlockTicket.mb-line(
     @click.prevent="router.push('/schedule')"
   ) 戻る
   DangerButton.mb-5(
-    @click.prevent="router.push('/schedule')"
+    :disabled="reservation.disabled_cancel"
+    @click.prevent="cancelScheudle()"
   ) 予約をキャンセルする
   HintText(
     text="予約日前日以降のキャンセルは直接ご連絡ください"
@@ -45,6 +46,18 @@ const { reservation } = await $fetch(`/customer/schedules/${id}`, {
     Authorization: useCustomerAuth().getAuth()
   },
 })
+const cancelScheudle = async () => {
+  const checkCancel = await confirm('本当に予約をキャンセルしますか？')
+  if (!checkCancel) return
+  await $fetch(`/customer/schedules/${id}`, {
+    baseURL: useRuntimeConfig().public.apiBaseURL,
+    method: 'DELETE',
+    headers: {
+      Authorization: useCustomerAuth().getAuth()
+    },
+  })
+  router.push('/schedule')
+}
 </script>
 
 <style lang="sass" scoped>

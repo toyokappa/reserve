@@ -22,7 +22,7 @@ const props = defineProps({
 })
 
 const expiration = computed(() => {
-  if(props.expiration) return props.expiration
+  if(props.expiration) return format(new Date(props.expiration), 'Y/M/d')
 
   return format(add(new Date(), { days: props.daysOfExpiration }), 'Y/M/d')
 })

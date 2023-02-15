@@ -46,27 +46,6 @@ const reservationList = [
   },
 ]
 
-const ticketSetList = [
-  {
-    id: 'ts1',
-    name: 'ビジターチケット',
-    expiration: '2023/2/28',
-    numberOfTicket: 1,
-  },
-  {
-    id: 'ts2',
-    name: 'ビジターチケット',
-    expiration: '2023/3/14',
-    numberOfTicket: 1,
-  },
-  {
-    id: 'ts3',
-    name: '2ヶ月コース',
-    expiration: '2023/4/18',
-    numberOfTicket: 16,
-  },
-]
-
 const purchaseHistoryList = [
   {
     id: 'ph3',
@@ -146,9 +125,7 @@ const creditCardList = {
 }
 
 export default {
-  productList,
   reservationList,
-  ticketSetList,
   purchaseHistoryList,
   creditCardList,
 }

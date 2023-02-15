@@ -167,7 +167,7 @@ const confirmReserve = (userInfo) => {
 const completeReserve = async () => {
   const { schedule, program, trainer } = reserve
   let params
-  if (loggedIn) {
+  if (loggedIn.value) {
     params = {
       customer: {
         id: currentCustomer.value.id,

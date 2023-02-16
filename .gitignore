@@ -7,3 +7,4 @@ node_modules
 .env
 dist
 .envrc
+.DS_Store

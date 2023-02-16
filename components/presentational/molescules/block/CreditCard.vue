@@ -17,8 +17,7 @@ const props = defineProps({
   brand: String,
   expiration: String,
   owner: String,
-})
-
+});
 </script>
 
 <style lang="sass" scoped>
@@ -31,6 +30,8 @@ const props = defineProps({
     justify-content: space-between
     .number
       font-size: 20px
+    .brand
+      height: 20px
     .label
       color: $hint
 </style>

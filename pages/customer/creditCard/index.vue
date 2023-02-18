@@ -38,7 +38,7 @@ definePageMeta({
 });
 
 const data = reactive(
-  await $fetch("/customer/cards", {
+  await $fetch("/customer/card", {
     baseURL: useRuntimeConfig().public.apiBaseURL,
     headers: {
       Authorization: useCustomerAuth().getAuth(),
@@ -48,7 +48,7 @@ const data = reactive(
 const { in_use, registered } = toRefs(data);
 
 const addCard = async (token) => {
-  const { new_card } = await $fetch(`/customer/cards`, {
+  const { new_card } = await $fetch("/customer/card", {
     baseURL: useRuntimeConfig().public.apiBaseURL,
     method: "POST",
     headers: {
@@ -64,7 +64,7 @@ const addCard = async (token) => {
 };
 
 const changeMainCard = async (id) => {
-  const { new_registered } = await $fetch(`/customer/cards`, {
+  const { new_registered } = await $fetch("/customer/card", {
     baseURL: useRuntimeConfig().public.apiBaseURL,
     method: "PUT",
     headers: {
@@ -85,7 +85,7 @@ const deleteCard = async (id) => {
   const deleteCheck = await confirm("本当に削除しますか？");
   if (!deleteCheck) return;
 
-  await $fetch(`/customer/cards`, {
+  await $fetch("/customer/card", {
     baseURL: useRuntimeConfig().public.apiBaseURL,
     method: "DELETE",
     headers: {

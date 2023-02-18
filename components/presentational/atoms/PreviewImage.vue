@@ -1,16 +1,22 @@
 <template lang="pug">
 .preview
-  img(v-for="(preview, index) in previews" :src="preview" :key="index")
+  img(:src="preview")
 </template>
 
 <script setup>
 const props = defineProps({
-  images: Array,
+  image: [String, Blob],
 });
 
-const previews = computed(() =>
-  props.images.map((image) => URL.createObjectURL(image))
-);
+const preview = computed(() => {
+  if (!props.image) return;
+
+  if (typeof props.image === "string") {
+    return props.image;
+  } else {
+    return URL.createObjectURL(props.image);
+  }
+});
 </script>
 
 <style lang="sass" scoped>

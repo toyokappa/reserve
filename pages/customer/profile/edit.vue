@@ -8,6 +8,7 @@ FormProfileEdit(
   :tel="currentCustomer.tel"
   :postcode="currentCustomer.postcode"
   :address="currentCustomer.address"
+  :image="currentCustomer.image.url"
   @updateProfile="updateProfile"
 )
 </template>
@@ -21,23 +22,22 @@ definePageMeta({
 });
 const currentCustomer = useState("currentCustomer");
 const updateProfile = async (values) => {
+  const formData = new FormData();
+  formData.append("profile[image]", values.image);
+  formData.append("profile[first_name]", values.firstName);
+  formData.append("profile[last_name]", values.lastName);
+  formData.append("profile[first_name_kana]", values.firstNameKana);
+  formData.append("profile[last_name_kana]", values.lastNameKana);
+  formData.append("profile[tel]", values.tel);
+  formData.append("profile[postcode]", values.postcode);
+  formData.append("profile[address]", values.address);
   const { profile } = await $fetch(`/customer/profile`, {
     baseURL: useRuntimeConfig().public.apiBaseURL,
     method: "PUT",
     headers: {
       Authorization: useCustomerAuth().getAuth(),
     },
-    body: {
-      profile: {
-        last_name: values.lastName,
-        first_name: values.firstName,
-        last_name_kana: values.lastNameKana,
-        first_name_kana: values.firstNameKana,
-        tel: values.tel,
-        postcode: values.postcode,
-        address: values.address,
-      },
-    },
+    body: formData,
   });
   useState("currentCustomer", profile);
   useRouter().push("/");

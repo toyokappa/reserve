@@ -42,6 +42,10 @@ form
     validation="required"
     required
   )
+  InputImage.mb-10(
+    name="image"
+    labelText="プロフィール画像"
+  )
   .button-area
     PrimaryButton.mb-10(
       :disabled="!meta.valid"
@@ -50,12 +54,13 @@ form
 </template>
 
 <script setup>
-import InputField from '~~/components/presentational/molescules/form/InputField.vue';
-import InputFieldHorizontal from '~~/components/presentational/molescules/form/InputFieldHorizontal.vue';
-import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
+import InputField from "~~/components/presentational/molescules/form/InputField.vue";
+import InputImage from "~~/components/presentational/molescules/form/InputImage.vue";
+import InputFieldHorizontal from "~~/components/presentational/molescules/form/InputFieldHorizontal.vue";
+import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue";
 
-import { useForm } from 'vee-validate'
-import { Core as YubinBangoCore } from 'yubinbango-core2'
+import { useForm } from "vee-validate";
+import { Core as YubinBangoCore } from "yubinbango-core2";
 
 const props = defineProps({
   lastName: String,
@@ -65,22 +70,23 @@ const props = defineProps({
   tel: String,
   postcode: String,
   address: String,
-})
+  image: [String, null],
+});
 
 const { meta, values } = useForm({
-  initialValues: props
-})
+  initialValues: props,
+});
 
 const autocompleteAdress = () => {
-  new YubinBangoCore(values.postcode, value => {
-    values.address = value.region
-    values.address += value.locality
-    values.address += value.street
-  })
-}
+  new YubinBangoCore(values.postcode, (value) => {
+    values.address = value.region;
+    values.address += value.locality;
+    values.address += value.street;
+  });
+};
 
-const emits = defineEmits()
+const emits = defineEmits();
 const updateProfile = () => {
-  emits('updateProfile', values)
-}
+  emits("updateProfile", values);
+};
 </script>

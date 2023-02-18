@@ -3,17 +3,15 @@
   label.input-label(:for="name")
     span.text {{ labelText }}
     RequiredBadge(v-if="required")
-  HintText(text="本人確認書類ガイド")
   input.hidden-field(
     type="file"
     :id="name"
     :name="name"
     ref="input"
     accept="image/*"
-    multiple
     @change="onImageUploaded"
   )
-  PreviewImages(:images="value")
+  PreviewImage(:image="value")
   ImageUploadButton(@click.prevent="input.click()")
   .invalid-feedback(v-if="errorMessage") {{ errorMessage }}
 </template>
@@ -25,7 +23,7 @@ import { localize } from "@vee-validate/i18n";
 import RequiredBadge from "~/components/presentational/atoms/RequiredBadge.vue";
 import HintText from "~/components/presentational/atoms/HintText.vue";
 import ImageUploadButton from "~/components/presentational/atoms/button/ImageUpload.vue";
-import PreviewImages from "~/components/presentational/atoms/PreviewImages.vue";
+import PreviewImage from "~/components/presentational/atoms/PreviewImage.vue";
 
 const props = defineProps({
   name: String,
@@ -37,14 +35,14 @@ const props = defineProps({
 const { name, type, labelText, required } = props;
 
 const validation = (value) => {
-  if (value.length === 0 && required) {
+  if (value && required) {
     return `${labelText}は必須項目です`;
   }
   const regex = /\.(jpg|svg|jpeg|png|bmp|gif|webp)$/i;
-  if (!value.every((file) => regex.test(file.name))) {
+  if (!regex.test(value.name)) {
     return `${labelText}は有効な画像形式ではありません`;
   }
-  if (!value.every((file) => file.size < 20 * 1024 * 1024)) {
+  if (value.size > 20 * 1024 * 1024) {
     return `${labelText}の容量は20MBまでです`;
   }
 
@@ -52,6 +50,14 @@ const validation = (value) => {
 };
 
 const { value, errorMessage } = useField(name, validation);
+
+onMounted(async () => {
+  const blob = await $fetch(value.value);
+  value.value = await new File(
+    [blob],
+    value.value.match(".+/(.+?)([\?#;].*)?$")[1]
+  );
+});
 
 const names = {};
 names[name] = labelText;
@@ -65,8 +71,8 @@ configure({
 
 const input = ref();
 const onImageUploaded = (e) => {
-  const images = Array.from(e.target.files);
-  value.value = images;
+  const image = e.target.files[0];
+  value.value = image;
 };
 </script>
 

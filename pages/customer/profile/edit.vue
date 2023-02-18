@@ -31,7 +31,7 @@ const updateProfile = async (values) => {
   formData.append("profile[tel]", values.tel);
   formData.append("profile[postcode]", values.postcode);
   formData.append("profile[address]", values.address);
-  const { profile } = await $fetch(`/customer/profile`, {
+  await $fetch(`/customer/profile`, {
     baseURL: useRuntimeConfig().public.apiBaseURL,
     method: "PUT",
     headers: {
@@ -39,7 +39,6 @@ const updateProfile = async (values) => {
     },
     body: formData,
   });
-  useState("currentCustomer", profile);
   useRouter().push("/");
 };
 </script>

@@ -39,10 +39,10 @@ const validation = (value) => {
     return `${labelText}は必須項目です`;
   }
   const regex = /\.(jpg|svg|jpeg|png|bmp|gif|webp)$/i;
-  if (!regex.test(value.name)) {
+  if (value && !regex.test(value.name)) {
     return `${labelText}は有効な画像形式ではありません`;
   }
-  if (value.size > 20 * 1024 * 1024) {
+  if (value && value.size > 20 * 1024 * 1024) {
     return `${labelText}の容量は20MBまでです`;
   }
 
@@ -52,6 +52,8 @@ const validation = (value) => {
 const { value, errorMessage } = useField(name, validation);
 
 onMounted(async () => {
+  if (!value.value) return;
+
   const blob = await $fetch(value.value);
   value.value = await new File(
     [blob],

@@ -7,8 +7,8 @@ form
     validation="required"
     required
   )
-  InputImages.mb-line(
-    name="photo"
+  InputImage.mb-line(
+    name="image"
     labelText="プロフィール写真"
   )
   Textarea.mb-10(
@@ -23,25 +23,25 @@ form
 </template>
 
 <script setup>
-import InputField from '~~/components/presentational/molescules/form/InputField.vue';
-import InputImages from '~~/components/presentational/molescules/form/InputImages.vue';
-import Textarea from '~~/components/presentational/molescules/form/Textarea.vue';
-import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
+import InputField from "~~/components/presentational/molescules/form/InputField.vue";
+import InputImage from "~~/components/presentational/molescules/form/InputImage.vue";
+import Textarea from "~~/components/presentational/molescules/form/Textarea.vue";
+import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue";
 
-import { useForm } from 'vee-validate'
+import { useForm } from "vee-validate";
 
 const props = defineProps({
   name: String,
-  photo: Array,
+  image: [String, null],
   comment: String,
-})
+});
 
 const { meta, values } = useForm({
-  initialValues: props
-})
+  initialValues: props,
+});
 
-const emits = defineEmits()
+const emits = defineEmits();
 const updateProfile = () => {
-  emits('updateProfile', values)
-}
+  emits("updateProfile", values);
+};
 </script>

@@ -2,26 +2,33 @@
 BlockText.mb-line 変更したい項目を入力してください。
 FormStaffProfileEdit(
   :name="currentStaff.display_name"
-  :photo="[]"
+  :image="currentStaff.image.url"
   :comment="currentStaff.comment"
-  @updateProfile="updateProfile()"
+  @updateProfile="updateProfile"
 )
 </template>
 
 <script setup>
-import { format } from 'date-fns'
-
-import BlockText from '~/components/presentational/molescules/block/Text.vue'
-import FormStaffProfileEdit from '~/components/presentational/organizms/FormStaffProfileEdit.vue'
+import BlockText from "~/components/presentational/molescules/block/Text.vue";
+import FormStaffProfileEdit from "~/components/presentational/organizms/FormStaffProfileEdit.vue";
 
 definePageMeta({
-  middleware: 'staff-auth'
-})
-
-const currentStaff = useState('currentStaff')
-const router = useRouter()
-
-const updateProfile = () => {
-  router.push('/staff')
-}
+  middleware: "staff-auth",
+});
+const currentStaff = useState("currentStaff");
+const updateProfile = async (values) => {
+  const formData = new FormData();
+  formData.append("profile[image]", values.image);
+  formData.append("profile[display_name]", values.name);
+  formData.append("profile[comment]", values.comment);
+  await $fetch(`/staff/profile`, {
+    baseURL: useRuntimeConfig().public.apiBaseURL,
+    method: "PUT",
+    headers: {
+      Authorization: useStaffAuth().getAuth(),
+    },
+    body: formData,
+  });
+  useRouter().push("/staff");
+};
 </script>

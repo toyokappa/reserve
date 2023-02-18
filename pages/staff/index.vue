@@ -2,6 +2,7 @@
 BlockProfile.mb-30(
   :name="currentStaff.display_name"
   :email="currentStaff.email"
+  :image="currentStaff.image.url"
 )
 BlockMenu.mb-line(
   v-for="menuSection in mypageMenu"
@@ -12,37 +13,43 @@ BlockMenu.mb-line(
 </template>
 
 <script setup>
-import BlockProfile from '~/components/presentational/molescules/block/Profile.vue'
-import BlockMenu from '~/components/presentational/molescules/block/Menu.vue'
+import BlockProfile from "~/components/presentational/molescules/block/Profile.vue";
+import BlockMenu from "~/components/presentational/molescules/block/Menu.vue";
 
-import scheduleIcon from '~/assets/images/menu-schedule.svg'
-import shiftIcon from '~/assets/images/menu-shift.svg'
-import profileIcon from '~/assets/images/menu-profile.svg'
-import passwordIcon from '~/assets/images/menu-password.svg'
+import scheduleIcon from "~/assets/images/menu-schedule.svg";
+import shiftIcon from "~/assets/images/menu-shift.svg";
+import profileIcon from "~/assets/images/menu-profile.svg";
+import passwordIcon from "~/assets/images/menu-password.svg";
 
 definePageMeta({
-  middleware: 'staff-auth'
-})
+  middleware: "staff-auth",
+});
 
-const currentStaff = useState('currentStaff')
+const currentStaff = useState("currentStaff");
 const mypageMenu = [
   {
-    title: '管理',
+    title: "管理",
     menuList: [
-      { name: '予約スケジュール', link: '/staff/schedule', icon: scheduleIcon },
-      { name: 'シフト入力', link: '/staff/shift', icon: shiftIcon },
-    ]
+      { name: "予約スケジュール", link: "/staff/schedule", icon: scheduleIcon },
+      { name: "シフト入力", link: "/staff/shift", icon: shiftIcon },
+    ],
   },
   {
-    title: 'アカウント',
+    title: "アカウント",
     menuList: [
-      { name: 'プロフィール変更', link: '/staff/profile/edit', icon: profileIcon },
-      { name: 'パスワード変更', link: '/staff/password/edit', icon: passwordIcon },
-    ]
+      {
+        name: "プロフィール変更",
+        link: "/staff/profile/edit",
+        icon: profileIcon,
+      },
+      {
+        name: "パスワード変更",
+        link: "/staff/password/edit",
+        icon: passwordIcon,
+      },
+    ],
   },
-]
+];
 </script>
 
-<style scoped lang="sass">
-
-</style>
+<style scoped lang="sass"></style>

@@ -13,7 +13,9 @@
     .delete(
       @click="emits('deleteCard', id)"
     ) カードを削除する
-    .to-main 利用中のカードに指定する
+    .to-main(
+      @click="emits('changeMainCard', id)"
+    ) 利用中のカードに指定する
 </template>
 
 <script setup>

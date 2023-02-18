@@ -17,6 +17,7 @@ BlockText.mb-line 登録済みのカード
     :expiration="card.expiration"
     :owner="card.owner"
     hasController
+    @changeMainCard="changeMainCard"
     @deleteCard="deleteCard"
   )
 BlockText.mb-line 追加したいカード情報を入力してください。
@@ -60,6 +61,24 @@ const addCard = async (token) => {
     },
   });
   registered.value.unshift(new_card);
+};
+
+const changeMainCard = async (id) => {
+  const { new_registered } = await $fetch(`/customer/cards`, {
+    baseURL: useRuntimeConfig().public.apiBaseURL,
+    method: "PUT",
+    headers: {
+      Authorization: useCustomerAuth().getAuth(),
+    },
+    body: {
+      card: {
+        id,
+      },
+    },
+  });
+  const mainCard = registered.value.find((card) => card.id === id);
+  in_use.value = mainCard;
+  registered.value = new_registered;
 };
 
 const deleteCard = async (id) => {

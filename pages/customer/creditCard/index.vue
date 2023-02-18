@@ -11,10 +11,13 @@ BlockText.mb-line 登録済みのカード
   BlockCreditCard.mb-line(
     v-for="card in registered"
     :key="card.id"
+    :id="card.id"
     :number="card.number"
     :brand="card.brand"
     :expiration="card.expiration"
     :owner="card.owner"
+    hasController
+    @deleteCard="deleteCard"
   )
 BlockText.mb-line 追加したいカード情報を入力してください。
 FormCreditCard(
@@ -57,6 +60,26 @@ const addCard = async (token) => {
     },
   });
   registered.value.unshift(new_card);
+};
+
+const deleteCard = async (id) => {
+  const deleteCheck = await confirm("本当に削除しますか？");
+  if (!deleteCheck) return;
+
+  await $fetch(`/customer/cards`, {
+    baseURL: useRuntimeConfig().public.apiBaseURL,
+    method: "DELETE",
+    headers: {
+      Authorization: useCustomerAuth().getAuth(),
+    },
+    body: {
+      card: {
+        id,
+      },
+    },
+  });
+  const cardIndex = registered.value.findIndex((card) => card.id === id);
+  registered.value.splice(cardIndex, 1);
 };
 </script>
 

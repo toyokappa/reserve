@@ -1,6 +1,7 @@
 <template lang="pug">
 .profile-block
-  .avatar
+  img.avatar(v-if="image" :src="image")
+  .no-avatar(v-else)
   .text
     .name.mb-5 {{ name }}
     .email {{ email }}
@@ -10,7 +11,8 @@
 const props = defineProps({
   name: String,
   email: String,
-})
+  image: String,
+});
 </script>
 
 <style lang="sass" scoped>
@@ -20,6 +22,15 @@ const props = defineProps({
   display: flex
   align-items: center
   .avatar
+    width: 100px
+    height: 100px
+    object-fit: cover
+    object-position: center center
+    border: 5px solid $white
+    border-radius: 50%
+    margin-right: 20px
+    transform: translateY(20px)
+  .no-avatar
     width: 100px
     height: 100px
     background-color: $grey

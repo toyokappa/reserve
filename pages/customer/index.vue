@@ -2,6 +2,7 @@
 BlockProfile.mb-30(
   :name="name"
   :email="currentCustomer.email"
+  :image="currentCustomer.image.url"
 )
 Notice.mb-10(
   v-for="(notice, index) in notice_list"

@@ -1,13 +1,14 @@
 <template lang="pug">
 .profile-block
-  img.avatar(v-if="image" :src="image")
-  .no-avatar(v-else)
+  img.avatar(:src="image || noUserIcon")
   .text
     .name.mb-5 {{ name }}
     .email {{ email }}
 </template>
 
 <script setup>
+import noUserIcon from "~/assets/images/no-user-icon.png";
+
 const props = defineProps({
   name: String,
   email: String,
@@ -26,14 +27,6 @@ const props = defineProps({
     height: 100px
     object-fit: cover
     object-position: center center
-    border: 5px solid $white
-    border-radius: 50%
-    margin-right: 20px
-    transform: translateY(20px)
-  .no-avatar
-    width: 100px
-    height: 100px
-    background-color: $grey
     border: 5px solid $white
     border-radius: 50%
     margin-right: 20px

@@ -24,7 +24,7 @@ template(v-else)
   BlockText.mb-line カード情報を入力してください。
   FormCreditCard(
     buttonText="チケットを購入する"
-    @purchaseTicket="purchaseTicket"
+    @formSubmit="purchaseTicket"
   )
 .button-area
   DefaultButton.mb-10(@click.prevent="router.push('/purchase')") 戻る

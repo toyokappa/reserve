@@ -1,5 +1,6 @@
 <template lang="pug">
 form
+  BlockText.mb-line 会員登録に必要な情報を入力してください。
   InputFieldHorizontal.mb-line(
     labelText="お名前"
     name1="lastName" name2="firstName"
@@ -25,14 +26,6 @@ form
     required
   )
   InputField.mb-line(
-    name="email"
-    type="email"
-    labelText="メールアドレス"
-    autocomplete="email"
-    validation="required|email"
-    required
-  )
-  InputField.mb-line(
     name="tel"
     type="tel"
     labelText="電話番号"
@@ -50,17 +43,34 @@ form
     required
     @focusout="autocompleteAdress()"
   )
-  InputField.mb-line(
+  InputField.mb-10(
     name="address"
     type="text"
     labelText="住所"
     validation="required"
     required
   )
-  InputImages.mb-10(
-    name="idCard"
-    labelText="本人確認書類"
-    multiple
+  BlockText.mb-line ログインに必要な情報を入力してください。
+  InputField.mb-line(
+    name="email"
+    type="email"
+    labelText="メールアドレス"
+    autocomplete="email"
+    validation="required|email"
+    required
+  )
+  InputField.mb-line(
+    name="password"
+    type="password"
+    labelText="パスワード"
+    validation="required|min:8"
+    required
+  )
+  InputField.mb-10(
+    name="passwordConfirmation"
+    type="password"
+    labelText="パスワード（確認用）"
+    validation="required|confirmed:@password"
     required
   )
   .button-area
@@ -71,13 +81,13 @@ form
 </template>
 
 <script setup>
-import InputField from '~~/components/presentational/molescules/form/InputField.vue';
-import InputFieldHorizontal from '~~/components/presentational/molescules/form/InputFieldHorizontal.vue';
-import InputImages from '~~/components/presentational/molescules/form/InputImages.vue';
-import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
+import BlockText from "~/components/presentational/molescules/block/Text.vue";
+import InputField from "~~/components/presentational/molescules/form/InputField.vue";
+import InputFieldHorizontal from "~~/components/presentational/molescules/form/InputFieldHorizontal.vue";
+import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue";
 
-import { useForm } from 'vee-validate'
-import { Core as YubinBangoCore } from 'yubinbango-core2'
+import { useForm } from "vee-validate";
+import { Core as YubinBangoCore } from "yubinbango-core2";
 
 const props = defineProps({
   lastName: String,
@@ -85,27 +95,28 @@ const props = defineProps({
   lastNameKana: String,
   firstNameKana: String,
   birthday: String,
-  email: String,
   tel: String,
   postcode: String,
   address: String,
-  idCard: Array,
-})
+  email: String,
+  password: String,
+  passwordConfirmation: String,
+});
 
 const { meta, values } = useForm({
-  initialValues: props
-})
+  initialValues: props,
+});
 
 const autocompleteAdress = () => {
-  new YubinBangoCore(values.postcode, value => {
-    values.address = value.region
-    values.address += value.locality
-    values.address += value.street
-  })
-}
+  new YubinBangoCore(values.postcode, (value) => {
+    values.address = value.region;
+    values.address += value.locality;
+    values.address += value.street;
+  });
+};
 
-const emits = defineEmits()
+const emits = defineEmits();
 const confirmRegister = () => {
-  emits('confirmRegister', values)
-}
+  emits("confirmRegister", values);
+};
 </script>

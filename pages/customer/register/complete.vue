@@ -1,6 +1,6 @@
 <template lang="pug">
 .complete-page
-  CompleteHeader(title="確認メールを送信しました")
+  CompleteHeader(title="会員登録が完了しました")
   .mb-30
     p この度は会員登録をいただき
     p.mb-20 誠にありがとうございました！
@@ -15,11 +15,10 @@
 </template>
 
 <script setup>
-import CompleteHeader from '~/components/presentational/atoms/CompleteHeader.vue'
-import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
+import CompleteHeader from "~/components/presentational/atoms/CompleteHeader.vue";
+import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue";
 
-const router = useRouter()
+const router = useRouter();
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="sass" scoped></style>

@@ -1,16 +1,18 @@
 <template lang="pug">
 .trainer-block
   img.arrow(src="@/assets/images/arrow-right.svg")
-  .thumbnail
+  img.thumbnail(:src="image || noUserIcon")
   .profile
     .name {{ name }}
 </template>
 
 <script setup>
+import noUserIcon from "@/assets/images/no-user-icon.png";
+
 const props = defineProps({
+  image: String,
   name: String,
-  comment: String,
-})
+});
 </script>
 
 <style lang="sass" scoped>

@@ -24,6 +24,7 @@ template(v-else-if="reserve.screen === 'trainer'")
   BlockTrainer.mb-line(
     v-for="trainer in reserve.program.trainer_list"
     :key="trainer.id"
+    :image="trainer.image.url"
     :name="trainer.name"
     :comment="trainer.comment"
     @click.native="selectTrainer(trainer)"
@@ -36,6 +37,7 @@ template(v-else-if="reserve.screen === 'schedule'")
   )
   BlockTrainerSelected.mb-10(
     :name="reserve.trainer.name"
+    :image="reserve.trainer.image.url"
     @click.native="moveScreen('trainer')"
   )
   BlockText.mb-line ご希望の日程を選択してください。
@@ -52,6 +54,7 @@ template(v-else-if="reserve.screen === 'userInput'")
   )
   BlockTrainerSelected.mb-line(
     :name="reserve.trainer.name"
+    :image="reserve.trainer.image.url"
     @click.native="moveScreen('trainer')"
   )
   BlockScheduleSelected.mb-10(
@@ -80,6 +83,7 @@ template(v-else-if="reserve.screen === 'confirm'")
   )
   BlockTrainerSelected.mb-line(
     :name="reserve.trainer.name"
+    :image="reserve.trainer.image.url"
     @click.native="moveScreen('trainer')"
   )
   BlockScheduleSelected.mb-line(
@@ -97,84 +101,87 @@ template(v-else-if="reserve.screen === 'confirm'")
 
 <script setup>
 // TODO: チケットが一枚もない場合の処理も追加
-import CalendarReserve from '~/components/presentational/organizms/CalendarReserve.vue'
-import FormReserveNoAccount from '~~/components/presentational/organizms/FormReserveNoAccount.vue'
-import BlockText from '~/components/presentational/molescules/block/Text.vue'
-import BlockProgram from '~/components/presentational/molescules/block/Program.vue'
-import BlockProgramSelected from '~/components/presentational/molescules/block/ProgramSelected.vue'
-import BlockTrainer from '~/components/presentational/molescules/block/Trainer.vue'
-import BlockTrainerSelected from '~/components/presentational/molescules/block/TrainerSelected.vue'
-import BlockScheduleSelected from '~/components/presentational/molescules/block/ScheduleSelected.vue'
-import BlockConfirm from '~/components/presentational/molescules/block/Confirm.vue'
-import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
-import DefaultButton from '~~/components/presentational/atoms/button/Default.vue';
+import CalendarReserve from "~/components/presentational/organizms/CalendarReserve.vue";
+import FormReserveNoAccount from "~~/components/presentational/organizms/FormReserveNoAccount.vue";
+import BlockText from "~/components/presentational/molescules/block/Text.vue";
+import BlockProgram from "~/components/presentational/molescules/block/Program.vue";
+import BlockProgramSelected from "~/components/presentational/molescules/block/ProgramSelected.vue";
+import BlockTrainer from "~/components/presentational/molescules/block/Trainer.vue";
+import BlockTrainerSelected from "~/components/presentational/molescules/block/TrainerSelected.vue";
+import BlockScheduleSelected from "~/components/presentational/molescules/block/ScheduleSelected.vue";
+import BlockConfirm from "~/components/presentational/molescules/block/Confirm.vue";
+import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue";
+import DefaultButton from "~~/components/presentational/atoms/button/Default.vue";
 
 definePageMeta({
-  middleware: 'customer-auth'
-})
-const loggedIn = useState('customerLoggedIn')
-const currentCustomer = useState('currentCustomer')
+  middleware: "customer-auth",
+});
+const loggedIn = useState("customerLoggedIn");
+const currentCustomer = useState("currentCustomer");
 
 const trainerNoSelected = {
   id: null,
-  name: '指名なし',
-  comment: ''
-}
-const { program_list } = await $fetch('/customer/reserve', {
+  image: {
+    url: null,
+  },
+  name: "指名なし",
+  comment: "",
+};
+const { program_list } = await $fetch("/customer/reserve", {
   baseURL: useRuntimeConfig().public.apiBaseURL,
   headers: {
-    Authorization: useStaffAuth().getAuth()
+    Authorization: useStaffAuth().getAuth(),
   },
   params: {
-    logged_in: loggedIn.value
-  }
-})
+    logged_in: loggedIn.value,
+  },
+});
 
 const reserve = reactive({
-  screen: 'program',
+  screen: "program",
   program: null,
   trainer: null,
   schedule: null,
-  name: '',
-  email: '',
-  tel: '',
-  message: '',
-})
+  name: "",
+  email: "",
+  tel: "",
+  message: "",
+});
 
 const moveScreen = (screen) => {
-  reserve.screen = screen
-}
+  reserve.screen = screen;
+};
 const selectProgram = (program) => {
-  reserve.program = program
-  moveScreen('trainer')
-}
+  reserve.program = program;
+  moveScreen("trainer");
+};
 const selectTrainer = (trainer) => {
-  reserve.trainer = trainer
-  moveScreen('schedule')
-}
+  reserve.trainer = trainer;
+  moveScreen("schedule");
+};
 const selectSchedule = (schedule) => {
-  reserve.schedule = schedule
-  moveScreen('userInput')
-}
+  reserve.schedule = schedule;
+  moveScreen("userInput");
+};
 const confirmReserve = (userInfo) => {
-  const { name, email, tel, message } = userInfo
-  reserve.name = name
-  reserve.email = email
-  reserve.tel = tel
-  reserve.message = message
-  moveScreen('confirm')
-}
+  const { name, email, tel, message } = userInfo;
+  reserve.name = name;
+  reserve.email = email;
+  reserve.tel = tel;
+  reserve.message = message;
+  moveScreen("confirm");
+};
 
 const completeReserve = async () => {
-  const { schedule, program, trainer } = reserve
-  let params
+  const { schedule, program, trainer } = reserve;
+  let params;
   if (loggedIn.value) {
     params = {
       customer: {
         id: currentCustomer.value.id,
         required_ticket: program.required_ticket,
-      }
-    }
+      },
+    };
   } else {
     params = {
       guest: {
@@ -183,14 +190,14 @@ const completeReserve = async () => {
         tel: reserve.tel,
         message: reserve.message,
       },
-    }
+    };
   }
 
-  await $fetch('/customer/reserve', {
+  await $fetch("/customer/reserve", {
     baseURL: useRuntimeConfig().public.apiBaseURL,
-    method: 'POST',
+    method: "POST",
     headers: {
-      Authorization: useStaffAuth().getAuth()
+      Authorization: useStaffAuth().getAuth(),
     },
     body: {
       reservation: {
@@ -199,13 +206,11 @@ const completeReserve = async () => {
         scheduled_date: schedule,
         required_time: program.required_time,
       },
-      ...params
-    }
-  })
-  useRouter().push('/reserve/complete')
-}
+      ...params,
+    },
+  });
+  useRouter().push("/reserve/complete");
+};
 </script>
 
-<style scoped lang="sass">
-
-</style>
+<style scoped lang="sass"></style>

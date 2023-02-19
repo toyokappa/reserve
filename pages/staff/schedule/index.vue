@@ -1,11 +1,11 @@
 <template lang="pug">
 BlockText.mb-line 次回のトレーニング
 BlockReservation.mb-10(
-  v-if="nextSchedule"
-  :schedule="`${nextSchedule.scheduled_date} ${nextSchedule.scheduled_time}`"
-  :time="nextSchedule.required_time"
-  :name="nextSchedule.program_name"
-  :trainee="nextSchedule.trainee"
+  v-if="next_reservation"
+  :schedule="`${next_reservation.scheduled_date} ${next_reservation.scheduled_time}`"
+  :time="next_reservation.required_time"
+  :name="next_reservation.program_name"
+  :trainee="next_reservation.trainee"
 )
 BlockText.mb-10(v-else)
   .empty-state 次回のトレーニングはありません。
@@ -33,47 +33,49 @@ BlockText.mb-10(v-else)
 </template>
 
 <script setup>
-import { add, startOfToday, format, subWeeks } from 'date-fns'
-import BlockText from '~/components/presentational/molescules/block/Text.vue'
-import BlockReservation from '~/components/presentational/molescules/block/Reservation.vue'
-import BlockSwitchWeek from '~/components/presentational/molescules/block/SwitchWeek.vue'
+import { add, startOfToday, format, subWeeks } from "date-fns";
+import BlockText from "~/components/presentational/molescules/block/Text.vue";
+import BlockReservation from "~/components/presentational/molescules/block/Reservation.vue";
+import BlockSwitchWeek from "~/components/presentational/molescules/block/SwitchWeek.vue";
 
-import * as R from 'ramda'
+import * as R from "ramda";
 
 definePageMeta({
-  middleware: 'staff-auth'
-})
+  middleware: "staff-auth",
+});
 
-const start = ref(startOfToday())
-const end = computed(() => add(start.value, { days: 6 }))
+const start = ref(startOfToday());
+const end = computed(() => add(start.value, { days: 6 }));
 
 const getReservationList = async () => {
-  return await $fetch('/staff/schedules', {
+  return await $fetch("/staff/schedules", {
     baseURL: useRuntimeConfig().public.apiBaseURL,
     headers: {
-      Authorization: useStaffAuth().getAuth()
+      Authorization: useStaffAuth().getAuth(),
     },
     params: {
-      start_date: format(start.value, 'Y-MM-dd'),
+      start_date: format(start.value, "Y-MM-dd"),
     },
-  })
-}
+  });
+};
 
-const { reservation_list } = await getReservationList()
-const reactiveReservationList = ref(reservation_list)
-const nextSchedule = reservation_list[0]
+const { next_reservation, reservation_list } = await getReservationList();
+const reactiveReservationList = ref(reservation_list);
 const reservationGroupByDate = computed(() => {
-  return R.groupBy(({ scheduled_date }) => scheduled_date, reactiveReservationList.value)
-})
+  return R.groupBy(
+    ({ scheduled_date }) => scheduled_date,
+    reactiveReservationList.value
+  );
+});
 
-const router = useRouter()
+const router = useRouter();
 
 const switchWeek = async (startDate) => {
-  start.value = startDate
+  start.value = startDate;
   // TODO: APIリクエスト数を減らすためにキャッシュを使うロジックに変更
-  const { reservation_list: newReservationList } = await getReservationList()
-  reactiveReservationList.value = newReservationList
-}
+  const { reservation_list: newReservationList } = await getReservationList();
+  reactiveReservationList.value = newReservationList;
+};
 </script>
 
 <style lang="sass" scoped>

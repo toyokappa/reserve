@@ -1,16 +1,19 @@
 <template lang="pug">
 .trainer-block
-  .thumbnail
+  img.thumbnail(:src="image || noUserIcon")
   .profile
     .name {{ name }}
     .comment(v-if="comment") {{ comment }}
 </template>
 
 <script setup>
+import noUserIcon from "@/assets/images/no-user-icon.png";
+
 const props = defineProps({
+  image: String,
   name: String,
   comment: String,
-})
+});
 </script>
 
 <style lang="sass" scoped>

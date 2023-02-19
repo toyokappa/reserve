@@ -10,19 +10,20 @@ FormPassword(
 import BlockText from "~/components/presentational/molescules/block/Text.vue";
 import FormPassword from "~~/components/presentational/organizms/FormPassword.vue";
 
-const router = useRouter();
-const { token } = useRoute().params;
+const { query } = useRoute();
+const { token } = query;
 const submitForm = async (values) => {
   await $fetch(`/customer/auth/password`, {
     baseURL: useRuntimeConfig().public.apiBaseURL,
     method: "PUT",
     headers: {
-      Authorization: useCustomerAuth().getAuth(),
+      "access-token": query["access-token"],
+      client: query.client,
+      uid: query.uid,
     },
     body: {
       password: values.password,
       password_confirmation: values.password_confirmation,
-      reset_password_token: token,
     },
   });
   useRouter().push("/login");

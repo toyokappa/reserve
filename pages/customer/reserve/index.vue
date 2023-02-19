@@ -63,7 +63,14 @@ template(v-else-if="reserve.screen === 'userInput'")
   )
   template(v-if="loggedIn")
     .button-area
-      PrimaryButton.mb-10(@click.prevent="completeReserve()") チケットを消費して予約を確定する
+      PrimaryButton.mb-5(
+        :disabled="reserve.program.required_ticket > number_of_ticket"
+        @click.prevent="completeReserve()"
+      ) チケットを消費して予約を確定する
+    .alert.mb-10(v-if="reserve.program.required_ticket > number_of_ticket")
+      div チケットが不足しています。
+      nuxt-link(to="/purchase") こちら
+      span でチケットを購入してください。
   template(v-else)
     BlockText.mb-line 連絡先をご入力ください。
     FormReserveNoAccount(
@@ -73,8 +80,8 @@ template(v-else-if="reserve.screen === 'userInput'")
       :message="reserve.message"
       @confirmReserve="confirmReserve"
     )
-  .button-area
-    DefaultButton.mb-10(@click.prevent="moveScreen('schedule')") 戻る
+    .button-area
+      DefaultButton.mb-10(@click.prevent="moveScreen('schedule')") 戻る
 template(v-else-if="reserve.screen === 'confirm'")
   BlockProgramSelected.mb-line(
     :time="reserve.program.required_time"
@@ -127,13 +134,13 @@ const trainerNoSelected = {
   name: "指名なし",
   comment: "",
 };
-const { program_list } = await $fetch("/customer/reserve", {
+const { program_list, number_of_ticket } = await $fetch("/customer/reserve", {
   baseURL: useRuntimeConfig().public.apiBaseURL,
   headers: {
     Authorization: useStaffAuth().getAuth(),
   },
   params: {
-    logged_in: loggedIn.value,
+    current_customer_id: currentCustomer.value?.id,
   },
 });
 
@@ -213,4 +220,9 @@ const completeReserve = async () => {
 };
 </script>
 
-<style scoped lang="sass"></style>
+<style scoped lang="sass">
+.alert
+  text-align: center
+  font-size: 14px
+  color: $red
+</style>

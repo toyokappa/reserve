@@ -4,13 +4,6 @@ BlockProfile.mb-30(
   :email="currentCustomer.email"
   :image="currentCustomer.image.url"
 )
-Notice.mb-10(
-  v-for="(notice, index) in notice_list"
-  :key="index"
-  :type="notice.type"
-  :title="notice.title"
-  :description="notice.description"
-)
 BlockMenu.mb-line(
   v-for="menuSection in mypageMenu"
   :key="menuSection.title"
@@ -39,13 +32,6 @@ definePageMeta({
 const currentCustomer = useState("currentCustomer");
 const name = computed(() => {
   return `${currentCustomer.value.last_name} ${currentCustomer.value.first_name}`;
-});
-
-const { notice_list } = await $fetch("/customer/notices", {
-  baseURL: useRuntimeConfig().public.apiBaseURL,
-  headers: {
-    Authorization: useCustomerAuth().getAuth(),
-  },
 });
 
 const mypageMenu = [

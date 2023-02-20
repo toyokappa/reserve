@@ -1,20 +1,21 @@
 <template lang="pug">
 .program-block
   img.arrow(src="@/assets/images/arrow-right.svg")
-  .thumbnail
+  img.thumbnail(:src="defaultProgramImage")
   .menu
     RequiredTime(:time="time" size="14")
     .menu-name {{ name }}
 </template>
 
 <script setup>
-import RequiredTime from '~/components/presentational/atoms/RequiredTime.vue'
+import RequiredTime from "~/components/presentational/atoms/RequiredTime.vue";
+import defaultProgramImage from "~/assets/images/default-program-image.jpg";
 
 const props = defineProps({
   time: Number | String,
   name: String,
   hint: String,
-})
+});
 </script>
 
 <style lang="sass" scoped>
@@ -30,6 +31,8 @@ const props = defineProps({
     height: 40px
     border-radius: 50%
     background-color: $base
+    object-fit: cover
+    object-position: center center
     margin-right: 10px
   .menu
     display: flex

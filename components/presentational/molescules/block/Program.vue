@@ -1,6 +1,6 @@
 <template lang="pug">
 .program-block
-  .thumbnail
+  img.thumbnail(:src="defaultProgramImage")
   .menu
     .menu-main
       RequiredTime(:time="time")
@@ -9,13 +9,14 @@
 </template>
 
 <script setup>
-import RequiredTime from '~/components/presentational/atoms/RequiredTime.vue'
+import RequiredTime from "~/components/presentational/atoms/RequiredTime.vue";
+import defaultProgramImage from "~/assets/images/default-program-image.jpg";
 
 const props = defineProps({
   time: Number | String,
   name: String,
   hint: String,
-})
+});
 </script>
 
 <style lang="sass" scoped>
@@ -29,6 +30,8 @@ const props = defineProps({
     height: 80px
     border-radius: 50%
     background-color: $base
+    object-fit: cover
+    object-position: center center
     margin-right: 20px
   .menu
     .menu-main

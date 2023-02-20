@@ -21,6 +21,9 @@ import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue
 
 import { useForm } from "vee-validate";
 
+definePageMeta({
+  middleware: "staff-auth",
+});
 const { meta, values } = useForm();
 const submitForm = async () => {
   await $fetch(`/staff/auth/password`, {

@@ -12,8 +12,10 @@
 </template>
 
 <script setup>
-import CompleteHeader from '~/components/presentational/atoms/CompleteHeader.vue'
+import CompleteHeader from "~/components/presentational/atoms/CompleteHeader.vue";
+definePageMeta({
+  middleware: "staff-auth",
+});
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="sass" scoped></style>

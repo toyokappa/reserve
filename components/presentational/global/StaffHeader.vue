@@ -1,11 +1,20 @@
 <template lang="pug">
 header
   nuxt-link.logo(to="/staff") LOGO
-  //- .menu-toggler
-  //-   img(src="@/assets/images/menu-toggler-white.svg")
+  .menu-toggler(
+    v-if="loggedIn"
+    @click="logout()"
+  )
+    img(src="@/assets/images/logout-white.svg")
 </template>
 
 <script setup>
+const loggedIn = useState("staffLoggedIn");
+const logout = () => {
+  const cookie = useCookie("staff_access_token");
+  cookie.value = null;
+  useRouter().push("/staff/login");
+};
 </script>
 
 <style lang="sass" scoped>

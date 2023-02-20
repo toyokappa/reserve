@@ -17,8 +17,17 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     }
   }
 
-  if (!loggedIn.value && to.path !== '/staff/login') {
+  const skipRedirectPath = [
+    '/staff/login',
+    '/staff/login/password',
+    '/staff/login/password/sendMail',
+    '/staff/login/password/reset',
+  ]
+  if (!loggedIn.value && !skipRedirectPath.includes(to.path)) {
     const path = '/staff/login'
     return { path }
+  }
+  if (loggedIn.value && skipRedirectPath.includes(to.path)) {
+    return { path: '/staff' }
   }
 })

@@ -12,20 +12,19 @@ BlockPurchaseHistory.mb-line(
 </template>
 
 <script setup>
-import BlockText from '~/components/presentational/molescules/block/Text.vue'
-import BlockPurchaseHistory from '~/components/presentational/molescules/block/PurchaseHistory.vue'
+import BlockText from "~/components/presentational/molescules/block/Text.vue";
+import BlockPurchaseHistory from "~/components/presentational/molescules/block/PurchaseHistory.vue";
 
 definePageMeta({
-  middleware: 'customer-auth'
-})
+  middleware: "customer-auth",
+});
 
-const { purchase_history_list } = await $fetch('/customer/purchase_histories', {
+const { purchase_history_list } = await $fetch("/customer/purchase_histories", {
   baseURL: useRuntimeConfig().public.apiBaseURL,
   headers: {
-    Authorization: useCustomerAuth().getAuth()
+    Authorization: useCustomerAuth().getAuth(),
   },
-})
+});
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="sass" scoped></style>

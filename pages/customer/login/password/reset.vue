@@ -10,6 +10,10 @@ FormPassword(
 import BlockText from "~/components/presentational/molescules/block/Text.vue";
 import FormPassword from "~~/components/presentational/organizms/FormPassword.vue";
 
+definePageMeta({
+  middleware: "customer-auth",
+});
+
 const { query } = useRoute();
 const { token } = query;
 const submitForm = async (values) => {

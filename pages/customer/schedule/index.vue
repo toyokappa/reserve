@@ -12,19 +12,19 @@ BlockReservation.mb-line(
 </template>
 
 <script setup>
-import BlockText from '~/components/presentational/molescules/block/Text.vue'
-import BlockReservation from '~/components/presentational/molescules/block/Reservation.vue'
+import BlockText from "~/components/presentational/molescules/block/Text.vue";
+import BlockReservation from "~/components/presentational/molescules/block/Reservation.vue";
 
 definePageMeta({
-  middleware: 'customer-auth'
-})
-const { reservation_list } = await $fetch('/customer/schedules', {
+  middleware: "customer-auth",
+});
+
+const { reservation_list } = await $fetch("/customer/schedules", {
   baseURL: useRuntimeConfig().public.apiBaseURL,
   headers: {
-    Authorization: useCustomerAuth().getAuth()
+    Authorization: useCustomerAuth().getAuth(),
   },
-})
+});
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="sass" scoped></style>

@@ -10,20 +10,19 @@ BlockTicket.mb-line(
 </template>
 
 <script setup>
-import BlockText from '~/components/presentational/molescules/block/Text.vue'
-import BlockTicket from '~/components/presentational/molescules/block/Ticket.vue'
+import BlockText from "~/components/presentational/molescules/block/Text.vue";
+import BlockTicket from "~/components/presentational/molescules/block/Ticket.vue";
 
 definePageMeta({
-  middleware: 'customer-auth'
-})
+  middleware: "customer-auth",
+});
 
-const { ticket_list } = await $fetch('/customer/tickets', {
+const { ticket_list } = await $fetch("/customer/tickets", {
   baseURL: useRuntimeConfig().public.apiBaseURL,
   headers: {
-    Authorization: useCustomerAuth().getAuth()
+    Authorization: useCustomerAuth().getAuth(),
   },
-})
+});
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="sass" scoped></style>

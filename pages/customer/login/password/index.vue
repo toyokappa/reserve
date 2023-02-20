@@ -23,6 +23,10 @@ import { useForm } from "vee-validate";
 
 const { meta, values } = useForm();
 
+definePageMeta({
+  middleware: "customer-auth",
+});
+
 const submitForm = async () => {
   await $fetch(`/customer/auth/password`, {
     baseURL: useRuntimeConfig().public.apiBaseURL,

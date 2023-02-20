@@ -20,6 +20,7 @@ import FormProfileEdit from "~/components/presentational/organizms/FormProfileEd
 definePageMeta({
   middleware: "customer-auth",
 });
+
 const currentCustomer = useState("currentCustomer");
 const updateProfile = async (values) => {
   const formData = new FormData();

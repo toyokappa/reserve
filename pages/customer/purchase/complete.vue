@@ -15,14 +15,14 @@
 </template>
 
 <script setup>
-import CompleteHeader from '~/components/presentational/atoms/CompleteHeader.vue'
-import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
+import CompleteHeader from "~/components/presentational/atoms/CompleteHeader.vue";
+import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue";
 
 definePageMeta({
-  middleware: 'customer-auth'
-})
-const router = useRouter()
+  middleware: "customer-auth",
+});
+
+const router = useRouter();
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="sass" scoped></style>

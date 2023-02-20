@@ -119,11 +119,12 @@ import BlockConfirm from "~/components/presentational/molescules/block/Confirm.v
 import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue";
 import DefaultButton from "~~/components/presentational/atoms/button/Default.vue";
 
+const loggedIn = useState("customerLoggedIn");
+const currentCustomer = useState("currentCustomer");
+
 definePageMeta({
   middleware: "customer-auth",
 });
-const loggedIn = useState("customerLoggedIn");
-const currentCustomer = useState("currentCustomer");
 
 const trainerNoSelected = {
   id: null,

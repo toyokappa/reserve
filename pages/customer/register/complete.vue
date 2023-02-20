@@ -18,6 +18,10 @@
 import CompleteHeader from "~/components/presentational/atoms/CompleteHeader.vue";
 import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue";
 
+definePageMeta({
+  middleware: "customer-auth",
+});
+
 const router = useRouter();
 </script>
 

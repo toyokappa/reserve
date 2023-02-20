@@ -39,6 +39,10 @@ import DefaultButton from "~~/components/presentational/atoms/button/Default.vue
 import BlockConfirm from "~/components/presentational/molescules/block/Confirm.vue";
 import BlockConfirmImages from "~/components/presentational/molescules/block/ConfirmImages.vue";
 
+definePageMeta({
+  middleware: "customer-auth",
+});
+
 const register = reactive({
   last_name: "",
   first_name: "",

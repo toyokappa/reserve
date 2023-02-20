@@ -5,8 +5,7 @@ div
 </template>
 
 <script setup>
-import Header from '@/components/presentational/global/CustomerHeader.vue'
+import Header from "@/components/presentational/global/CustomerHeader.vue";
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="sass" scoped></style>

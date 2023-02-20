@@ -25,22 +25,26 @@ BlockCreditCard(
 </template>
 
 <script setup>
-import BlockText from '~/components/presentational/molescules/block/Text.vue'
-import BlockPurchaseHistory from '~/components/presentational/molescules/block/PurchaseHistory.vue'
-import BlockCreditCard from '~/components/presentational/molescules/block/CreditCard.vue'
-import DefaultButton from '~/components/presentational/atoms/button/Default.vue'
-import TotalAmount from '~~/components/presentational/organizms/TotalAmount.vue';
+import BlockText from "~/components/presentational/molescules/block/Text.vue";
+import BlockPurchaseHistory from "~/components/presentational/molescules/block/PurchaseHistory.vue";
+import BlockCreditCard from "~/components/presentational/molescules/block/CreditCard.vue";
+import DefaultButton from "~/components/presentational/atoms/button/Default.vue";
+import TotalAmount from "~~/components/presentational/organizms/TotalAmount.vue";
 
 definePageMeta({
-  middleware: 'customer-auth'
-})
-const { id } = useRoute().params
-const { purchase_history } = await $fetch(`/customer/purchase_histories/${id}`, {
-  baseURL: useRuntimeConfig().public.apiBaseURL,
-  headers: {
-    Authorization: useCustomerAuth().getAuth()
-  },
-})
+  middleware: "customer-auth",
+});
+
+const { id } = useRoute().params;
+const { purchase_history } = await $fetch(
+  `/customer/purchase_histories/${id}`,
+  {
+    baseURL: useRuntimeConfig().public.apiBaseURL,
+    headers: {
+      Authorization: useCustomerAuth().getAuth(),
+    },
+  }
+);
 </script>
 
 <style lang="sass" scoped>

@@ -82,10 +82,10 @@ const createToken = async () => {
   }
 
   emits("submitForm", res.id);
-  // numberField.value.clear();
-  // expiryField.value.clear();
-  // cvcField.value.clear();
-  // resetForm();
+  numberField.value.clear();
+  expiryField.value.clear();
+  cvcField.value.clear();
+  resetForm();
 };
 
 const cardNumberFmt = /^[0-9]{13,16}$/;

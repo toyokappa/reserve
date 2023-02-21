@@ -200,23 +200,28 @@ const completeReserve = async () => {
     };
   }
 
-  await $fetch("/customer/reserve", {
-    baseURL: useRuntimeConfig().public.apiBaseURL,
-    method: "POST",
-    headers: {
-      Authorization: useStaffAuth().getAuth(),
-    },
-    body: {
-      reservation: {
-        program_id: program.id,
-        staff_id: trainer.id,
-        scheduled_date: schedule,
-        required_time: program.required_time,
+  try {
+    await $fetch("/customer/reserve", {
+      baseURL: useRuntimeConfig().public.apiBaseURL,
+      method: "POST",
+      headers: {
+        Authorization: useStaffAuth().getAuth(),
       },
-      ...params,
-    },
-  });
-  useRouter().push("/reserve/complete");
+      body: {
+        reservation: {
+          program_id: program.id,
+          staff_id: trainer.id,
+          scheduled_date: schedule,
+          required_time: program.required_time,
+        },
+        ...params,
+      },
+    });
+    useRouter().push("/reserve/complete");
+  } catch (e) {
+    useNuxtApp().$toast.error(`予約できませんでした(code: ${e.status})`);
+    throw e;
+  }
 };
 </script>
 

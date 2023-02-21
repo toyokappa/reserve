@@ -93,18 +93,23 @@ const confirmRegister = (userInfo) => {
 };
 
 const submitRegister = async () => {
-  await $fetch(`/customer/auth`, {
-    baseURL: useRuntimeConfig().public.apiBaseURL,
-    method: "POST",
-    headers: {
-      Authorization: useCustomerAuth().getAuth(),
-    },
-    body: {
-      sign_up: register,
-      confirm_success_url: "http://localhost:3000/register/complete", // TODO: 環境によって変える
-    },
-  });
-  useRouter().push("/register/sendMail");
+  try {
+    await $fetch(`/customer/auth`, {
+      baseURL: useRuntimeConfig().public.apiBaseURL,
+      method: "POST",
+      headers: {
+        Authorization: useCustomerAuth().getAuth(),
+      },
+      body: {
+        sign_up: register,
+        confirm_success_url: "http://localhost:3000/register/complete", // TODO: 環境によって変える
+      },
+    });
+    useRouter().push("/register/sendMail");
+  } catch (e) {
+    useNuxtApp().$toast.error(`登録できませんでした(code: ${e.status})`);
+    throw e;
+  }
 };
 
 const name = computed(() => `${register.last_name} ${register.first_name}`);

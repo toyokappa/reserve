@@ -22,9 +22,9 @@ const login = (loggedIn, cookie) => async (loginInfo) => {
   }
 }
 
-const logout = (loggedIn, cookie) => async () => {
+const logout = (loggedIn) => () => {
   loggedIn.value = false
-  cookie.value = null
+  useCookie('staff_access_token').value = null
   useNuxtApp().$toast.info('ログアウトしました')
   useRouter().push('/staff/login')
 }
@@ -46,6 +46,6 @@ export const useStaffAuth = () => {
     currentStaff,
     getAuth: getAuth(cookie),
     login: login(loggedIn, cookie),
-    logout: logout(loggedIn, cookie),
+    logout: logout(loggedIn),
   }
 }

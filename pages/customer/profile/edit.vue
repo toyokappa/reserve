@@ -21,7 +21,8 @@ definePageMeta({
   middleware: "customer-auth",
 });
 
-const currentCustomer = useState("currentCustomer");
+const { $toast } = useNuxtApp();
+const { currentCustomer } = useCustomerAuth();
 const updateProfile = async (values) => {
   const formData = new FormData();
   formData.append("profile[image]", values.image);
@@ -32,14 +33,21 @@ const updateProfile = async (values) => {
   formData.append("profile[tel]", values.tel);
   formData.append("profile[postcode]", values.postcode);
   formData.append("profile[address]", values.address);
-  await $fetch(`/customer/profile`, {
-    baseURL: useRuntimeConfig().public.apiBaseURL,
-    method: "PUT",
-    headers: {
-      Authorization: useCustomerAuth().getAuth(),
-    },
-    body: formData,
-  });
-  useRouter().push("/");
+
+  try {
+    await $fetch(`/customer/profile`, {
+      baseURL: useRuntimeConfig().public.apiBaseURL,
+      method: "PUT",
+      headers: {
+        Authorization: useCustomerAuth().getAuth(),
+      },
+      body: formData,
+    });
+    $toast.info("プロフィールを変更しました");
+    useRouter().push("/");
+  } catch (e) {
+    $toast.error(`変更できませんでした(code: ${e.status})`);
+    throw e;
+  }
 };
 </script>

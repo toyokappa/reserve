@@ -35,7 +35,7 @@ form
     required
     @focusout="autocompleteAdress()"
   )
-  InputField.mb-10(
+  InputField.mb-line(
     name="address"
     type="text"
     labelText="住所"

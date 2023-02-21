@@ -14,16 +14,23 @@ definePageMeta({
   middleware: "customer-auth",
 });
 
+const { $toast } = useNuxtApp();
 const updatePassword = async (values) => {
-  await $fetch("/customer/auth/password", {
-    baseURL: useRuntimeConfig().public.apiBaseURL,
-    method: "PATCH",
-    headers: {
-      Authorization: useCustomerAuth().getAuth(),
-    },
-    body: values,
-  });
-  useRouter().push("/");
+  try {
+    await $fetch("/customer/auth/password", {
+      baseURL: useRuntimeConfig().public.apiBaseURL,
+      method: "PATCH",
+      headers: {
+        Authorization: useCustomerAuth().getAuth(),
+      },
+      body: values,
+    });
+    $toast.info("パスワードを変更しました");
+    useRouter().push("/");
+  } catch {
+    $toast.error(`変更できませんでした(code: ${e.status})`);
+    throw e;
+  }
 };
 </script>
 

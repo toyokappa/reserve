@@ -9,12 +9,7 @@ header
 </template>
 
 <script setup>
-const loggedIn = useState("customerLoggedIn");
-const logout = () => {
-  const cookie = useCookie("customer_access_token");
-  cookie.value = null;
-  useRouter().push("/login");
-};
+const { loggedIn, logout } = useCustomerAuth();
 </script>
 
 <style lang="sass" scoped>

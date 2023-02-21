@@ -1,4 +1,5 @@
 const login = (loggedIn, cookie) => async (loginInfo) => {
+  const { $toast } = useNuxtApp()
   try {
     const data = await $fetch('/staff/auth/sign_in', {
       baseURL: useRuntimeConfig().apiBaseURL,
@@ -9,8 +10,14 @@ const login = (loggedIn, cookie) => async (loginInfo) => {
     loggedIn.value = true
 
     const to = useRoute().redirectedFrom?.path || '/staff'
+    $toast.info('ログインしました')
     useRouter().push(to)
   } catch (e) {
+    if (e.status === 401) {
+      $toast.error('正しいログイン情報を入力してください')
+    } else {
+      $toast.error(`ログインに失敗しました(code: ${e.status})`)
+    }
     throw e
   }
 }
@@ -18,6 +25,8 @@ const login = (loggedIn, cookie) => async (loginInfo) => {
 const logout = (loggedIn, cookie) => async () => {
   loggedIn.value = false
   cookie.value = null
+  useNuxtApp().$toast.info('ログアウトしました')
+  useRouter().push('/staff/login')
 }
 
 const getAuth = (cookie) => () => {

@@ -19,6 +19,7 @@
     "date-fns": "^2.29.3",
     "ramda": "^0.28.0",
     "vee-validate": "^4.7.3",
+    "vue3-toastify": "^0.1.0",
     "yubinbango-core2": "^0.6.3"
   }
 }

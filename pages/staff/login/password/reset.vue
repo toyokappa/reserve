@@ -13,23 +13,31 @@ import FormPassword from "~~/components/presentational/organizms/FormPassword.vu
 definePageMeta({
   middleware: "staff-auth",
 });
+
+const { $toast } = useNuxtApp();
 const { query } = useRoute();
 const { token } = query;
 const submitForm = async (values) => {
-  await $fetch(`/staff/auth/password`, {
-    baseURL: useRuntimeConfig().public.apiBaseURL,
-    method: "PUT",
-    headers: {
-      "access-token": query["access-token"],
-      client: query.client,
-      uid: query.uid,
-    },
-    body: {
-      password: values.password,
-      password_confirmation: values.password_confirmation,
-    },
-  });
-  useRouter().push("/staff/login");
+  try {
+    await $fetch(`/staff/auth/password`, {
+      baseURL: useRuntimeConfig().public.apiBaseURL,
+      method: "PUT",
+      headers: {
+        "access-token": query["access-token"],
+        client: query.client,
+        uid: query.uid,
+      },
+      body: {
+        password: values.password,
+        password_confirmation: values.password_confirmation,
+      },
+    });
+    $toast.info("パスワードを再設定しました");
+    useRouter().push("/staff/login");
+  } catch (e) {
+    $toast.error(`再設定できませんでした(code: ${e.status})`);
+    throw e;
+  }
 };
 </script>
 

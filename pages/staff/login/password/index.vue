@@ -26,18 +26,28 @@ definePageMeta({
 });
 const { meta, values } = useForm();
 const submitForm = async () => {
-  await $fetch(`/staff/auth/password`, {
-    baseURL: useRuntimeConfig().public.apiBaseURL,
-    method: "POST",
-    headers: {
-      Authorization: useStaffAuth().getAuth(),
-    },
-    body: {
-      email: values.email,
-      redirect_url: "http://localhost:3000/staff/login/password/reset", // TODO: 環境によって変える
-    },
-  });
-  useRouter().push("/staff/login/password/sendMail");
+  try {
+    await $fetch(`/staff/auth/password`, {
+      baseURL: useRuntimeConfig().public.apiBaseURL,
+      method: "POST",
+      headers: {
+        Authorization: useStaffAuth().getAuth(),
+      },
+      body: {
+        email: values.email,
+        redirect_url: "http://localhost:3000/staff/login/password/reset", // TODO: 環境によって変える
+      },
+    });
+    useRouter().push("/staff/login/password/sendMail");
+  } catch (e) {
+    if (e.status === 404) {
+      // メールの存在を検知されないように正常系と同じ処理をする
+      useRouter().push("/staff/login/password/sendMail");
+    } else {
+      useNuxtApp().$toast.error(`送信できませんでした(code: ${e.status})`);
+      throw e;
+    }
+  }
 };
 </script>
 

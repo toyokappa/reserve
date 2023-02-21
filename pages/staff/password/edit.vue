@@ -7,25 +7,31 @@ FormPassword(
 </template>
 
 <script setup>
-import BlockText from '~/components/presentational/molescules/block/Text.vue'
-import FormPassword from '~~/components/presentational/organizms/FormPassword.vue';
+import BlockText from "~/components/presentational/molescules/block/Text.vue";
+import FormPassword from "~~/components/presentational/organizms/FormPassword.vue";
 
 definePageMeta({
-  middleware: 'staff-auth'
-})
+  middleware: "staff-auth",
+});
 
+const { $toast } = useNuxtApp();
 const updatePassword = async (values) => {
-  await $fetch('/staff/auth/password', {
-    baseURL: useRuntimeConfig().public.apiBaseURL,
-    method: 'PATCH',
-    headers: {
-      Authorization: useStaffAuth().getAuth()
-    },
-    body: values,
-  })
-  useRouter().push('/staff')
-}
+  try {
+    await $fetch("/staff/auth/password", {
+      baseURL: useRuntimeConfig().public.apiBaseURL,
+      method: "PATCH",
+      headers: {
+        Authorization: useStaffAuth().getAuth(),
+      },
+      body: values,
+    });
+    $toast.info("パスワードを変更しました");
+    useRouter().push("/staff");
+  } catch (e) {
+    $toast.error(`変更できませんでした(code: ${e.status})`);
+    throw e;
+  }
+};
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="sass" scoped></style>

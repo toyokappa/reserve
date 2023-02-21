@@ -14,23 +14,30 @@ definePageMeta({
   middleware: "customer-auth",
 });
 
+const { $toast } = useNuxtApp();
 const { query } = useRoute();
 const { token } = query;
 const submitForm = async (values) => {
-  await $fetch(`/customer/auth/password`, {
-    baseURL: useRuntimeConfig().public.apiBaseURL,
-    method: "PUT",
-    headers: {
-      "access-token": query["access-token"],
-      client: query.client,
-      uid: query.uid,
-    },
-    body: {
-      password: values.password,
-      password_confirmation: values.password_confirmation,
-    },
-  });
-  useRouter().push("/login");
+  try {
+    await $fetch(`/customer/auth/password`, {
+      baseURL: useRuntimeConfig().public.apiBaseURL,
+      method: "PUT",
+      headers: {
+        "access-token": query["access-token"],
+        client: query.client,
+        uid: query.uid,
+      },
+      body: {
+        password: values.password,
+        password_confirmation: values.password_confirmation,
+      },
+    });
+    $toast.info("パスワードを再設定しました");
+    useRouter().push("/login");
+  } catch (e) {
+    $toast.error(`再設定できませんでした(code: ${e.status})`);
+    throw e;
+  }
 };
 </script>
 

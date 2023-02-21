@@ -7,9 +7,12 @@ BlockTicket.mb-10(
 )
 BlockText.mb-line 購入金額を確認してください。
 TotalAmount.mb-10(
-  :productItemList="product.product_item_list"
+  :productItemList="productItemList"
   :totalAmount="totalAmount"
 )
+template(v-if="product.has_usable_coupons")
+  BlockText.mb-line クーポンをお持ちの方は入力してください。
+  FormCoupon.mb-10(@useCoupon="useCoupon")
 template(v-if="card_info")
   BlockText.mb-line カード情報を確認してください。
   BlockCreditCard.mb-10(
@@ -37,6 +40,7 @@ import TotalAmount from "~~/components/presentational/organizms/TotalAmount.vue"
 import DefaultButton from "~~/components/presentational/atoms/button/Default.vue";
 import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue";
 import BlockCreditCard from "~/components/presentational/molescules/block/CreditCard.vue";
+import FormCoupon from "~~/components/presentational/organizms/FormCoupon.vue";
 import FormCreditCard from "~~/components/presentational/organizms/FormCreditCard.vue";
 
 definePageMeta({
@@ -51,10 +55,30 @@ const { product, card_info } = await $fetch(`/customer/purchases/${id}`, {
   },
 });
 
-const totalAmount = product.product_item_list.reduce(
-  (sum, item) => sum + item.amount,
-  0
-);
+const coupon = ref(null);
+const productItemList = computed(() => {
+  if (!coupon.value) return product.product_item_list;
+  return product.product_item_list.concat(coupon.value);
+});
+
+const totalAmount = computed(() => {
+  return productItemList.value.reduce((sum, item) => sum + item.amount, 0);
+});
+
+const useCoupon = async (couponCode) => {
+  const data = await $fetch(`/customer/coupon`, {
+    baseURL: useRuntimeConfig().public.apiBaseURL,
+    headers: {
+      Authorization: useCustomerAuth().getAuth(),
+    },
+    params: {
+      product_set_id: product.id,
+      code: couponCode,
+    },
+  });
+  coupon.value = data.coupon;
+};
+
 const purchaseTicket = async (token = null) => {
   await $fetch(`/customer/purchases`, {
     baseURL: useRuntimeConfig().public.apiBaseURL,
@@ -65,6 +89,7 @@ const purchaseTicket = async (token = null) => {
     body: {
       purchase: {
         product_set_id: product.id,
+        coupon_id: coupon.value?.id,
         card_token: token,
       },
     },

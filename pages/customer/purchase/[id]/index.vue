@@ -47,6 +47,7 @@ definePageMeta({
   middleware: "customer-auth",
 });
 
+const { $toast } = useNuxtApp();
 const { id } = useRoute().params;
 const { product, card_info } = await $fetch(`/customer/purchases/${id}`, {
   baseURL: useRuntimeConfig().public.apiBaseURL,
@@ -66,35 +67,56 @@ const totalAmount = computed(() => {
 });
 
 const useCoupon = async (couponCode) => {
-  const data = await $fetch(`/customer/coupon`, {
-    baseURL: useRuntimeConfig().public.apiBaseURL,
-    headers: {
-      Authorization: useCustomerAuth().getAuth(),
-    },
-    params: {
-      product_set_id: product.id,
-      code: couponCode,
-    },
-  });
-  coupon.value = data.coupon;
+  try {
+    const data = await $fetch(`/customer/coupon`, {
+      baseURL: useRuntimeConfig().public.apiBaseURL,
+      headers: {
+        Authorization: useCustomerAuth().getAuth(),
+      },
+      params: {
+        product_set_id: product.id,
+        code: couponCode,
+      },
+    });
+    coupon.value = data.coupon;
+    $toast.info("クーポンを適用しました");
+  } catch (e) {
+    if (e.status === 404) {
+      $toast.error("入力したクーポンコードはご利用いただけません");
+      coupon.value = null;
+    } else {
+      $toast.error(`適用できませんでした(code: ${e.status})`);
+      throw e;
+    }
+  }
 };
 
 const purchaseTicket = async (token = null) => {
-  await $fetch(`/customer/purchases`, {
-    baseURL: useRuntimeConfig().public.apiBaseURL,
-    method: "POST",
-    headers: {
-      Authorization: useCustomerAuth().getAuth(),
-    },
-    body: {
-      purchase: {
-        product_set_id: product.id,
-        coupon_id: coupon.value?.id,
-        card_token: token,
+  try {
+    const { error } = await $fetch(`/customer/purchases`, {
+      baseURL: useRuntimeConfig().public.apiBaseURL,
+      method: "POST",
+      headers: {
+        Authorization: useCustomerAuth().getAuth(),
       },
-    },
-  });
-  router.push("/purchase/complete");
+      body: {
+        purchase: {
+          product_set_id: product.id,
+          coupon_id: coupon.value?.id,
+          card_token: token,
+        },
+      },
+    });
+    if (error) {
+      $toast.error(error.message);
+      return console.error(error.message);
+    }
+
+    router.push("/purchase/complete");
+  } catch (e) {
+    $toast.error(`購入できませんでした(code: ${e.status})`);
+    throw e;
+  }
 };
 const router = useRouter();
 </script>

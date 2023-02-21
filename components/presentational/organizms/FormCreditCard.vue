@@ -76,13 +76,16 @@ const emits = defineEmits();
 const createToken = async () => {
   const options = { card: { name: values.cardOwner } };
   const res = await $payjp.createToken(numberField.value, options);
-  if (res.error) return console.error(res.error.message);
+  if (res.error) {
+    useNuxtApp().$toast.error(res.error.message);
+    return console.error(res.error.message);
+  }
 
   emits("submitForm", res.id);
-  numberField.value.clear();
-  expiryField.value.clear();
-  cvcField.value.clear();
-  resetForm();
+  // numberField.value.clear();
+  // expiryField.value.clear();
+  // cvcField.value.clear();
+  // resetForm();
 };
 
 const cardNumberFmt = /^[0-9]{13,16}$/;

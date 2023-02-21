@@ -27,7 +27,7 @@ const updatePassword = async (values) => {
     });
     $toast.info("パスワードを変更しました");
     useRouter().push("/");
-  } catch {
+  } catch (e) {
     $toast.error(`変更できませんでした(code: ${e.status})`);
     throw e;
   }

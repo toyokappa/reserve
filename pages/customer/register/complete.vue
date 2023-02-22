@@ -10,7 +10,7 @@
     p マイページへ移動してください。
   .button-area
     PrimaryButton(
-      @click="userRouter().push('/')"
+      @click="useRouter().push('/')"
     ) マイページへ移動する
 </template>
 

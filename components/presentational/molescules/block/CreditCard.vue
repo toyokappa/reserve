@@ -2,7 +2,7 @@
 .credit-card-block
   .row.mb-5
     .number ****-****-****-{{ number }}
-    img.brand(:src="`/images/card-${brand}.svg`")
+    img.brand(:src="`/images/card-${brand.toLowerCase()}.svg`")
   .row.mb-5
     .label 有効期限
     .value {{ expiration }}

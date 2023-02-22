@@ -92,17 +92,18 @@ const confirmRegister = (userInfo) => {
   moveScreen("confirm");
 };
 
+const { appHost, apiBaseURL } = useRuntimeConfig().public;
 const submitRegister = async () => {
   try {
     await $fetch(`/customer/auth`, {
-      baseURL: useRuntimeConfig().public.apiBaseURL,
+      baseURL: apiBaseURL,
       method: "POST",
       headers: {
         Authorization: useCustomerAuth().getAuth(),
       },
       body: {
         sign_up: register,
-        confirm_success_url: "http://localhost:3000/register/complete", // TODO: 環境によって変える
+        confirm_success_url: `${appHost}/register/complete`,
       },
     });
     useRouter().push("/register/sendMail");

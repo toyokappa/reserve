@@ -25,17 +25,18 @@ definePageMeta({
   middleware: "staff-auth",
 });
 const { meta, values } = useForm();
+const { appHost, apiBaseURL } = useRuntimeConfig().public;
 const submitForm = async () => {
   try {
     await $fetch(`/staff/auth/password`, {
-      baseURL: useRuntimeConfig().public.apiBaseURL,
+      baseURL: apiBaseURL,
       method: "POST",
       headers: {
         Authorization: useStaffAuth().getAuth(),
       },
       body: {
         email: values.email,
-        redirect_url: "http://localhost:3000/staff/login/password/reset", // TODO: 環境によって変える
+        redirect_url: `${appHost}/staff/login/password/reset`,
       },
     });
     useRouter().push("/staff/login/password/sendMail");

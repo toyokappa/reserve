@@ -27,17 +27,18 @@ definePageMeta({
   middleware: "customer-auth",
 });
 
+const { appHost, apiBaseURL } = useRuntimeConfig().public;
 const submitForm = async () => {
   try {
     await $fetch(`/customer/auth/password`, {
-      baseURL: useRuntimeConfig().public.apiBaseURL,
+      baseURL: apiBaseURL,
       method: "POST",
       headers: {
         Authorization: useCustomerAuth().getAuth(),
       },
       body: {
         email: values.email,
-        redirect_url: "http://localhost:3000/login/password/reset", // TODO: 環境によって変える
+        redirect_url: `${appHost}/login/password/reset`,
       },
     });
     useRouter().push("/login/password/sendMail");

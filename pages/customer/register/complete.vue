@@ -10,7 +10,7 @@
     p マイページへ移動してください。
   .button-area
     PrimaryButton(
-      @click="router.push('/')"
+      @click="userRouter().push('/')"
     ) マイページへ移動する
 </template>
 
@@ -21,8 +21,6 @@ import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue
 definePageMeta({
   middleware: "customer-auth",
 });
-
-const router = useRouter();
 </script>
 
 <style lang="sass" scoped></style>

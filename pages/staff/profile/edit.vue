@@ -18,9 +18,10 @@ definePageMeta({
 
 const { $toast } = useNuxtApp();
 const currentStaff = useState("currentStaff");
-const updateProfile = async (values) => {
+const updateProfile = async (event) => {
+  const { values, imageChanged } = event;
   const formData = new FormData();
-  formData.append("profile[image]", values.image);
+  if (imageChanged.value) formData.append("profile[image]", values.image);
   formData.append("profile[display_name]", values.name);
   formData.append("profile[comment]", values.comment);
 

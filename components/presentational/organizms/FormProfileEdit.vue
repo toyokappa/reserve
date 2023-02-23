@@ -45,6 +45,8 @@ form
   InputImage.mb-10(
     name="image"
     labelText="プロフィール画像"
+    :imageChanged="imageChanged"
+    @onImageChange="onImageChange"
   )
   .button-area
     PrimaryButton.mb-10(
@@ -73,9 +75,14 @@ const props = defineProps({
   image: [String, null],
 });
 
+const imageChanged = ref(false);
 const { meta, values } = useForm({
   initialValues: props,
 });
+
+const onImageChange = (bool) => {
+  imageChanged.value = bool;
+};
 
 const autocompleteAdress = () => {
   new YubinBangoCore(values.postcode, (value) => {
@@ -87,6 +94,6 @@ const autocompleteAdress = () => {
 
 const emits = defineEmits();
 const updateProfile = () => {
-  emits("updateProfile", values);
+  emits("updateProfile", { values, imageChanged });
 };
 </script>

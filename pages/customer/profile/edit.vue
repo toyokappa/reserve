@@ -23,9 +23,10 @@ definePageMeta({
 
 const { $toast } = useNuxtApp();
 const { currentCustomer } = useCustomerAuth();
-const updateProfile = async (values) => {
+const updateProfile = async (event) => {
+  const { values, imageChanged } = event;
   const formData = new FormData();
-  formData.append("profile[image]", values.image);
+  if (imageChanged.value) formData.append("profile[image]", values.image);
   formData.append("profile[first_name]", values.firstName);
   formData.append("profile[last_name]", values.lastName);
   formData.append("profile[first_name_kana]", values.firstNameKana);

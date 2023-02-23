@@ -30,11 +30,14 @@ const props = defineProps({
   type: String,
   labelText: String,
   required: Boolean,
+  imageChanged: Boolean,
 });
 
 const { name, type, labelText, required } = props;
 
 const validation = (value) => {
+  if (!props.imageChanged) return true;
+
   if (value && required) {
     return `${labelText}は必須項目です`;
   }
@@ -51,16 +54,6 @@ const validation = (value) => {
 
 const { value, errorMessage } = useField(name, validation);
 
-onMounted(async () => {
-  if (!value.value) return;
-
-  const blob = await $fetch(value.value);
-  value.value = await new File(
-    [blob],
-    value.value.match(".+/(.+?)([\?#;].*)?$")[1]
-  );
-});
-
 const names = {};
 names[name] = labelText;
 configure({
@@ -72,9 +65,11 @@ configure({
 });
 
 const input = ref();
+const emits = defineEmits();
 const onImageUploaded = (e) => {
   const image = e.target.files[0];
   value.value = image;
+  emits("onImageChange", true);
 };
 </script>
 

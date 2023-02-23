@@ -10,6 +10,8 @@ form
   InputImage.mb-line(
     name="image"
     labelText="プロフィール写真"
+    :imageChanged="imageChanged"
+    @onImageChange="onImageChange"
   )
   Textarea.mb-10(
     name="comment"
@@ -36,12 +38,17 @@ const props = defineProps({
   comment: String,
 });
 
+const imageChanged = ref(false);
 const { meta, values } = useForm({
   initialValues: props,
 });
 
+const onImageChange = (bool) => {
+  imageChanged.value = bool;
+};
+
 const emits = defineEmits();
 const updateProfile = () => {
-  emits("updateProfile", values);
+  emits("updateProfile", { values, imageChanged });
 };
 </script>

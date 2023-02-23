@@ -76,6 +76,9 @@ const assign = async (staffId) => {
   }
 };
 const unassign = async (staffId) => {
+  const checkUnassign = await confirm("本当に解除しますか？");
+  if (!checkUnassign) return;
+
   try {
     useLoad().start();
     const data = await $fetch("/admin/program_staff", {

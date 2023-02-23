@@ -47,17 +47,25 @@ const { reservation } = await $fetch(`/customer/schedules/${id}`, {
     Authorization: useCustomerAuth().getAuth(),
   },
 });
+
+const { $toast } = useNuxtApp();
 const cancelScheudle = async () => {
   const checkCancel = await confirm("本当に予約をキャンセルしますか？");
   if (!checkCancel) return;
-  await $fetch(`/customer/schedules/${id}`, {
-    baseURL: useRuntimeConfig().public.apiBaseURL,
-    method: "DELETE",
-    headers: {
-      Authorization: useCustomerAuth().getAuth(),
-    },
-  });
-  router.push("/schedule");
+  try {
+    await $fetch(`/customer/schedules/${id}`, {
+      baseURL: useRuntimeConfig().public.apiBaseURL,
+      method: "DELETE",
+      headers: {
+        Authorization: useCustomerAuth().getAuth(),
+      },
+    });
+    $toast.info("予約をキャンセルしました");
+    router.push("/schedule");
+  } catch (e) {
+    $toast.error(`キャンセルできませんでした(code: ${e.status})`);
+    throw e;
+  }
 };
 </script>
 

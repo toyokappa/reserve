@@ -26,6 +26,8 @@ const props = defineProps({
   .thumbnail
     width: 40px
     height: 40px
+    object-fit: cover
+    object-position: center center
     border-radius: 50%
     background-color: $base
     margin-right: 10px

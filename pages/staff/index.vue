@@ -16,6 +16,7 @@ BlockMenu.mb-line(
 import BlockProfile from "~/components/presentational/molescules/block/Profile.vue";
 import BlockMenu from "~/components/presentational/molescules/block/Menu.vue";
 
+import qrcodeIcon from "~/assets/images/menu-qrcode.svg";
 import scheduleIcon from "~/assets/images/menu-schedule.svg";
 import shiftIcon from "~/assets/images/menu-shift.svg";
 import profileIcon from "~/assets/images/menu-profile.svg";
@@ -27,6 +28,12 @@ definePageMeta({
 
 const currentStaff = useState("currentStaff");
 const mypageMenu = [
+  {
+    title: "接客",
+    menuList: [
+      { name: "各種QRコード", link: "/staff/qrcode", icon: qrcodeIcon },
+    ],
+  },
   {
     title: "管理",
     menuList: [

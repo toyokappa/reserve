@@ -6,6 +6,7 @@ BlockProgram.mb-line(
   :time="program.required_time"
   :name="program.name"
   :hint="program.description"
+  @click="useRouter().push(`/admin/program/${program.id}`)"
 )
 </template>
 

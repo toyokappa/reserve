@@ -38,6 +38,7 @@ template(v-else-if="reserve.screen === 'schedule'")
   BlockTrainerSelected.mb-10(
     :name="reserve.trainer.name"
     :image="reserve.trainer.image.url"
+    forSelect
     @click.native="moveScreen('trainer')"
   )
   BlockText.mb-line ご希望の日程を選択してください。
@@ -55,6 +56,7 @@ template(v-else-if="reserve.screen === 'userInput'")
   BlockTrainerSelected.mb-line(
     :name="reserve.trainer.name"
     :image="reserve.trainer.image.url"
+    forSelect
     @click.native="moveScreen('trainer')"
   )
   BlockScheduleSelected.mb-10(
@@ -91,6 +93,7 @@ template(v-else-if="reserve.screen === 'confirm'")
   BlockTrainerSelected.mb-line(
     :name="reserve.trainer.name"
     :image="reserve.trainer.image.url"
+    forSelect
     @click.native="moveScreen('trainer')"
   )
   BlockScheduleSelected.mb-line(

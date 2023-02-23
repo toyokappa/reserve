@@ -4,10 +4,16 @@ NuxtLayout(:name="layoutName")
 </template>
 
 <script setup>
-const $route = useRoute()
+const route = useRoute();
 const layoutName = computed(() => {
-  return $route.name.startsWith('customer') ? 'customer' : 'staff'
-})
+  if (route.name.startsWith("customer")) {
+    return "customer";
+  } else if (route.name.startsWith("staff")) {
+    return "staff";
+  } else if (route.name.startsWith("admin")) {
+    return "admin";
+  }
+});
 </script>
 
 <style lang="sass">

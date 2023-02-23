@@ -44,6 +44,9 @@ a
   margin-bottom: 20px
 .mb-30
   margin-bottom: 30px
+.empty-state
+  font-size: 14px
+  color: $hint
 .button-area
   padding: 0 20px
 .complete-page

@@ -1,6 +1,7 @@
 <template lang="pug">
 BlockText.mb-line 購入履歴
 BlockPurchaseHistory.mb-line(
+  v-if="purchase_history_list.length > 0"
   v-for="history in purchase_history_list"
   :key="history.id"
   :productName="history.product_set_name"
@@ -9,6 +10,8 @@ BlockPurchaseHistory.mb-line(
   :totalAmount="history.total_amount"
   @click="useRouter().push(`/purchaseHistory/${history.id}`)"
 )
+BlockText(v-else)
+  .empty-state 購入履歴はありません。
 </template>
 
 <script setup>

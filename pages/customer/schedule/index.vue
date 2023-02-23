@@ -1,6 +1,7 @@
 <template lang="pug">
 BlockText.mb-line 予約スケジュール
 BlockReservation.mb-line(
+  v-if="reservation_list.lengh > 0"
   v-for="reservation in reservation_list"
   :key="reservation.id"
   :schedule="`${reservation.scheduled_date} ${reservation.scheduled_time}`"
@@ -9,6 +10,8 @@ BlockReservation.mb-line(
   :trainer="reservation.trainer"
   @click="useRouter().push(`/schedule/${reservation.id}`)"
 )
+BlockText(v-else)
+  .empty-state 予定している予約ありません。
 </template>
 
 <script setup>

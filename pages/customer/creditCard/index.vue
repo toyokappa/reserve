@@ -7,10 +7,12 @@ BlockCreditCard.mb-10(
   :expiration="in_use.expiration"
   :owner="in_use.owner"
 )
+BlockText.mb-10(v-else)
+  .empty-state 利用中のカードはありません。
 BlockText.mb-line 登録済みのカード
 .mb-10
   BlockCreditCard.mb-line(
-    v-if="registered"
+    v-if="registered.length > 0"
     v-for="card in registered"
     :key="card.id"
     :id="card.id"
@@ -22,6 +24,8 @@ BlockText.mb-line 登録済みのカード
     @changeMainCard="changeMainCard"
     @deleteCard="deleteCard"
   )
+  BlockText(v-else)
+    .empty-state 登録済みのカードはありません。
 BlockText.mb-line 追加したいカード情報を入力してください。
 FormCreditCard(
   buttonText="新しくカードを追加する"

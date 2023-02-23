@@ -78,8 +78,4 @@ const switchWeek = async (startDate) => {
 };
 </script>
 
-<style lang="sass" scoped>
-.empty-state
-  font-size: 14px
-  color: $hint
-</style>
+<style lang="sass" scoped></style>

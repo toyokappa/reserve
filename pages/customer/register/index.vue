@@ -95,6 +95,7 @@ const confirmRegister = (userInfo) => {
 const { appHost, apiBaseURL } = useRuntimeConfig().public;
 const submitRegister = async () => {
   try {
+    useLoad().start();
     await $fetch(`/customer/auth`, {
       baseURL: apiBaseURL,
       method: "POST",
@@ -110,6 +111,8 @@ const submitRegister = async () => {
   } catch (e) {
     useNuxtApp().$toast.error(`登録できませんでした(code: ${e.status})`);
     throw e;
+  } finally {
+    useLoad().finish();
   }
 };
 

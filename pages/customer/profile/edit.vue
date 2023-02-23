@@ -24,6 +24,7 @@ definePageMeta({
 const { $toast } = useNuxtApp();
 const { currentCustomer } = useCustomerAuth();
 const updateProfile = async (event) => {
+  useLoad().start();
   const { values, imageChanged } = event;
   const formData = new FormData();
   if (imageChanged.value) formData.append("profile[image]", values.image);
@@ -49,6 +50,8 @@ const updateProfile = async (event) => {
   } catch (e) {
     $toast.error(`変更できませんでした(code: ${e.status})`);
     throw e;
+  } finally {
+    useLoad().finish();
   }
 };
 </script>

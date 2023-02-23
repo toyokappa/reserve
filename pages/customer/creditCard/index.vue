@@ -56,6 +56,7 @@ const { in_use, registered } = toRefs(data);
 const { $toast } = useNuxtApp();
 const addCard = async (token) => {
   try {
+    useLoad().start();
     const { new_card } = await $fetch("/customer/card", {
       baseURL: useRuntimeConfig().public.apiBaseURL,
       method: "POST",
@@ -78,11 +79,14 @@ const addCard = async (token) => {
   } catch (e) {
     $toast.error(`追加できませんでした(code: ${e.status})`);
     throw e;
+  } finally {
+    useLoad().finish();
   }
 };
 
 const changeMainCard = async (id) => {
   try {
+    useLoad().start();
     const { new_registered } = await $fetch("/customer/card", {
       baseURL: useRuntimeConfig().public.apiBaseURL,
       method: "PUT",
@@ -102,6 +106,8 @@ const changeMainCard = async (id) => {
   } catch (e) {
     $toast.error(`変更できませんでした(code: ${e.status})`);
     throw e;
+  } finally {
+    useLoad().finish();
   }
 };
 
@@ -110,6 +116,7 @@ const deleteCard = async (id) => {
   if (!deleteCheck) return;
 
   try {
+    useLoad().start();
     await $fetch("/customer/card", {
       baseURL: useRuntimeConfig().public.apiBaseURL,
       method: "DELETE",
@@ -128,6 +135,8 @@ const deleteCard = async (id) => {
   } catch (e) {
     $toast.info(`削除できませんでした(code: ${e.status})`);
     throw e;
+  } finally {
+    useLoad().finish();
   }
 };
 </script>

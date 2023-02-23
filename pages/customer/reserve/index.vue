@@ -180,6 +180,7 @@ const confirmReserve = (userInfo) => {
 };
 
 const completeReserve = async () => {
+  useLoad().start();
   const { schedule, program, trainer } = reserve;
   let params;
   if (loggedIn.value) {
@@ -221,6 +222,8 @@ const completeReserve = async () => {
   } catch (e) {
     useNuxtApp().$toast.error(`予約できませんでした(code: ${e.status})`);
     throw e;
+  } finally {
+    useLoad().finish();
   }
 };
 </script>

@@ -28,6 +28,7 @@ const { meta, values } = useForm();
 const { appHost, apiBaseURL } = useRuntimeConfig().public;
 const submitForm = async () => {
   try {
+    useLoad().start();
     await $fetch(`/staff/auth/password`, {
       baseURL: apiBaseURL,
       method: "POST",
@@ -48,6 +49,8 @@ const submitForm = async () => {
       useNuxtApp().$toast.error(`送信できませんでした(code: ${e.status})`);
       throw e;
     }
+  } finally {
+    useLoad().finish();
   }
 };
 </script>

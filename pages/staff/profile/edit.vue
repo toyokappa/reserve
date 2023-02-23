@@ -19,13 +19,14 @@ definePageMeta({
 const { $toast } = useNuxtApp();
 const currentStaff = useState("currentStaff");
 const updateProfile = async (event) => {
-  const { values, imageChanged } = event;
-  const formData = new FormData();
-  if (imageChanged.value) formData.append("profile[image]", values.image);
-  formData.append("profile[display_name]", values.name);
-  formData.append("profile[comment]", values.comment);
-
   try {
+    useLoad().start();
+    const { values, imageChanged } = event;
+    const formData = new FormData();
+    if (imageChanged.value) formData.append("profile[image]", values.image);
+    formData.append("profile[display_name]", values.name);
+    formData.append("profile[comment]", values.comment);
+
     await $fetch(`/staff/profile`, {
       baseURL: useRuntimeConfig().public.apiBaseURL,
       method: "PUT",
@@ -39,6 +40,8 @@ const updateProfile = async (event) => {
   } catch (e) {
     $toast.error(`変更できませんでした(code: ${e.status})`);
     throw e;
+  } finally {
+    useLoad().finish();
   }
 };
 </script>

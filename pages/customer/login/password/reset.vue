@@ -19,6 +19,7 @@ const { query } = useRoute();
 const { token } = query;
 const submitForm = async (values) => {
   try {
+    useLoad().start();
     await $fetch(`/customer/auth/password`, {
       baseURL: useRuntimeConfig().public.apiBaseURL,
       method: "PUT",
@@ -37,6 +38,8 @@ const submitForm = async (values) => {
   } catch (e) {
     $toast.error(`再設定できませんでした(code: ${e.status})`);
     throw e;
+  } finally {
+    useLoad().finish();
   }
 };
 </script>

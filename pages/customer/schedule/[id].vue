@@ -52,7 +52,9 @@ const { $toast } = useNuxtApp();
 const cancelScheudle = async () => {
   const checkCancel = await confirm("本当に予約をキャンセルしますか？");
   if (!checkCancel) return;
+
   try {
+    useLoad().start();
     await $fetch(`/customer/schedules/${id}`, {
       baseURL: useRuntimeConfig().public.apiBaseURL,
       method: "DELETE",
@@ -65,6 +67,8 @@ const cancelScheudle = async () => {
   } catch (e) {
     $toast.error(`キャンセルできませんでした(code: ${e.status})`);
     throw e;
+  } finally {
+    useLoad().finish();
   }
 };
 </script>

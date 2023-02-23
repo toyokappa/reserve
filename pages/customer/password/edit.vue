@@ -17,6 +17,7 @@ definePageMeta({
 const { $toast } = useNuxtApp();
 const updatePassword = async (values) => {
   try {
+    useLoad().start();
     await $fetch("/customer/auth/password", {
       baseURL: useRuntimeConfig().public.apiBaseURL,
       method: "PATCH",
@@ -30,6 +31,8 @@ const updatePassword = async (values) => {
   } catch (e) {
     $toast.error(`変更できませんでした(code: ${e.status})`);
     throw e;
+  } finally {
+    useLoad().finish();
   }
 };
 </script>

@@ -127,6 +127,7 @@ const toggleShift = (e) => {
 const { $toast } = useNuxtApp();
 const submitShift = async () => {
   try {
+    useLoad().start();
     await $fetch("/staff/shift", {
       baseURL: useRuntimeConfig().public.apiBaseURL,
       method: "PUT",
@@ -144,6 +145,8 @@ const submitShift = async () => {
   } catch (e) {
     $toast.error(`更新できませんでした(code: ${e.status})`);
     throw e;
+  } finally {
+    useLoad().finish();
   }
 };
 </script>

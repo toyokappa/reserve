@@ -1,6 +1,7 @@
 const login = (loggedIn, cookie) => async (loginInfo) => {
   const { $toast } = useNuxtApp()
   try {
+    useLoad().start()
     const data = await $fetch('/customer/auth/sign_in', {
       baseURL: useRuntimeConfig().apiBaseURL,
       method: 'POST',
@@ -19,6 +20,8 @@ const login = (loggedIn, cookie) => async (loginInfo) => {
       $toast.error(`ログインに失敗しました(code: ${e.status})`)
     }
     throw e
+  } finally {
+    useLoad().finish()
   }
 }
 

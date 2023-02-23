@@ -68,6 +68,7 @@ const totalAmount = computed(() => {
 
 const useCoupon = async (couponCode) => {
   try {
+    useLoad().start();
     const data = await $fetch(`/customer/coupon`, {
       baseURL: useRuntimeConfig().public.apiBaseURL,
       headers: {
@@ -88,11 +89,14 @@ const useCoupon = async (couponCode) => {
       $toast.error(`適用できませんでした(code: ${e.status})`);
       throw e;
     }
+  } finally {
+    useLoad().finish();
   }
 };
 
 const purchaseTicket = async (token = null) => {
   try {
+    useLoad().start();
     const { error } = await $fetch(`/customer/purchases`, {
       baseURL: useRuntimeConfig().public.apiBaseURL,
       method: "POST",
@@ -109,6 +113,7 @@ const purchaseTicket = async (token = null) => {
     });
     if (error) {
       $toast.error(error.message);
+      useLoad().finish();
       return console.error(error.message);
     }
 
@@ -116,6 +121,8 @@ const purchaseTicket = async (token = null) => {
   } catch (e) {
     $toast.error(`購入できませんでした(code: ${e.status})`);
     throw e;
+  } finally {
+    useLoad().finish();
   }
 };
 const router = useRouter();

@@ -31,7 +31,9 @@ export default defineNuxtConfig({
     public: {
       appHost: process.env.APP_HOST,
       apiBaseURL: process.env.API_BASE_URL,
-      payjpApiToken: process.env.PAYJP_API_TOKEN
+      apiBasicUser: process.env.API_BASIC_USER,
+      apiBasicPass: process.env.API_BASIC_PASS,
+      payjpApiToken: process.env.PAYJP_API_TOKEN,
     }
   }
 })

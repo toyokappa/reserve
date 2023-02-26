@@ -20,6 +20,7 @@
     "qrcode-vue3": "^1.4.17",
     "ramda": "^0.28.0",
     "vee-validate": "^4.7.3",
+    "vue-gtag": "2",
     "vue3-toastify": "^0.1.0",
     "yubinbango-core2": "^0.6.3"
   }

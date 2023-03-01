@@ -8,7 +8,7 @@
 const props = defineProps({
   date: String,
   day: String,
-})
+});
 </script>
 
 <style lang="sass" scoped>

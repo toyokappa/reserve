@@ -7,25 +7,25 @@
 <script setup>
 const props = defineProps({
   state: String,
-})
+});
 
 const stateSymbol = computed(() => {
-  let symbol
-  switch(props.state) {
-    case 'ok':
-    case 'work':
-    case 'lock':
-      symbol = '○'
-      break
-    case 'ng':
-      symbol = '-'
-      break
-    case 'rest':
-      symbol = '×'
-      break
+  let symbol;
+  switch (props.state) {
+    case "ok":
+    case "work":
+    case "lock":
+      symbol = "○";
+      break;
+    case "ng":
+      symbol = "-";
+      break;
+    case "rest":
+      symbol = "×";
+      break;
   }
-  return symbol
-})
+  return symbol;
+});
 </script>
 
 <style lang="sass" scoped>

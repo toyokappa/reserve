@@ -7,10 +7,10 @@
   )
   .calendar-header.mb-line
     .column-title.black 開始時間
-    BlockCalendarDate.ms-line(v-for="column in dateColumns" :key="column.date" :date="column.date" :day="column.day")
+    BlockCalendarDate.column-item.ms-line(v-for="column in dateColumns" :key="column.date" :date="column.date" :day="column.day")
   .calendar-body.mb-line(v-for="(_d, stateIndex) in schedule[0].state_list" :key="stateIndex")
     .column-title {{ calcHour(stateIndex) }}
-    BlockCalendarState.ms-line(
+    BlockCalendarState.column-item.ms-line(
       v-for="(day, dateIndex) in selectedSchedule"
       :key="day.date + dateIndex"
       :state="day.state_list[stateIndex]"
@@ -167,4 +167,11 @@ const submitShift = async () => {
       &.black
         color: $white
         background-color: $dark
+    @include pc
+      .column-item, .column-title
+        width: 100%
+      .column-title
+        flex-grow: 0
+      .column-item
+        aspect-ratio: auto
 </style>

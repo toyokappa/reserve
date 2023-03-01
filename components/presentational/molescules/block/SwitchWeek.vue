@@ -13,23 +13,23 @@
 </template>
 
 <script setup>
-import { add, format, isToday, startOfToday, subWeeks } from 'date-fns'
-import BlockText from '~/components/presentational/molescules/block/Text.vue'
+import { add, format, isToday, startOfToday, subWeeks } from "date-fns";
+import BlockText from "~/components/presentational/molescules/block/Text.vue";
 
 const props = defineProps({
   start: Date,
   end: Date,
-})
+});
 
-const { start, end } = toRefs(props)
-const startDate = computed(() => format(start.value, 'M/d'))
-const endDate = computed(() => format(end.value, 'M/d'))
-const isThisWeek = computed(() => isToday(start.value))
-const prevWeek = computed(() => subWeeks(start.value, 1))
-const nextWeek = computed(() => add(start.value, { days: 7 }))
-const today = computed(() => startOfToday())
+const { start, end } = toRefs(props);
+const startDate = computed(() => format(start.value, "M/d"));
+const endDate = computed(() => format(end.value, "M/d"));
+const isThisWeek = computed(() => isToday(start.value));
+const prevWeek = computed(() => subWeeks(start.value, 1));
+const nextWeek = computed(() => add(start.value, { days: 7 }));
+const today = computed(() => startOfToday());
 
-const emits = defineEmits()
+const emits = defineEmits();
 </script>
 
 <style lang="sass" scoped>
@@ -49,6 +49,8 @@ const emits = defineEmits()
     display: flex
     align-items: center
     justify-content: center
+    @include pc
+      width: 50%
     .icon
       margin-right: 3px
       width: 16px

@@ -1,5 +1,5 @@
 <template lang="pug">
-.trainer-block
+.person-block
   img.thumbnail(:src="image || noUserIcon")
   .profile
     .name {{ name }}
@@ -17,7 +17,7 @@ const props = defineProps({
 </script>
 
 <style lang="sass" scoped>
-.trainer-block
+.person-block
   background-color: $white
   padding: $block-padding
   display: flex

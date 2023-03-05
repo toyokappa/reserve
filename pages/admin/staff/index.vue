@@ -13,7 +13,7 @@ BlockTrainer.mb-line(
 
 <script setup>
 import BlockText from "~/components/presentational/molescules/block/Text.vue";
-import BlockTrainer from "~/components/presentational/molescules/block/Trainer.vue";
+import BlockTrainer from "~/components/presentational/molescules/block/Person.vue";
 import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue";
 
 const { trainer_list } = await $fetch("/admin/staffs", {

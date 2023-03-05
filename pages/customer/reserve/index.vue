@@ -115,7 +115,7 @@ import FormReserveNoAccount from "~~/components/presentational/organizms/FormRes
 import BlockText from "~/components/presentational/molescules/block/Text.vue";
 import BlockProgram from "~/components/presentational/molescules/block/Program.vue";
 import BlockProgramSelected from "~/components/presentational/molescules/block/ProgramSelected.vue";
-import BlockTrainer from "~/components/presentational/molescules/block/Trainer.vue";
+import BlockTrainer from "~/components/presentational/molescules/block/Person.vue";
 import BlockTrainerSelected from "~/components/presentational/molescules/block/TrainerSelected.vue";
 import BlockScheduleSelected from "~/components/presentational/molescules/block/ScheduleSelected.vue";
 import BlockConfirm from "~/components/presentational/molescules/block/Confirm.vue";

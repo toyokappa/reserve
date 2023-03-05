@@ -10,6 +10,7 @@
 import noUserIcon from "@/assets/images/no-user-icon.png";
 
 const props = defineProps({
+  id: Number,
   image: String,
   name: String,
   comment: String,

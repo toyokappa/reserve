@@ -15,7 +15,8 @@ form
     name1="lastNameKana" name2="firstNameKana"
     placeholder1="せい" placeholder2="めい"
     type1="text" type2="text"
-    validation1="required" validation2="required"
+    :validation1="{ required: true, regex: kanaFmt }"
+    :validation2="{ required: true, regex: kanaFmt }"
     required
   )
   InputField.mb-line(
@@ -106,6 +107,8 @@ const props = defineProps({
 const { meta, values } = useForm({
   initialValues: props,
 });
+
+const kanaFmt = /^[ぁ-んー　]*$/;
 
 const autocompleteAdress = () => {
   new YubinBangoCore(values.postcode, (value) => {

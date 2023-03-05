@@ -13,7 +13,6 @@ header
 
 <script setup>
 const { loggedIn, logout } = useCustomerAuth();
-console.log(useRoute().path);
 const noLink = computed(
   () => !loggedIn.value && useRoute().path === "/reserve"
 );

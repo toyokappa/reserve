@@ -19,4 +19,8 @@ const layoutName = computed(() => {
 });
 </script>
 
-<style lang="sass"></style>
+<style lang="sass">
+body
+  font-family: 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif
+  background-color: $base
+</style>

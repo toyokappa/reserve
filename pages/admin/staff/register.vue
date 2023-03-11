@@ -1,12 +1,10 @@
 <template lang="pug">
-BlockText.mb-line スタッフの情報を入力してください。
 FormStaffRegister(
   @submitForm="submitForm"
 )
 </template>
 
 <script setup>
-import BlockText from "~/components/presentational/molescules/block/Text.vue";
 import FormStaffRegister from "~/components/presentational/organizms/FormStaffRegister.vue";
 
 const { $toast } = useNuxtApp();
@@ -21,6 +19,7 @@ const submitForm = async (values) => {
     formData.append("sign_up[image]", values.image);
     formData.append("sign_up[email]", values.email);
     formData.append("sign_up[password]", values.password);
+    formData.append("sign_up[frequency]", values.frequency);
 
     await $fetch(`/staff/auth`, {
       baseURL: useRuntimeConfig().public.apiBaseURL,

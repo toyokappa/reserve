@@ -6,6 +6,7 @@ BlockTrainer.mb-line(
   :image="trainer.image.url"
   :name="trainer.name"
   :comment="trainer.comment"
+  @click="useRouter().push(`/admin/staff/${trainer.id}`)"
 )
 .button-area.mt-10.mb-10
   PrimaryButton(@click.prevent="useRouter().push('/admin/staff/register')") トレーナーを追加する

@@ -26,7 +26,6 @@ const props = defineProps({
   name: String,
   type: String,
   labelText: String,
-  defaultValue: [String, Number],
   min: [String, Number],
   max: [String, Number],
   validation: [String, Object],
@@ -36,7 +35,6 @@ const props = defineProps({
 const { name, labelText, defaultValue, validation } = props;
 
 const { value, errorMessage } = useField(name, validation);
-value.value = defaultValue;
 
 const names = {};
 names[name] = labelText;

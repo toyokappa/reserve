@@ -20,25 +20,20 @@ form
   InputImage.mb-line(
     name="image"
     labelText="プロフィール写真"
+    :imageChanged="imageChanged"
+    @onImageChange="onImageChange"
   )
   Textarea.mb-10(
     name="comment"
     labelText="公開メッセージ"
   )
   BlockText.mb-line スタッフのログイン情報を入力してください。
-  InputField.mb-line(
+  InputField.mb-10(
     name="email"
     type="email"
     labelText="メールアドレス"
     autocomplete="email"
     validation="required|email"
-    required
-  )
-  InputField.mb-10(
-    name="password"
-    type="password"
-    labelText="パスワード"
-    validation="required|min:8"
     required
   )
   BlockText.mb-line スタッフの設定を入力してください。
@@ -47,13 +42,14 @@ form
     type="range"
     min="1"
     max="10"
+    defaultValue="5"
     labelText="指名なし予約時の選出頻度"
   )
   .button-area
     PrimaryButton.mb-10(
       :disabled="!meta.valid"
       @click.prevent="submitForm()"
-    ) スタッフを追加する
+    ) スタッフの情報を変更する
 </template>
 
 <script setup>
@@ -67,15 +63,26 @@ import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue
 
 import { useForm } from "vee-validate";
 
-const { meta, values } = useForm({
-  initialValues: {
-    comment: "",
-    frequency: 5,
-  },
+const props = defineProps({
+  firstName: String,
+  lastName: String,
+  displayName: String,
+  image: [String, null],
+  comment: String,
+  email: String,
+  frequency: Number,
 });
 
+const imageChanged = ref(false);
+const { meta, values } = useForm({
+  initialValues: props,
+});
+
+const onImageChange = (bool) => {
+  imageChanged.value = bool;
+};
 const emits = defineEmits();
 const submitForm = () => {
-  emits("submitForm", values);
+  emits("submitForm", { values, imageChanged });
 };
 </script>

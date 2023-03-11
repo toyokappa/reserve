@@ -1,7 +1,7 @@
 <template lang="pug">
 BlockText.mb-line 予約スケジュール
 BlockReservation.mb-line(
-  v-if="reservation_list.lengh > 0"
+  v-if="reservation_list.length > 0"
   v-for="reservation in reservation_list"
   :key="reservation.id"
   :schedule="`${reservation.scheduled_date} ${reservation.scheduled_time}`"

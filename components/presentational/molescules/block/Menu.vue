@@ -2,20 +2,23 @@
 .block
   .block-title {{ title }}
   .block-menu
-    nuxt-link.menu(
+    Menu(
       v-for="menu in menuList"
-      :key="menu.title"
-      :to="menu.link"
+      :key="menu.name"
+      :name="menu.name"
+      :link="menu.link"
+      :icon="menu.icon"
+      :external="menu.external"
     )
-      img.icon(:src="menu.icon")
-      .name {{ menu.name }}
 </template>
 
 <script setup>
+import Menu from "@/components/presentational/atoms/Menu.vue";
+
 const props = defineProps({
   title: String,
   menuList: Array,
-})
+});
 </script>
 
 <style lang="sass" scoped>

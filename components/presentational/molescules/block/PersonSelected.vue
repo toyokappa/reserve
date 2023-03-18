@@ -1,5 +1,5 @@
 <template lang="pug">
-.trainer-block
+.person-block
   img.arrow(
     v-if="forSelect"
     src="@/assets/images/arrow-right.svg"
@@ -41,7 +41,7 @@ const emits = defineEmits();
 </script>
 
 <style lang="sass" scoped>
-.trainer-block
+.person-block
   background-color: $white
   padding: $block-padding
   display: flex

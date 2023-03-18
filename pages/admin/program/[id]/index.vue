@@ -33,7 +33,7 @@ BlockTrainerSelected.mb-line(
 <script setup>
 import BlockText from "~/components/presentational/molescules/block/Text.vue";
 import BlockProgram from "~/components/presentational/molescules/block/Program.vue";
-import BlockTrainerSelected from "~/components/presentational/molescules/block/TrainerSelected.vue";
+import BlockTrainerSelected from "~/components/presentational/molescules/block/PersonSelected.vue";
 
 const { id } = useRoute().params;
 const { program, assigned_trainer_list, wait_trainer_list } = await $fetch(

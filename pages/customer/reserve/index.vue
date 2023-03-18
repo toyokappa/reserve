@@ -116,7 +116,7 @@ import BlockText from "~/components/presentational/molescules/block/Text.vue";
 import BlockProgram from "~/components/presentational/molescules/block/Program.vue";
 import BlockProgramSelected from "~/components/presentational/molescules/block/ProgramSelected.vue";
 import BlockTrainer from "~/components/presentational/molescules/block/Person.vue";
-import BlockTrainerSelected from "~/components/presentational/molescules/block/TrainerSelected.vue";
+import BlockTrainerSelected from "~/components/presentational/molescules/block/PersonSelected.vue";
 import BlockScheduleSelected from "~/components/presentational/molescules/block/ScheduleSelected.vue";
 import BlockConfirm from "~/components/presentational/molescules/block/Confirm.vue";
 import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue";
@@ -215,7 +215,7 @@ const completeReserve = async () => {
         reservation: {
           program_id: program.id,
           staff_id: trainer.id,
-          scheduled_date: schedule,
+          scheduled_at: schedule,
           required_time: program.required_time,
         },
         ...params,

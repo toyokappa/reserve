@@ -91,7 +91,7 @@ const unassign = async (groupId) => {
 };
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .group
   display: flex
   align-items: center

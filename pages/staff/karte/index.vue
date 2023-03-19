@@ -2,6 +2,7 @@
 template(v-if="karte.screen === 'customer'")
   BlockText.mb-line カルテを入力したい顧客を選択してください。
   BlockCustomer.mb-line(
+    v-if="customer_list.length > 0"
     v-for="customer in customer_list"
     :key="customer.id"
     :id="customer.id"
@@ -9,6 +10,8 @@ template(v-if="karte.screen === 'customer'")
     :name="customer.full_name"
     @click.native="selectCustomer(customer)"
   )
+  BlockText(v-else)
+    .empty-state 対象の顧客はいません。
 template(v-else-if="karte.screen === 'reservation'")
   BlockCustomerSelected.mb-10(
     :name="karte.customer.full_name"
@@ -17,7 +20,7 @@ template(v-else-if="karte.screen === 'reservation'")
     @click.native="moveScreen('customer')"
   )
   BlockText.mb-line 紐付ける予約を選択してください。
-  BlockReservation(
+  BlockReservation.mb-line(
     v-for="reservation in karte.customer.reservation_list"
     :key="reservation.id"
     :schedule="`${reservation.scheduled_date} ${reservation.scheduled_time}`"

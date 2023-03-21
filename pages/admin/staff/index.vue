@@ -3,7 +3,7 @@ BlockText.mb-line トレーナー管理
 BlockTrainer.mb-line(
   v-for="trainer in trainer_list"
   :key="trainer.id"
-  :image="trainer.image.url"
+  :image="trainer.image.thumb.url"
   :name="trainer.name"
   :comment="trainer.comment"
   @click="useRouter().push(`/admin/staff/${trainer.id}`)"

@@ -1,7 +1,7 @@
 <template lang="pug">
 BlockText.mb-line 顧客管理
 BlockCustomer.mb-10(
-  :image="customer.image.url"
+  :image="customer.image.thumb.url"
   :name="customer.full_name"
 )
 BlockText.mb-line 設定中のグループ
@@ -91,7 +91,7 @@ const unassign = async (groupId) => {
 };
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .group
   display: flex
   align-items: center

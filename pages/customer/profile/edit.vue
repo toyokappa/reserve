@@ -8,7 +8,7 @@ FormProfileEdit(
   :tel="currentCustomer.tel"
   :postcode="currentCustomer.postcode"
   :address="currentCustomer.address"
-  :image="currentCustomer.image.url"
+  :image="currentCustomer.image.thumb.url"
   @updateProfile="updateProfile"
 )
 </template>

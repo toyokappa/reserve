@@ -2,7 +2,7 @@
 BlockProfile.mb-30(
   :name="currentStaff.display_name"
   :email="currentStaff.email"
-  :image="currentStaff.image.url"
+  :image="currentStaff.image.thumb.url"
 )
 BlockMenu.mb-line(
   v-for="menuSection in mypageMenu"
@@ -17,10 +17,11 @@ import BlockProfile from "~/components/presentational/molescules/block/Profile.v
 import BlockMenu from "~/components/presentational/molescules/block/Menu.vue";
 
 import qrcodeIcon from "~/assets/images/menu-qrcode.svg";
-import karteIcon from "~/assets/images/menu-karte.svg";
+import customerIcon from "~/assets/images/menu-customer.svg";
 import manualIcon from "~/assets/images/menu-manual.svg";
 import scheduleIcon from "~/assets/images/menu-schedule.svg";
 import shiftIcon from "~/assets/images/menu-shift.svg";
+import karteIcon from "~/assets/images/menu-karte.svg";
 import profileIcon from "~/assets/images/menu-profile.svg";
 import passwordIcon from "~/assets/images/menu-password.svg";
 
@@ -34,12 +35,7 @@ const mypageMenu = [
     title: "接客",
     menuList: [
       { name: "各種QRコード", link: "/staff/qrcode", icon: qrcodeIcon },
-      {
-        name: "カルテ",
-        link: "https://www.notion.so/lixa/eb37cb578e1e4a3ca42beeeef434d0b6?v=6eb8c9c827df4ac0b89c6e3d3c3f302f&pvs=4",
-        icon: karteIcon,
-        external: true,
-      },
+      { name: "顧客情報", link: "/staff/customer", icon: customerIcon },
       {
         name: "マニュアル",
         link: "https://www.notion.so/lixa/b960858e43ce43deb1d51bf4041e2358?pvs=4",
@@ -53,6 +49,7 @@ const mypageMenu = [
     menuList: [
       { name: "予約スケジュール", link: "/staff/schedule", icon: scheduleIcon },
       { name: "シフト入力", link: "/staff/shift", icon: shiftIcon },
+      { name: "カルテ入力(β)", link: "/staff/karte", icon: karteIcon },
     ],
   },
   {

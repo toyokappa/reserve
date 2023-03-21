@@ -4575,6 +4575,11 @@ vue-router@^4.1.6:
   dependencies:
     "@vue/devtools-api" "^6.4.5"
 
+vue3-carousel@^0.2.12:
+  version "0.2.12"
+  resolved "https://registry.yarnpkg.com/vue3-carousel/-/vue3-carousel-0.2.12.tgz#94f1a2744120cfe71585861cd522a475cbd5a727"
+  integrity sha512-yG5MCu/zOusFtIpyihlBtQtt5kI8dA5SqAWBJfGk8vxsbFo4P5OYC2jzCX/ZxLckS/Zw9AB+AahmKFGd1dncbw==
+
 vue3-toastify@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/vue3-toastify/-/vue3-toastify-0.1.0.tgz#983151b20632b04cebfd4273399699c2077c1cae"

@@ -32,13 +32,6 @@ const props = defineProps({
   padding: 0 20px 20px
   display: flex
   flex-wrap: wrap
-  .menu
-    display: block
-    text-align: center
-    color: $black
-    width: calc(100% / 3)
-    .icon
-      margin: 0 auto
-    .name
-      font-size: 10px
+  *:nth-child(n + 4)
+    margin-top: 15px
 </style>

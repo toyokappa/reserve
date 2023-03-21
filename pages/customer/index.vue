@@ -21,6 +21,7 @@ import reserveIcon from "~/assets/images/menu-reserve.svg";
 import purchaseIcon from "~/assets/images/menu-purchase.svg";
 import scheduleIcon from "~/assets/images/menu-schedule.svg";
 import ticketIcon from "~/assets/images/menu-ticket.svg";
+import foodIcon from "~/assets/images/menu-food.svg";
 import purchaseHistoryIcon from "~/assets/images/menu-purchase-history.svg";
 import profileIcon from "~/assets/images/menu-profile.svg";
 import passwordIcon from "~/assets/images/menu-password.svg";
@@ -47,6 +48,12 @@ const mypageMenu = [
     menuList: [
       { name: "予約スケジュール", link: "/schedule", icon: scheduleIcon },
       { name: "所持チケット", link: "/ticket", icon: ticketIcon },
+      {
+        name: "食事管理",
+        link: "https://lin.ee/74XW3Em",
+        icon: foodIcon,
+        external: true,
+      },
       { name: "購入履歴", link: "/purchaseHistory", icon: purchaseHistoryIcon },
     ],
   },

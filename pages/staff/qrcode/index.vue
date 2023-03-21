@@ -9,16 +9,6 @@ BlockText.mb-10
     :cornersSquareOptions="cornersSquareOptions"
     imgclass="full-width"
   )
-BlockText.mb-line 管理用LINEアカウント
-BlockText.mb-10
-  QRCodeVue3(
-    value="https://lin.ee/74XW3Em"
-    width="500"
-    height="500"
-    :dotsOptions="dotsOptionsLine"
-    :cornersSquareOptions="cornersSquareOptions"
-    imgclass="full-width"
-  )
 </template>
 
 <script setup>

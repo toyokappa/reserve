@@ -49,7 +49,7 @@ const mypageMenu = [
     menuList: [
       { name: "予約スケジュール", link: "/staff/schedule", icon: scheduleIcon },
       { name: "シフト入力", link: "/staff/shift", icon: shiftIcon },
-      { name: "カルテ入力", link: "/staff/karte", icon: karteIcon },
+      { name: "カルテ入力(β)", link: "/staff/karte", icon: karteIcon },
     ],
   },
   {

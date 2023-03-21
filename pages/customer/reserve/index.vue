@@ -24,7 +24,7 @@ template(v-else-if="reserve.screen === 'trainer'")
   BlockTrainer.mb-line(
     v-for="trainer in reserve.program.trainer_list"
     :key="trainer.id"
-    :image="trainer.image.url"
+    :image="trainer.image.thumb.url"
     :name="trainer.name"
     :comment="trainer.comment"
     @click.native="selectTrainer(trainer)"
@@ -37,7 +37,7 @@ template(v-else-if="reserve.screen === 'schedule'")
   )
   BlockTrainerSelected.mb-10(
     :name="reserve.trainer.name"
-    :image="reserve.trainer.image.url"
+    :image="reserve.trainer.image.thumb.url"
     forSelect
     @click.native="moveScreen('trainer')"
   )
@@ -55,7 +55,7 @@ template(v-else-if="reserve.screen === 'userInput'")
   )
   BlockTrainerSelected.mb-line(
     :name="reserve.trainer.name"
-    :image="reserve.trainer.image.url"
+    :image="reserve.trainer.image.thumb.url"
     forSelect
     @click.native="moveScreen('trainer')"
   )
@@ -92,7 +92,7 @@ template(v-else-if="reserve.screen === 'confirm'")
   )
   BlockTrainerSelected.mb-line(
     :name="reserve.trainer.name"
-    :image="reserve.trainer.image.url"
+    :image="reserve.trainer.image.thumb.url"
     forSelect
     @click.native="moveScreen('trainer')"
   )

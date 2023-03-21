@@ -2,7 +2,7 @@
 BlockProfile.mb-30(
   :name="currentStaff.display_name"
   :email="currentStaff.email"
-  :image="currentStaff.image.url"
+  :image="currentStaff.image.thumb.url"
 )
 BlockMenu.mb-line(
   v-for="menuSection in mypageMenu"

@@ -1,7 +1,7 @@
 <template lang="pug">
 BlockText.mb-line 顧客情報
 BlockCustomer.mb-10(
-  :image="customer.image.url"
+  :image="customer.image.thumb.url"
   :name="customer.full_name"
 )
 BlockText.mb-line トレーニング記録
@@ -9,11 +9,11 @@ Carousel.mb-10(v-if="training_log_list.length > 0" :itemsToShow="1.5" :wrapAroun
   Slide(
     v-for="(log, i) in training_log_list"
     :key="log.id"
-    @click="openModal(log.photo.url)"
+    @click="openModal(log.photo.high.url)"
   )
     .log.me-line
       .date {{ log.logged_date }}
-      img.photo(:src="log.photo.url")
+      img.photo(:src="log.photo.thumb.url")
   template(#addons)
     Navigation
     Pagination
@@ -24,11 +24,11 @@ Carousel(v-if="body_metrics_log_list.length > 0" :itemsToShow="1.5" :wrapAround=
   Slide(
     v-for="(log, i) in body_metrics_log_list"
     :key="log.id"
-    @click="openModal(log.photo.url)"
+    @click="openModal(log.photo.high.url)"
   )
     .log.me-line
       .date {{ log.logged_date }}
-      img.photo(:src="log.photo.url")
+      img.photo(:src="log.photo.thumb.url")
   template(#addons)
     Navigation
     Pagination

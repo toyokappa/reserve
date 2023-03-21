@@ -12,7 +12,7 @@ BlockTrainerSelected.mb-line(
   :key="trainer.id"
   :id="trainer.id"
   :name="trainer.name"
-  :image="trainer.image.url"
+  :image="trainer.image.thumb.url"
   forAssign
   assigned
   @unassign="unassign"
@@ -24,7 +24,7 @@ BlockTrainerSelected.mb-line(
   :key="trainer.id"
   :id="trainer.id"
   :name="trainer.name"
-  :image="trainer.image.url"
+  :image="trainer.image.thumb.url"
   forAssign
   @assign="assign"
 )

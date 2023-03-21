@@ -3,7 +3,7 @@ FormStaffEdit(
   :firstName="trainer.first_name"
   :lastName="trainer.last_name"
   :displayName="trainer.display_name"
-  :image="trainer.image.url"
+  :image="trainer.image.thumb.url"
   :comment="trainer.comment"
   :email="trainer.email"
   :frequency="trainer.frequency"

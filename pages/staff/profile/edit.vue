@@ -2,7 +2,7 @@
 BlockText.mb-line 変更したい項目を入力してください。
 FormStaffProfileEdit(
   :name="currentStaff.display_name"
-  :image="currentStaff.image.url"
+  :image="currentStaff.image.thumb.url"
   :comment="currentStaff.comment"
   @updateProfile="updateProfile"
 )

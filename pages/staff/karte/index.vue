@@ -6,7 +6,7 @@ template(v-if="karte.screen === 'customer'")
     v-for="customer in customer_list"
     :key="customer.id"
     :id="customer.id"
-    :image="customer.image.url"
+    :image="customer.image.thumb.url"
     :name="customer.full_name"
     @click.native="selectCustomer(customer)"
   )
@@ -15,7 +15,7 @@ template(v-if="karte.screen === 'customer'")
 template(v-else-if="karte.screen === 'reservation'")
   BlockCustomerSelected.mb-10(
     :name="karte.customer.full_name"
-    :image="karte.customer.image.url"
+    :image="karte.customer.image.thumb.url"
     forSelect
     @click.native="moveScreen('customer')"
   )
@@ -31,7 +31,7 @@ template(v-else-if="karte.screen === 'reservation'")
 template(v-else-if="karte.screen === 'logInput'")
   BlockCustomerSelected.mb-line(
     :name="karte.customer.full_name"
-    :image="karte.customer.image.url"
+    :image="karte.customer.image.thumb.url"
     forSelect
     @click.native="moveScreen('customer')"
   )

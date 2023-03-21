@@ -4,7 +4,7 @@ BlockCustomer.mb-line(
   v-for="customer in customer_list"
   :key="customer.id"
   :id="customer.id"
-  :image="customer.image.url"
+  :image="customer.image.thumb.url"
   :name="customer.full_name"
   @click="useRouter().push(`/admin/customer/${customer.id}`)"
 )

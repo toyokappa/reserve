@@ -67,12 +67,15 @@ form
     validation="required|min:8"
     required
   )
-  InputField.mb-10(
+  InputField.mb-line(
     name="passwordConfirmation"
     type="password"
     labelText="パスワード（確認用）"
     validation="required|confirmed:@password"
     required
+  )
+  AgreementField.mb-10(
+    validation="required"
   )
   .button-area
     PrimaryButton.mb-10(
@@ -85,6 +88,7 @@ form
 import BlockText from "~/components/presentational/molescules/block/Text.vue";
 import InputField from "~~/components/presentational/molescules/form/InputField.vue";
 import InputFieldHorizontal from "~~/components/presentational/molescules/form/InputFieldHorizontal.vue";
+import AgreementField from "~~/components/presentational/molescules/form/AgreementField.vue";
 import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue";
 
 import { useForm } from "vee-validate";

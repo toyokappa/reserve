@@ -33,5 +33,5 @@ const props = defineProps({
   display: flex
   flex-wrap: wrap
   *:nth-child(n + 4)
-    margin-top: 15px
+    margin-top: 20px
 </style>

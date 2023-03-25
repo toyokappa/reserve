@@ -2,7 +2,7 @@
 .badge 必須
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .badge
   display: inline
   font-size: 10px

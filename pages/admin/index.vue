@@ -12,6 +12,7 @@ import BlockMenu from "~/components/presentational/molescules/block/Menu.vue";
 import customerIcon from "~/assets/images/menu-customer.svg";
 import profileIcon from "~/assets/images/menu-profile.svg";
 import programIcon from "~/assets/images/menu-program.svg";
+import couponIcon from "~/assets/images/menu-coupon.svg";
 
 const mypageMenu = [
   {
@@ -20,6 +21,7 @@ const mypageMenu = [
       { name: "顧客管理", link: "/admin/customer", icon: customerIcon },
       { name: "トレーナー管理", link: "/admin/staff", icon: profileIcon },
       { name: "プログラム管理", link: "/admin/program", icon: programIcon },
+      { name: "クーポン管理", link: "/admin/coupon", icon: couponIcon },
     ],
   },
 ];

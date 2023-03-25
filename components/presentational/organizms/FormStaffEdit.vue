@@ -50,6 +50,8 @@ form
       :disabled="!meta.valid"
       @click.prevent="submitForm()"
     ) スタッフの情報を変更する
+    .mb-10
+      .delete(@click="emits('deleteStaff')") スタッフを削除する
 </template>
 
 <script setup>
@@ -86,3 +88,10 @@ const submitForm = () => {
   emits("submitForm", { values, imageChanged });
 };
 </script>
+
+<style lang="sass" scoped>
+.delete
+  font-size: 12px
+  text-align: center
+  color: $hint
+</style>

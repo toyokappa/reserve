@@ -1,7 +1,8 @@
 <template lang="pug">
 div
-  Header.mb-20
-  slot
+  Header
+  .py-20
+    slot
 </template>
 
 <script setup>

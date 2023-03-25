@@ -8,6 +8,7 @@ FormStaffEdit(
   :email="trainer.email"
   :frequency="trainer.frequency"
   @submitForm="submitForm"
+  @deleteStaff="deleteStaff"
 )
 </template>
 
@@ -48,6 +49,29 @@ const submitForm = async (event) => {
     useRouter().push("/admin/staff");
   } catch (e) {
     $toast.error(`変更できませんでした(code: ${e.status})`);
+    throw e;
+  } finally {
+    useLoad().finish();
+  }
+};
+
+const deleteStaff = async () => {
+  const checkDelete = await confirm("本当に削除しますか？");
+  if (!checkDelete) return;
+
+  try {
+    useLoad().start();
+    await $fetch(`/admin/staffs/${id}`, {
+      baseURL: useRuntimeConfig().public.apiBaseURL,
+      method: "DELETE",
+      headers: {
+        Authorization: useAdminAuth().getAuth(),
+      },
+    });
+    $toast.info("スタッフの削除しました");
+    useRouter().push("/admin/staff");
+  } catch (e) {
+    $toast.error(`削除できませんでした(code: ${e.status})`);
     throw e;
   } finally {
     useLoad().finish();

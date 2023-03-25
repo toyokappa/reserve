@@ -36,28 +36,27 @@ form
 </template>
 
 <script setup>
-import InputField from '~~/components/presentational/molescules/form/InputField.vue';
-import Textarea from '~~/components/presentational/molescules/form/Textarea.vue';
-import PrimaryButton from '~~/components/presentational/atoms/button/Primary.vue';
+import InputField from "~~/components/presentational/molescules/form/InputField.vue";
+import Textarea from "~~/components/presentational/molescules/form/Textarea.vue";
+import PrimaryButton from "~~/components/presentational/atoms/button/Primary.vue";
 
-import { useForm } from 'vee-validate'
+import { useForm } from "vee-validate";
 
 const props = defineProps({
   name: String,
   email: String,
   tel: String,
   message: String,
-})
+});
 
 const { meta, values } = useForm({
-  initialValues: props
-})
+  initialValues: props,
+});
 
-const emits = defineEmits()
+const emits = defineEmits();
 const confirmReserve = () => {
-  emits('confirmReserve', values)
-}
+  emits("confirmReserve", values);
+};
 </script>
 
-<style lang="sass" scoped>
-</style>
+<style lang="sass" scoped></style>

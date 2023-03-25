@@ -5,19 +5,29 @@ BlockCustomer.mb-10(
   :name="customer.full_name"
 )
 BlockText.mb-line 設定中のグループ
-BlockText.mb-line.group(v-for="group in assignedGroupList" :key="group.id")
-  .name {{ group.name }}
-  .unassign(@click="unassign(group.id)") グループから解除
+BlockAssign.mb-line(
+  v-for="group in assignedGroupList"
+  :key="group.id"
+  :name="group.name"
+  unassignText="グループから解除"
+  assigned
+  @unassign="unassign(group.id)"
+)
 .mb-10
 BlockText.mb-line 未設定のグループ
-BlockText.mb-line.group(v-for="group in unassignedGroupList" :key="group.id")
-  .name {{ group.name }}
-  .assign(@click="assign(group.id)") グループに設定
+BlockAssign.mb-line(
+  v-for="group in unassignedGroupList"
+  :key="group.id"
+  :name="group.name"
+  assignText="グループに設定"
+  @assign="assign(group.id)"
+)
 </template>
 
 <script setup>
 import BlockText from "~/components/presentational/molescules/block/Text.vue";
 import BlockCustomer from "~/components/presentational/molescules/block/Person.vue";
+import BlockAssign from "~/components/presentational/molescules/block/Assign.vue";
 
 const { id } = useRoute().params;
 const { customer, assigned_group_list, unassigned_group_list } = await $fetch(
@@ -91,15 +101,4 @@ const unassign = async (groupId) => {
 };
 </script>
 
-<style lang="sass" scoped>
-.group
-  display: flex
-  align-items: center
-  justify-content: space-between
-  .assign, .unassign
-    font-size: 12px
-  .assign
-    color: $primary
-  .unassign
-    color: $red
-</style>
+<style lang="sass" scoped></style>

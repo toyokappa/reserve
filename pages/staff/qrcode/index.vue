@@ -9,6 +9,16 @@ BlockText.mb-10
     :cornersSquareOptions="cornersSquareOptions"
     imgclass="full-width"
   )
+BlockText.mb-line Google口コミ
+BlockText.mb-10
+  QRCodeVue3(
+    value="https://g.page/r/CQwYKdSmMs5pEBk/review"
+    width="500"
+    height="500"
+    :dotsOptions="dotsOptionsMain"
+    :cornersSquareOptions="cornersSquareOptions"
+    imgclass="full-width"
+  )
 </template>
 
 <script setup>

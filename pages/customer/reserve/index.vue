@@ -132,7 +132,9 @@ definePageMeta({
 const trainerNoSelected = {
   id: null,
   image: {
-    url: null,
+    thumb: {
+      url: null,
+    },
   },
   name: "指名なし",
   comment: "",
